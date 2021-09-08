@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Redirect, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import './App.css';
 
@@ -7,6 +7,7 @@ import Nav from './components/Nav';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+import Logout from './components/Logout';
 
 function App() {
     const [name, setName] = useState('');
@@ -14,7 +15,7 @@ function App() {
     useEffect(() => {
         (
             async () => {
-                return fetch('http://localhost:8000/api/user', {
+                return fetch(process.env.REACT_APP_DOMAIN + '/api/user', {
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
                 })
@@ -39,16 +40,9 @@ function App() {
                         setName(response.name);
                     })
                     .catch(error => {
-                        console.log("/api/user error");
-
-                        return (
-                            <div>No</div>
-                        );
+                        console.log("User Request error:");
+                        console.log(error);
                     });
-
-                // const content = await response.json();
-
-                // setName(content.name);
             }
         )();
     });
@@ -56,12 +50,13 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                {/* <Nav name={name} setName={setName} /> */}
+                <Nav name={name} setName={setName} />
 
                 <div className="container mainDiv">
                     <Route path="/" exact component={() => <Home name={name} />} />
                     <Route path="/login" component={() => <Login setName={setName} />} />
                     <Route path="/register" component={Register} />
+                    <Route path="/logout" component={() => <Logout name={name} setName={setName} />} />
                 </div>
             </BrowserRouter>
         </div>

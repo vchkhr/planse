@@ -11,7 +11,7 @@ const Login = (props) => {
     const submit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:8000/api/login', {
+        const response = await fetch(process.env.REACT_APP_DOMAIN + '/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -22,6 +22,8 @@ const Login = (props) => {
         });
 
         const content = await response.json();
+        console.log("Result of login request: ");
+        console.log(content);
 
         setRedirect(true);
         props.setName(content.name);
@@ -35,7 +37,7 @@ const Login = (props) => {
         <div className="form-signin text-center">
             <form onSubmit={submit}>
                 <img className="mb-4" src={logo} alt="" width="72" height="57" />
-                <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                <h1 className="h3 mb-3 fw-normal">Login</h1>
 
                 <div className="form-floating">
                     <input type="email" className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
@@ -47,13 +49,9 @@ const Login = (props) => {
                     <label htmlFor="floatingPassword">Password</label>
                 </div>
 
-                {/* <div className="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me" /> Remember me
-                    </label>
-                </div> */}
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                {/* <p className="mt-5 mb-3 text-muted">&copy; 2021</p> */}
+                <button className="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+
+                <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
             </form>
         </div>
     );
