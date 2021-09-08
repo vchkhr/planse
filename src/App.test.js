@@ -1,8 +1,12 @@
+import React from 'react';
+
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('You are not logged in', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/You are not logged in/i);
-  expect(linkElement).toBeInTheDocument();
-})
+test('renders learn react link', () => {
+    if (typeof window !== 'undefined') {
+        render(<App />);
+        const linkElement = screen.getByText(/learn react/i);
+        expect(linkElement).toBeInTheDocument();
+    }
+});
