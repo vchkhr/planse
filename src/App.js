@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Redirect, withRouter } from 'react-router-dom';
 
 import './App.css';
 
@@ -9,15 +9,59 @@ import Login from './components/Login';
 import Register from './components/Register';
 
 function App() {
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        (
+            async () => {
+                return fetch('http://localhost:8000/api/user', {
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                })
+                    .then(
+                        response => {
+                            if (response.ok) {
+                                return response;
+                            }
+                            else {
+                                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                                error.response = response;
+
+                                throw error;
+                            }
+                        },
+                        error => {
+                            throw error;
+                        }
+                    )
+                    .then(response => response.json())
+                    .then(response => {
+                        setName(response.name);
+                    })
+                    .catch(error => {
+                        console.log("/api/user error");
+
+                        return (
+                            <div>No</div>
+                        );
+                    });
+
+                // const content = await response.json();
+
+                // setName(content.name);
+            }
+        )();
+    });
+
     return (
         <div className="App">
             <BrowserRouter>
-                <Nav />
+                {/* <Nav name={name} setName={setName} /> */}
 
-                <div className="container mt-5 mainDiv">
-                    <Route path="/" exact component={Home} />
-                    <Route path="/login" exact component={Login} />
-                    <Route path="/register" exact component={Register} />
+                <div className="container mainDiv">
+                    <Route path="/" exact component={() => <Home name={name} />} />
+                    <Route path="/login" component={() => <Login setName={setName} />} />
+                    <Route path="/register" component={Register} />
                 </div>
             </BrowserRouter>
         </div>
