@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 
 const Logout = (props) => {
     const [redirect, setRedirect] = useState(false);
@@ -19,7 +19,7 @@ const Logout = (props) => {
         console.log("Logout")
 
         setRedirect(true);
-        props.setName("");
+        props.setUser([]);
     }
 
     if (redirect) {
@@ -27,15 +27,17 @@ const Logout = (props) => {
     }
 
     return (
-        <div className="form-signin text-center">
-            <form onSubmit={submit}>
-                <img className="mb-4" src={logo} alt="" width="72" height="57" />
-                <h1 className="h3 mb-3 fw-normal">{props.name}, do you really want to log out?</h1>
+        <div className="container mainDiv">
+            <div className="form-signin text-center">
+                <form onSubmit={submit}>
+                    {/* <img className="mb-4" src={logo} alt="PLANSE" width="72" height="72" /> */}
+                    <h1 className="h3 mb-3 fw-normal">{props.user.name}, do you really want to log out?</h1>
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Log Out</button>
+                    <button className="w-100 btn btn-lg btn-primary" type="submit">Log Out</button>
 
-                <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
-            </form>
+                    <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
+                </form>
+            </div>
         </div>
     );
 };

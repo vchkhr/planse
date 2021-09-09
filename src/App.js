@@ -4,60 +4,62 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 
 import Nav from './components/Nav';
-import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Logout from './components/Logout';
+import Calendar from './components/Calendar';
+
 
 function App() {
-    const [name, setName] = useState('');
+    const [user, setUser] = useState([]);
+    const [userLoading, setUserLoading] = useState(true);
 
     useEffect(() => {
-        (
-            async () => {
-                return fetch(process.env.REACT_APP_DOMAIN + '/api/user', {
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
-                })
-                    .then(
-                        response => {
-                            if (response.ok) {
-                                return response;
-                            }
-                            else {
-                                var error = new Error('Error ' + response.status + ': ' + response.statusText);
-                                error.response = response;
+        fetchUser();
+    }, []);
 
-                                throw error;
-                            }
-                        },
-                        error => {
-                            throw error;
-                        }
-                    )
-                    .then(response => response.json())
-                    .then(response => {
-                        setName(response.name);
-                    })
-                    .catch(error => {
-                        console.log("User Request error:");
-                        console.log(error);
-                    });
-            }
-        )();
-    });
+    const fetchUser = () => {
+        setUserLoading(true);
+
+        fetch(process.env.REACT_APP_DOMAIN + '/api/user', {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+        })
+            .then(
+                response => {
+                    if (response.ok) {
+                        return response;
+                    }
+                    else {
+                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        error.response = response;
+
+                        throw error;
+                    }
+                },
+                error => {
+                    throw error;
+                }
+            )
+            .then(response => response.json())
+            .then(response => {
+                setUser(response);
+                setUserLoading(false);
+            })
+            .catch(error => {
+                setUserLoading(false);
+            });
+    }
 
     return (
         <div className="App">
             <BrowserRouter>
-                <Nav name={name} setName={setName} />
+                <Nav user={user} setUser={setUser} />
 
-                <div className="container mainDiv">
-                    <Route path="/" exact component={() => <Home name={name} />} />
-                    <Route path="/login" component={() => <Login setName={setName} />} />
-                    <Route path="/register" component={Register} />
-                    <Route path="/logout" component={() => <Logout name={name} setName={setName} />} />
-                </div>
+                <Route path="/" exact component={() => <Calendar user={user} userLoading={userLoading} />} />
+                <Route path="/login" component={() => <Login setUser={setUser} />} />
+                <Route path="/register" component={Register} />
+                <Route path="/logout" component={() => <Logout user={user} setUser={setUser} />} />
             </BrowserRouter>
         </div>
     );
