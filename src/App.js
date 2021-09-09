@@ -4,10 +4,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 
 import Nav from './components/Nav';
-import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Logout from './components/Logout';
+import Calendar from './components/Calendar';
 
 function App() {
     const [name, setName] = useState('');
@@ -61,7 +61,7 @@ function App() {
             <BrowserRouter>
                 <Nav name={name} setName={setName} />
 
-                <Route path="/" exact component={() => <Home name={name} mainCalendar={mainCalendar} userLoaded={userLoaded} />} />
+                <Route path="/" exact component={() => <Calendar name={name} mainCalendar={mainCalendar} userLoaded={userLoaded} />} />
                 <Route path="/login" component={() => <Login setName={setName} />} />
                 <Route path="/register" component={Register} />
                 <Route path="/logout" component={() => <Logout name={name} setName={setName} />} />
