@@ -48,3 +48,12 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.left-bar {
+    background-color: rgb(245, 245, 245);
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    border-right: 2px solid rgb(75, 75, 75);
+    padding: 60px 10px 10px 10px;
+}

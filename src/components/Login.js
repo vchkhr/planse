@@ -34,25 +34,27 @@ const Login = (props) => {
     }
 
     return (
-        <div className="form-signin text-center">
-            <form onSubmit={submit}>
-                <img className="mb-4" src={logo} alt="" width="72" height="57" />
-                <h1 className="h3 mb-3 fw-normal">Login</h1>
+        <div className="container mainDiv">
+            <div className="form-signin text-center">
+                <form onSubmit={submit}>
+                    <img className="mb-4" src={logo} alt="" width="72" height="57" />
+                    <h1 className="h3 mb-3 fw-normal">Login</h1>
 
-                <div className="form-floating">
-                    <input type="email" className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
-                    <label htmlFor="floatingEmail">Email</label>
-                </div>
+                    <div className="form-floating">
+                        <input type="email" className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
+                        <label htmlFor="floatingEmail">Email</label>
+                    </div>
 
-                <div className="form-floating">
-                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e => setPassword(e.target.value)} required />
-                    <label htmlFor="floatingPassword">Password</label>
-                </div>
+                    <div className="form-floating">
+                        <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e => setPassword(e.target.value)} required />
+                        <label htmlFor="floatingPassword">Password</label>
+                    </div>
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+                    <button className="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
 
-                <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
-            </form>
+                    <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
+                </form>
+            </div>
         </div>
     );
 };
