@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -35,7 +35,7 @@ const Register = () => {
         <div className="container mainDiv">
             <div className="form-signup text-center">
                 <form onSubmit={submit}>
-                    <img className="mb-4" src={logo} alt="" width="72" height="57" />
+                    {/* <img className="mb-4" src={logo} alt="PLANSE" width="72" height="72" /> */}
                     <h1 className="h3 mb-3 fw-normal">Register</h1>
 
                     <div className="form-floating">

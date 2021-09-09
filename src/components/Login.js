@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 
 const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -22,11 +22,9 @@ const Login = (props) => {
         });
 
         const content = await response.json();
-        console.log("Result of login request: ");
-        console.log(content);
 
         setRedirect(true);
-        props.setName(content.name);
+        props.setUser(content);
     }
 
     if (redirect) {
@@ -37,7 +35,7 @@ const Login = (props) => {
         <div className="container mainDiv">
             <div className="form-signin text-center">
                 <form onSubmit={submit}>
-                    <img className="mb-4" src={logo} alt="" width="72" height="57" />
+                    {/* <img className="mb-4" src={logo} alt="PLANSE" width="72" height="72" /> */}
                     <h1 className="h3 mb-3 fw-normal">Login</h1>
 
                     <div className="form-floating">

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
 
-export const CalendarsList = (props) => {
+export const CalendarList = (props) => {
     const [calendars, setCalendars] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [calendarsLoading, setCalendarsLoading] = useState(false);
 
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = () => {
-        setLoading(true);
+        setCalendarsLoading(true);
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/' + props.mainCalendar, {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/' + props.user.main_calendar, {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         })
@@ -22,7 +21,7 @@ export const CalendarsList = (props) => {
                         return response;
                     }
                     else {
-                        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
                         error.response = response;
 
                         throw error;
@@ -35,28 +34,36 @@ export const CalendarsList = (props) => {
             .then(response => response.json())
             .then(response => {
                 setCalendars(response);
-                console.log(response);
-                setLoading(false);
+                setCalendarsLoading(false);
             })
             .catch(error => {
-                console.log("User Request error:");
+                console.log("Calendars Request error:");
                 console.log(error);
-                setLoading(false);
             });
     }
 
-    if (loading) {
-        return (
-            <div>Loading Calendars...</div>
-        );
-    }
-    else {
+    if (props.userLoading === true) {
         return (
             <div>
-                {calendars.name}
+
             </div>
         );
     }
+    else {
+        if (calendarsLoading) {
+            return (
+                <div>Loading Calendars...</div>
+            );
+        }
+        else {
+            return (
+                <div>
+                    {/* <i className="bi bi-square"></i> */}
+                    <i className={"bi bi-check-square-fill calendar-color-" + calendars.color}></i> {calendars.name}
+                </div>
+            );
+        }
+    }
 };
 
-export default CalendarsList;
+export default CalendarList;

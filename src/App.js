@@ -9,18 +9,17 @@ import Register from './components/Register';
 import Logout from './components/Logout';
 import Calendar from './components/Calendar';
 
+
 function App() {
-    const [name, setName] = useState('');
-    const [loadingUser, setLoadingUser] = useState(false)
-    const [userLoaded, setUserLoaded] = useState(false)
-    const [mainCalendar, setMainCalendar] = useState('')
+    const [user, setUser] = useState([]);
+    const [userLoading, setUserLoading] = useState(true);
 
     useEffect(() => {
         fetchUser();
     }, []);
 
     const fetchUser = () => {
-        setLoadingUser(true);
+        setUserLoading(true);
 
         fetch(process.env.REACT_APP_DOMAIN + '/api/user', {
             headers: { 'Content-Type': 'application/json' },
@@ -32,7 +31,7 @@ function App() {
                         return response;
                     }
                     else {
-                        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
                         error.response = response;
 
                         throw error;
@@ -44,27 +43,23 @@ function App() {
             )
             .then(response => response.json())
             .then(response => {
-                setName(response.name);
-                setMainCalendar(response.main_calendar);
-                setLoadingUser(false);
-                setUserLoaded(true);
+                setUser(response);
+                setUserLoading(false);
             })
             .catch(error => {
-                console.log("User Request error:");
-                console.log(error);
-                setLoadingUser(false);
+                setUserLoading(false);
             });
     }
 
     return (
         <div className="App">
             <BrowserRouter>
-                <Nav name={name} setName={setName} />
+                <Nav user={user} setUser={setUser} />
 
-                <Route path="/" exact component={() => <Calendar name={name} mainCalendar={mainCalendar} userLoaded={userLoaded} />} />
-                <Route path="/login" component={() => <Login setName={setName} />} />
+                <Route path="/" exact component={() => <Calendar user={user} userLoading={userLoading} />} />
+                <Route path="/login" component={() => <Login setUser={setUser} />} />
                 <Route path="/register" component={Register} />
-                <Route path="/logout" component={() => <Logout name={name} setName={setName} />} />
+                <Route path="/logout" component={() => <Logout user={user} setUser={setUser} />} />
             </BrowserRouter>
         </div>
     );
