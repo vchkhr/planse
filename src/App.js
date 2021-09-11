@@ -7,7 +7,9 @@ import Nav from './components/Nav';
 import Login from './components/Login';
 import Register from './components/Register';
 import Logout from './components/Logout';
+
 import Calendar from './components/Calendar';
+import CalendarCreate from './components/CalendarCreate';
 
 
 function App() {
@@ -16,6 +18,11 @@ function App() {
 
     useEffect(() => {
         fetchUser();
+
+        return () => {
+            setUser([]);
+            setUserLoading(true);
+        };
     }, []);
 
     const fetchUser = () => {
@@ -60,6 +67,8 @@ function App() {
                 <Route path="/login" component={() => <Login setUser={setUser} />} />
                 <Route path="/register" component={Register} />
                 <Route path="/logout" component={() => <Logout user={user} setUser={setUser} />} />
+
+                <Route path="/calendar/create" component={() => <CalendarCreate user={user} />} />
             </BrowserRouter>
         </div>
     );
