@@ -3,15 +3,17 @@ import { Redirect } from 'react-router-dom';
 
 // import logo from '../logo.svg';
 
+
 const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
     const [redirect, setRedirect] = useState(false);
 
     const submit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(process.env.REACT_APP_DOMAIN + '/api/login', {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -19,12 +21,30 @@ const Login = (props) => {
                 email,
                 password
             })
-        });
+        })
+            .then(
+                response => {
+                    if (response.ok) {
+                        return response;
+                    }
+                    else {
+                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        error.response = response;
 
-        const content = await response.json();
-
-        setRedirect(true);
-        props.setUser(content);
+                        throw error;
+                    }
+                },
+                error => {
+                    throw error;
+                }
+            )
+            .then(response => response.json())
+            .then(response => {
+                setRedirect(true);
+                props.setUser(response);
+            })
+            .catch(error => {
+            });
     }
 
     if (redirect) {

@@ -61,3 +61,7 @@
 .calendar-color-0 {
     color: rgb(202, 0, 0);
 }
+
+.link-hidden {
+    text-decoration: none;
+}
