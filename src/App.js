@@ -49,7 +49,7 @@ function App() {
                 setUserLoaded(true);
             })
             .catch(error => {
-                setUserLoaded(false);
+                setUserLoaded(true);
             });
     }
 
