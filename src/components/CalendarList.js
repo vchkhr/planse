@@ -42,7 +42,7 @@ export const CalendarList = (props) => {
             });
     }
 
-    if (props.userLoading === true) {
+    if (props.userLoaded === true) {
         return (
             <div>
 
@@ -56,13 +56,13 @@ export const CalendarList = (props) => {
             );
         }
         else {
-            let calendarsText = calendars.map((calendar) => {
+            let calendarsList = calendars.map((calendar) => {
                 return <CalendarEntry key={calendar.id} calendar={calendar} />
             })
 
             return (
                 <div>
-                    {calendarsText}
+                    {calendarsList}
                 </div>
             );
         }

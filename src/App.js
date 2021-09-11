@@ -14,19 +14,14 @@ import CalendarCreate from './components/CalendarCreate';
 
 function App() {
     const [user, setUser] = useState([]);
-    const [userLoading, setUserLoading] = useState(true);
+    const [userLoaded, setUserLoaded] = useState(false);
 
     useEffect(() => {
         fetchUser();
-
-        return () => {
-            setUser([]);
-            setUserLoading(true);
-        };
     }, []);
 
     const fetchUser = () => {
-        setUserLoading(true);
+        setUserLoaded(false);
 
         fetch(process.env.REACT_APP_DOMAIN + '/api/user', {
             headers: { 'Content-Type': 'application/json' },
@@ -51,10 +46,10 @@ function App() {
             .then(response => response.json())
             .then(response => {
                 setUser(response);
-                setUserLoading(false);
+                setUserLoaded(true);
             })
             .catch(error => {
-                setUserLoading(false);
+                setUserLoaded(false);
             });
     }
 
@@ -63,9 +58,9 @@ function App() {
             <BrowserRouter>
                 <Nav user={user} setUser={setUser} />
 
-                <Route path="/" exact component={() => <Calendar user={user} userLoading={userLoading} />} />
+                <Route path="/" exact component={() => <Calendar user={user} userLoaded={userLoaded} />} />
                 <Route path="/login" component={() => <Login setUser={setUser} />} />
-                <Route path="/register" component={Register} />
+                <Route path="/register" component={() => <Register setUser={setUser} />} />
                 <Route path="/logout" component={() => <Logout user={user} setUser={setUser} />} />
 
                 <Route path="/calendar/create" component={() => <CalendarCreate user={user} />} />

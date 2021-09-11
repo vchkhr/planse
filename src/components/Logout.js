@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 // import logo from '../logo.svg';
 
 const Logout = (props) => {
-    const [redirect, setRedirect] = useState(false);
+    const [logoutRedirect, setLogoutRedirect] = useState(false);
 
     const submit = async (e) => {
         e.preventDefault();
@@ -16,13 +16,11 @@ const Logout = (props) => {
             body: JSON.stringify({})
         });
 
-        console.log("Logout")
-
-        setRedirect(true);
+        setLogoutRedirect(true);
         props.setUser([]);
     }
 
-    if (redirect) {
+    if (logoutRedirect) {
         return <Redirect to="/" />;
     }
 

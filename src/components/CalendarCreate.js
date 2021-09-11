@@ -8,7 +8,7 @@ const CalendarCreate = (props) => {
     const [description, setDescription] = useState('');
     const [color, setColor] = useState('');
 
-    const [redirect, setRedirect] = useState(false);
+    const [createCalendarCreateRedirect, setCalendarCreateRedirect] = useState(false);
     
     const createCalendar = (e) => {
         e.preventDefault();
@@ -41,13 +41,13 @@ const CalendarCreate = (props) => {
             )
             .then(response => response.json())
             .then(response => {
-                setRedirect(true);
+                setCalendarCreateRedirect(true);
             })
             .catch(error => {
             });
     }
 
-    if (redirect) {
+    if (createCalendarCreateRedirect) {
         return <Redirect to="/" />;
     }
 
