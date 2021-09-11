@@ -42,7 +42,7 @@ export const CalendarList = (props) => {
             });
     }
 
-    if (props.userLoaded === true) {
+    if (props.userLoaded === false) {
         return (
             <div>
 
