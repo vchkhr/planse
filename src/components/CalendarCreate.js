@@ -55,7 +55,7 @@ const CalendarCreate = (props) => {
         <div className="container mainDiv">
             <div className="form-signin text-center">
                 <form onSubmit={createCalendar}>
-                    <h1 className="h3 mb-3 fw-normal">Create a Calendar</h1>
+                    <h1 className="h3 mb-3 fw-normal">Create calendar</h1>
 
                     <div className="form-floating">
                         <input type="text" className="form-control" id="name" placeholder="Name" onChange={e => setName(e.target.value)} required />
@@ -71,10 +71,15 @@ const CalendarCreate = (props) => {
                         <select className="form-select" aria-label="Color" id="color" onChange={e => setColor(e.target.value)}>
                             <option value="0">Color</option>
                             <option value="0">Red</option>
+                            <option value="1">Orange</option>
+                            <option value="2">Yellow</option>
+                            <option value="3">Green</option>
+                            <option value="4">Blue</option>
+                            <option value="5">Violet</option>
                         </select>
                     </div>
 
-                    <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Create Calendar</button>
+                    <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Create calendar</button>
                 </form>
             </div>
         </div>

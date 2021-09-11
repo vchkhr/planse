@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
+import { CalendarEntry } from './CalendarEntry';
+
 export const CalendarList = (props) => {
     const [calendars, setCalendars] = useState('');
-    const [calendarsLoading, setCalendarsLoading] = useState(false);
+    const [calendarsLoaded, setCalendarsLoaded] = useState(false);
 
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = () => {
-        setCalendarsLoading(true);
+        setCalendarsLoaded(false);
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/' + props.user.main_calendar, {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/index', {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         })
@@ -34,11 +36,9 @@ export const CalendarList = (props) => {
             .then(response => response.json())
             .then(response => {
                 setCalendars(response);
-                setCalendarsLoading(false);
+                setCalendarsLoaded(true);
             })
             .catch(error => {
-                console.log("Calendars Request error:");
-                console.log(error);
             });
     }
 
@@ -50,16 +50,19 @@ export const CalendarList = (props) => {
         );
     }
     else {
-        if (calendarsLoading) {
+        if (calendarsLoaded === false) {
             return (
                 <div>Loading Calendars...</div>
             );
         }
         else {
+            let calendarsText = calendars.map((calendar) => {
+                return <CalendarEntry key={calendar.id} calendar={calendar} />
+            })
+
             return (
                 <div>
-                    {/* <i className="bi bi-square"></i> */}
-                    <i className={"bi bi-check-square-fill calendar-color-" + calendars.color}></i> {calendars.name}
+                    {calendarsText}
                 </div>
             );
         }
