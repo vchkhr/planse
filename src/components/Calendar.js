@@ -6,7 +6,7 @@ import { CalendarList } from './CalendarList';
 
 
 const Calendar = (props) => {
-    if (props.userLoading === true) {
+    if (props.userLoaded === false) {
         return (
             <div>Loading User Information...</div>
         );
@@ -29,10 +29,12 @@ const Calendar = (props) => {
             return (
                 <div className="left-bar">
                     <h5><i className="bi bi-calendar"></i> Calendars</h5>
-                    
-                    <CalendarList user={props.user} userLoading={props.userLoading} />
 
-                    <p><Link to="calendar/create" className="link-hidden"><i className="bi bi-plus-circle-dotted"></i> Create a calendar</Link></p>
+                    <h6>Your calendars</h6>
+                    
+                    <CalendarList user={props.user} userLoaded={props.userLoaded} />
+
+                    <h6 className="mt-2"><Link to="calendar/create" className="link-hidden"><i className="bi bi-plus-circle-dotted"></i> Create a calendar</Link></h6>
                 </div>
             );
         }

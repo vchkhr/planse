@@ -8,10 +8,12 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [redirect, setRedirect] = useState(false);
+    const [loginRedirect, setLoginRedirect] = useState(false);
+    const [loginError, setLoginError] = useState('');
 
     const submit = async (e) => {
         e.preventDefault();
+        setLoginError('');
 
         fetch(process.env.REACT_APP_DOMAIN + '/api/login', {
             method: 'POST',
@@ -40,20 +42,30 @@ const Login = (props) => {
             )
             .then(response => response.json())
             .then(response => {
-                setRedirect(true);
+                setLoginRedirect(true);
+                setLoginError('');
                 props.setUser(response);
             })
             .catch(error => {
+                setLoginError(error.toString());
             });
     }
 
-    if (redirect) {
+    if (loginRedirect) {
         return <Redirect to="/" />;
     }
+
+    let loginErrorText = (
+        <div className="alert alert-danger" role="alert">
+            {loginError === 'Error: Error 401: Unauthorized' ? 'Invalid email or password' : loginError}
+        </div>
+    );
 
     return (
         <div className="container mainDiv">
             <div className="form-signin text-center">
+                {loginError ? loginErrorText : ''}
+
                 <form onSubmit={submit}>
                     {/* <img className="mb-4" src={logo} alt="PLANSE" width="72" height="72" /> */}
                     <h1 className="h3 mb-3 fw-normal">Login</h1>
