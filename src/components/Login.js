@@ -58,6 +58,7 @@ const Login = (props) => {
     let loginErrorText = (
         <div className="alert alert-danger" role="alert">
             {loginError === 'Error: Error 401: Unauthorized' ? 'Invalid email or password' : loginError}
+            {loginError === 'Error: Error 401:' ? 'Invalid email or password' : loginError}
         </div>
     );
 

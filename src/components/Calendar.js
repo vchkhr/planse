@@ -19,7 +19,7 @@ const Calendar = (props) => {
                         <p>You are not logged in.</p>
 
                         <p>
-                            <Link to="/login">Login</Link>
+                            <Link to="/login" className="alert-link">Login</Link> or <Link to="/register" className="alert-link">Register</Link>
                         </p>
                     </div>
                 </div>
