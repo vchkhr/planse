@@ -61,6 +61,7 @@ const Register = (props) => {
     let registerErrorText = (
         <div className="alert alert-danger" role="alert">
             {registerError === 'Error: Error 409: Conflict' ? 'Email already registered' : registerError}
+            {registerError === 'Error: Error 409:' ? 'Email already registered' : registerError}
         </div>
     );
 
