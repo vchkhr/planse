@@ -10,6 +10,7 @@ import Logout from './components/Logout';
 
 import Calendar from './components/Calendar';
 import CalendarCreate from './components/CalendarCreate';
+import CalendarEdit from './components/CalendarEdit';
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
                 <Route path="/logout" component={() => <Logout user={user} setUser={setUser} />} />
 
                 <Route path="/calendar/create" component={() => <CalendarCreate user={user} />} />
+                <Route path="/calendar/edit/:id" component={() => <CalendarEdit />} />
             </BrowserRouter>
         </div>
     );

@@ -1,0 +1,155 @@
+import React, { useEffect, useState } from 'react';
+
+import { withRouter } from "react-router";
+import { Redirect } from "react-router-dom";
+
+import { useHistory } from "react-router-dom";
+
+
+const CalendarEdit = (props) => {
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [color, setColor] = useState('');
+
+    const [calendarEditRedirect, setCalendarEditRedirect] = useState(false);
+
+    const [calendars, setCalendars] = useState('');
+    const [calendarsLoaded, setCalendarsLoaded] = useState(false);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const calendarEdit = (e) => {
+        e.preventDefault();
+
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/update/' + props.match.params.id, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+                name,
+                description,
+                color
+            })
+        })
+            .then(
+                response => {
+                    if (response.ok) {
+                        return response;
+                    }
+                    else {
+                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        error.response = response;
+
+                        throw error;
+                    }
+                },
+                error => {
+                    throw error;
+                }
+            )
+            .then(response => response.json())
+            .then(response => {
+                setCalendarEditRedirect(true);
+            })
+            .catch(error => {
+                alert(error);
+            });
+    }
+
+    if (calendarEditRedirect) {
+        return <Redirect to="/" />;
+    }
+
+    const fetchData = () => {
+        setCalendarsLoaded(false);
+
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/index', {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+        })
+            .then(
+                response => {
+                    if (response.ok) {
+                        return response;
+                    }
+                    else {
+                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        error.response = response;
+
+                        throw error;
+                    }
+                },
+                error => {
+                    throw error;
+                }
+            )
+            .then(response => response.json())
+            .then(response => {
+                setCalendars(response);
+                setCalendarsLoaded(true);
+            })
+            .catch(error => {
+                alert(error);
+            });
+    }
+
+    if (calendarsLoaded === false) {
+        return (
+            <div className="container mainDiv">
+                <p className="t-center">Loading information about this calendar...</p>
+            </div>
+        );
+    }
+    else {
+        const history = useHistory();
+
+        const calendarInfo = calendars.filter((calendar) => calendar.id == props.match.params.id)[0];
+
+        return (
+            <div className="container mainDiv">
+                <div className="form-signin text-center">
+                    <form onSubmit={calendarEdit}>
+                        <h1 className="h3 mb-3 fw-normal">Edit calendar <code>{calendarInfo.name}</code></h1>
+
+                        <div className="form-floating">
+                            <input type="text" className="form-control" id="name" placeholder="Name" onChange={e => setName(e.target.value)} defaultValue={calendarInfo.name} required />
+                            <label htmlFor="name">Name *</label>
+                        </div>
+
+                        <div className="form-floating mt-3">
+                            <input type="text" className="form-control" id="description" placeholder="Description" onChange={e => setDescription(e.target.value)} defaultValue={calendarInfo.description} />
+                            <label htmlFor="description">Description</label>
+                        </div>
+
+                        <div className=" mt-3">
+                            <select className="form-select" aria-label="Color" id="color" onChange={e => setColor(e.target.value)} defaultValue={calendarInfo.color} >
+                                <option value="00">Color</option>
+                                <option value="0">Red</option>
+                                <option value="1">Orange</option>
+                                <option value="2">Yellow</option>
+                                <option value="3">Green</option>
+                                <option value="4">Blue</option>
+                                <option value="5">Violet</option>
+                            </select>
+                        </div>
+
+                        <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Save changes</button>
+                    </form>
+
+                    <form>
+                        <hr />
+                        <button className="w-100 btn btn-lg btn-warning" onClick={() => history.push("/calendar/main/" + props.match.params.id)}>Make the main calendar</button>
+                    </form>
+
+                    <form>
+                        <button className="w-100 btn btn-lg btn-danger mt-3" onClick={() => history.push("/calendar/delete/" + props.match.params.id)}>Delete calendar</button>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+};
+
+export default withRouter(CalendarEdit);

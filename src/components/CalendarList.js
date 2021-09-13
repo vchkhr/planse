@@ -39,6 +39,7 @@ export const CalendarList = (props) => {
                 setCalendarsLoaded(true);
             })
             .catch(error => {
+                alert(error);
             });
     }
 
@@ -52,12 +53,12 @@ export const CalendarList = (props) => {
     else {
         if (calendarsLoaded === false) {
             return (
-                <div>Loading Calendars...</div>
+                <div>Loading calendars...</div>
             );
         }
         else {
             let calendarsList = calendars.map((calendar) => {
-                return <CalendarEntry key={calendar.id} calendar={calendar} />
+                return <CalendarEntry key={calendar.id} calendar={calendar} user={props.user} />
             })
 
             return (

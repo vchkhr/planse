@@ -85,3 +85,15 @@
 .link-hidden {
     text-decoration: none;
 }
+
+.link-gray {
+    color: gray;
+}
+
+.text-gray {
+    color: gray;
+}
+
+.t-center {
+    text-align: center;
+}
