@@ -54,16 +54,20 @@ const Register = (props) => {
 
     if (registerRedirect) {
         return (
-            <Redirect to="/login" />
+            <Redirect to={{ pathname: '/login', state: { justRegistered: 'true' } }}
+            />
         );
     }
 
+    console.log(registerError);
     let registerErrorText = (
-        <div className="alert alert-danger" role="alert">
-            {registerError === 'Error: Error 409: Conflict' ? 'Email already registered' : registerError}
-            {registerError === 'Error: Error 409:' ? 'Email already registered' : registerError}
-        </div>
+        <div className="alert alert-danger" role="alert">{registerError}</div>
     );
+    if (registerError === 'Error: Error 409: Conflict' || registerError === 'Error: Error 409:') {
+        registerErrorText = (
+            <div className="alert alert-danger" role="alert">This email is already registered</div>
+        );
+    }
 
     return (
         <div className="container mainDiv">
