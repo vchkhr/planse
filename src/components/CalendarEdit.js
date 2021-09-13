@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { withRouter } from "react-router";
 import { Redirect } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import { useHistory } from "react-router-dom";
 
@@ -105,7 +106,7 @@ const CalendarEdit = (props) => {
     else {
         const history = useHistory();
 
-        const calendarInfo = calendars.filter((calendar) => calendar.id == props.match.params.id)[0];
+        const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === parseInt(props.match.params.id, 10))[0];
 
         return (
             <div className="container mainDiv">
@@ -140,7 +141,7 @@ const CalendarEdit = (props) => {
 
                     <form>
                         <hr />
-                        <button className="w-100 btn btn-lg btn-warning" onClick={() => history.push("/calendar/main/" + props.match.params.id)}>Make the main calendar</button>
+                        <Link to={{ pathname: "/calendar/updateMain/" + props.match.params.id, state: { mainName: calendarInfo.name} }} className="w-100 btn btn-lg btn-warning">Make the main calendar</Link>
                     </form>
 
                     <form>

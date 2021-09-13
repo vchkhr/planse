@@ -11,6 +11,7 @@ import Logout from './components/Logout';
 import Calendar from './components/Calendar';
 import CalendarCreate from './components/CalendarCreate';
 import CalendarEdit from './components/CalendarEdit';
+import CalendarUpdateMain from './components/CalendarUpdateMain';
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
 
                 <Route path="/calendar/create" component={() => <CalendarCreate user={user} />} />
                 <Route path="/calendar/edit/:id" component={() => <CalendarEdit />} />
+                <Route path="/calendar/updateMain/:id" component={() => <CalendarUpdateMain user={user} setUser={setUser} />} />
             </BrowserRouter>
         </div>
     );
