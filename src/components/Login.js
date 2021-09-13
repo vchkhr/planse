@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
+import { useLocation } from "react-router"
+
 // import logo from '../logo.svg';
 
 
@@ -55,17 +57,34 @@ const Login = (props) => {
         return <Redirect to="/" />;
     }
 
+    console.log(loginError)
     let loginErrorText = (
-        <div className="alert alert-danger" role="alert">
-            {loginError === 'Error: Error 401: Unauthorized' ? 'Invalid email or password' : loginError}
-            {loginError === 'Error: Error 401:' ? 'Invalid email or password' : loginError}
-        </div>
+        <div className="alert alert-danger" role="alert">{loginError}</div>
     );
+    if (loginError === 'Error: Error 401: Unauthorized' || loginError === 'Error: Error 401:') {
+        loginErrorText = (
+            <div className="alert alert-danger" role="alert">Invalid email or password</div>
+        );
+    }
+
+    let justRegistered = useLocation().state;
+    let justRegisteredText = (
+        <div></div>
+    );
+    if (justRegistered !== undefined && !loginError) {
+        if (justRegistered['justRegistered'] !== 'false') {
+            justRegisteredText = (
+                <div className="alert alert-success" role="alert">Account has been successfully registered. Now you can login</div>
+            )
+        }
+    }
 
     return (
         <div className="container mainDiv">
             <div className="form-signin text-center">
                 {loginError ? loginErrorText : ''}
+
+                {justRegisteredText}
 
                 <form onSubmit={submit}>
                     {/* <img className="mb-4" src={logo} alt="PLANSE" width="72" height="72" /> */}
