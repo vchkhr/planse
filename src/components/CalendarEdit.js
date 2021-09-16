@@ -108,11 +108,24 @@ const CalendarEdit = (props) => {
 
         const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === parseInt(props.match.params.id, 10))[0];
 
+        let deleteCalendar = (
+            <form>
+                <button className="w-100 btn btn-lg btn-danger mt-3" onClick={() => history.push("/calendar/delete/" + props.match.params.id)}>Delete calendar</button>
+            </form>
+        );
+        if (calendarInfo.id === props.user.main_calendar) {
+            deleteCalendar = (
+                <div className="mt-3">
+                    <p>You can't delete your main calendar.</p>
+                </div>
+            );
+        }
+
         return (
             <div className="container mainDiv">
                 <div className="form-signin text-center">
                     <form onSubmit={calendarEdit}>
-                        <h1 className="h3 mb-3 fw-normal">Edit calendar <code>{calendarInfo.name}</code></h1>
+                        <h1 className="h3 mb-3 fw-normal">Edit <code>{calendarInfo.name}</code> calendar</h1>
 
                         <div className="form-floating">
                             <input type="text" className="form-control" id="name" placeholder="Name" onChange={e => setName(e.target.value)} defaultValue={calendarInfo.name} required />
@@ -141,12 +154,10 @@ const CalendarEdit = (props) => {
 
                     <form>
                         <hr />
-                        <Link to={{ pathname: "/calendar/updateMain/" + props.match.params.id, state: { mainName: calendarInfo.name} }} className="w-100 btn btn-lg btn-warning">Make the main calendar</Link>
+                        <Link to={{ pathname: "/calendar/updateMain/" + props.match.params.id, state: { mainName: calendarInfo.name } }} className="w-100 btn btn-lg btn-warning">Make the main calendar</Link>
                     </form>
 
-                    <form>
-                        <button className="w-100 btn btn-lg btn-danger mt-3" onClick={() => history.push("/calendar/delete/" + props.match.params.id)}>Delete calendar</button>
-                    </form>
+                    {deleteCalendar}
                 </div>
             </div>
         );

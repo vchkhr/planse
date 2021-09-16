@@ -4,8 +4,8 @@ import { withRouter } from "react-router";
 import { Redirect } from "react-router-dom";
 
 
-const CalendarEdit = (props) => {
-    const [calendarUpdateMainRedirect, setCalendarUpdateMainRedirect] = useState(false);
+const CalendarDelete = (props) => {
+    const [calendarDeleteRedirect, setCalendarDeleteRedirect] = useState(false);
     const [id] = useState(parseInt(props.match.params.id, 10))
 
     const [calendars, setCalendars] = useState('');
@@ -15,10 +15,10 @@ const CalendarEdit = (props) => {
         fetchData();
     }, []);
 
-    const calendarUpdateMain = (e) => {
+    const calendarDelete = (e) => {
         e.preventDefault();
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/updateMain/' + id, {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/delete/' + id, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -44,15 +44,14 @@ const CalendarEdit = (props) => {
             )
             .then(response => response.json())
             .then(response => {
-                setCalendarUpdateMainRedirect(true);
-                props.setUser(response);
+                setCalendarDeleteRedirect(true);
             })
             .catch(error => {
                 alert(error);
             });
     }
 
-    if (calendarUpdateMainRedirect) {
+    if (calendarDeleteRedirect) {
         return <Redirect to="/" />;
     }
 
@@ -99,15 +98,24 @@ const CalendarEdit = (props) => {
     else {
         const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === id)[0];
 
+        let deleteButton = (
+            <button className="w-100 btn btn-lg btn-danger mt-3" type="submit">Delete calendar</button>
+        );
+        if (props.user.main_calendar === calendarInfo.id) {
+            deleteButton = (
+                <p>You can't delete your main calendar.</p>
+            );
+        }
+
         return (
             <div className="container mainDiv">
                 <div className="form-signin text-center">
-                    <form onSubmit={calendarUpdateMain}>
-                        <h1 className="h3 mb-3 fw-normal">Update main calendar</h1>
+                    <form onSubmit={calendarDelete}>
+                        <h1 className="h3 mb-3 fw-normal">Delete <code>{calendarInfo.name}</code> calendar</h1>
 
-                        <p>You are going to change your main calendar to the <code>{calendarInfo.name}</code> calendar.</p>
+                        <p>You are going to delete this calendar. All events in this calendar, as well as access settings will be deleted.</p>
 
-                        <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Update main calendar</button>
+                        {deleteButton}
                     </form>
                 </div>
             </div>
@@ -115,4 +123,4 @@ const CalendarEdit = (props) => {
     }
 };
 
-export default withRouter(CalendarEdit);
+export default withRouter(CalendarDelete);
