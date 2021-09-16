@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { withRouter } from "react-router";
 import { Redirect } from "react-router-dom";
 
-import { useLocation } from "react-router"
+import { useHistory } from "react-router-dom";
 
 
-const CalendarUpdateMain = (props) => {
-    const [id, setId] = useState('');
-
+const CalendarEdit = (props) => {
     const [calendarUpdateMainRedirect, setCalendarUpdateMainRedirect] = useState(false);
+    const [id] = useState(parseInt(props.match.params.id, 10))
+
+    const [calendars, setCalendars] = useState('');
+    const [calendarsLoaded, setCalendarsLoaded] = useState(false);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const calendarUpdateMain = (e) => {
         e.preventDefault();
 
-        console.log("ok");
-
-        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/updateMain', {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/updateMain/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -43,6 +47,7 @@ const CalendarUpdateMain = (props) => {
             .then(response => response.json())
             .then(response => {
                 setCalendarUpdateMainRedirect(true);
+                props.setUser(response);
             })
             .catch(error => {
                 alert(error);
@@ -53,21 +58,60 @@ const CalendarUpdateMain = (props) => {
         return <Redirect to="/" />;
     }
 
-    let mainName = useLocation().state;
-    if (mainName !== undefined) {
+    const fetchData = () => {
+        setCalendarsLoaded(false);
+
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/index', {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+        })
+            .then(
+                response => {
+                    if (response.ok) {
+                        return response;
+                    }
+                    else {
+                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        error.response = response;
+
+                        throw error;
+                    }
+                },
+                error => {
+                    throw error;
+                }
+            )
+            .then(response => response.json())
+            .then(response => {
+                setCalendars(response);
+                setCalendarsLoaded(true);
+            })
+            .catch(error => {
+                alert(error);
+            });
+    }
+
+    if (calendarsLoaded === false) {
+        return (
+            <div className="container mainDiv">
+                <p className="t-center">Loading information about this calendar...</p>
+            </div>
+        );
+    }
+    else {
+        const history = useHistory();
+
+        const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === id)[0];
+
         return (
             <div className="container mainDiv">
                 <div className="form-signin text-center">
                     <form onSubmit={calendarUpdateMain}>
-                        <h1 className="h3 mb-3 fw-normal">Change main calendar</h1>
+                        <h1 className="h3 mb-3 fw-normal">Update main calendar</h1>
 
-                        <p>You are going to change your main calendar to the <code>{mainName['mainName']}</code> calendar.</p>
+                        <p>You are going to change your main calendar to the <code>{calendarInfo.name}</code> calendar.</p>
 
                         <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Confirm</button>
-                    </form>
-
-                    <form>
-                        <button className="w-100 btn btn-lg btn-danger mt-3" onClick={() => 5}>Delete calendar</button>
                     </form>
                 </div>
             </div>
@@ -75,4 +119,4 @@ const CalendarUpdateMain = (props) => {
     }
 };
 
-export default withRouter(CalendarUpdateMain);
+export default withRouter(CalendarEdit);
