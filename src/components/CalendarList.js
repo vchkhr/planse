@@ -39,7 +39,7 @@ export const CalendarList = (props) => {
                 setCalendarsLoaded(true);
             })
             .catch(error => {
-                alert(error);
+                // alert(error);
             });
     }
 

@@ -108,13 +108,18 @@ const CalendarEdit = (props) => {
 
         const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === parseInt(props.match.params.id, 10))[0];
 
-        let deleteCalendar = (
-            <form>
-                <button className="w-100 btn btn-lg btn-danger mt-3" onClick={() => history.push("/calendar/delete/" + props.match.params.id)}>Delete calendar</button>
-            </form>
+        let calendarControl = (
+            <div>
+                <form>
+                    <Link to={{ pathname: "/calendar/updateMain/" + props.match.params.id, state: { mainName: calendarInfo.name } }} className="w-100 btn btn-lg btn-warning">Make the main calendar</Link>
+                </form>
+                <form>
+                    <button className="w-100 btn btn-lg btn-danger mt-3" onClick={() => history.push("/calendar/delete/" + props.match.params.id)}>Delete calendar</button>
+                </form>
+            </div>
         );
         if (calendarInfo.id === props.user.main_calendar) {
-            deleteCalendar = (
+            calendarControl = (
                 <div className="mt-3">
                     <p>You can't delete your main calendar.</p>
                 </div>
@@ -152,12 +157,8 @@ const CalendarEdit = (props) => {
                         <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Save changes</button>
                     </form>
 
-                    <form>
-                        <hr />
-                        <Link to={{ pathname: "/calendar/updateMain/" + props.match.params.id, state: { mainName: calendarInfo.name } }} className="w-100 btn btn-lg btn-warning">Make the main calendar</Link>
-                    </form>
-
-                    {deleteCalendar}
+                    <hr />
+                    {calendarControl}
                 </div>
             </div>
         );
