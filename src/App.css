@@ -63,11 +63,11 @@
 }
 
 .calendar-color-1 {
-    color: rgb(202, 155, 0);
+    color: rgb(202, 155, 1);
 }
 
 .calendar-color-2 {
-    color: rgb(199, 202, 0);
+    color: rgb(202, 199, 0);
 }
 
 .calendar-color-3 {
@@ -84,4 +84,16 @@
 
 .link-hidden {
     text-decoration: none;
+}
+
+.link-gray {
+    color: gray;
+}
+
+.text-gray {
+    color: gray;
+}
+
+.t-center {
+    text-align: center;
 }

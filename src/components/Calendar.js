@@ -8,7 +8,7 @@ import { CalendarList } from './CalendarList';
 const Calendar = (props) => {
     if (props.userLoaded === false) {
         return (
-            <div>Loading User Information...</div>
+            <div>Loading user information...</div>
         );
     }
     else {

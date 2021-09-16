@@ -57,11 +57,10 @@ const Login = (props) => {
         return <Redirect to="/" />;
     }
 
-    console.log(loginError)
     let loginErrorText = (
         <div className="alert alert-danger" role="alert">{loginError}</div>
     );
-    if (loginError === 'Error: Error 401: Unauthorized' || loginError === 'Error: Error 401:') {
+    if (loginError === 'Error: Error 401: Unauthorized' || loginError === 'Error: Error 401: ') {
         loginErrorText = (
             <div className="alert alert-danger" role="alert">Invalid email or password</div>
         );

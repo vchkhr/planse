@@ -44,6 +44,7 @@ const CalendarCreate = (props) => {
                 setCalendarCreateRedirect(true);
             })
             .catch(error => {
+                alert(error);
             });
     }
 
