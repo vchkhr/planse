@@ -97,3 +97,7 @@
 .t-center {
     text-align: center;
 }
+
+#create-event {
+    margin-top: 6px;
+}
