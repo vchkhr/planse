@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 const CalendarEdit = (props) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [color, setColor] = useState('');
+    const [color, setColor] = useState();
 
     const [calendarEditRedirect, setCalendarEditRedirect] = useState(false);
 
@@ -142,9 +142,8 @@ const CalendarEdit = (props) => {
                             <label htmlFor="description">Description</label>
                         </div>
 
-                        <div className=" mt-3">
+                        <div className="form-floating mt-3">
                             <select className="form-select" aria-label="Color" id="color" onChange={e => setColor(e.target.value)} defaultValue={calendarInfo.color} >
-                                <option value="00">Color</option>
                                 <option value="0">Red</option>
                                 <option value="1">Orange</option>
                                 <option value="2">Yellow</option>
@@ -152,6 +151,7 @@ const CalendarEdit = (props) => {
                                 <option value="4">Blue</option>
                                 <option value="5">Violet</option>
                             </select>
+                            <label htmlFor="color">Color</label>
                         </div>
 
                         <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Save changes</button>

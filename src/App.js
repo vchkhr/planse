@@ -14,6 +14,9 @@ import CalendarEdit from './components/CalendarEdit';
 import CalendarUpdateMain from './components/CalendarUpdateMain';
 import CalendarDelete from './components/CalendarDelete';
 
+import EventCreate from './components/EventCreate';
+import ArrangementCreate from './components/ArrangementCreate';
+
 
 function App() {
     const [user, setUser] = useState([]);
@@ -70,6 +73,9 @@ function App() {
                 <Route path="/calendar/edit/:id" component={() => <CalendarEdit user={user} />} />
                 <Route path="/calendar/updateMain/:id" component={() => <CalendarUpdateMain user={user} setUser={setUser} />} />
                 <Route path="/calendar/delete/:id" component={() => <CalendarDelete user={user} />} />
+
+                <Route path="/event/create" component={() => <EventCreate user={user} />} />
+                <Route path="/arrangement/create" component={() => <ArrangementCreate user={user} />} />
             </BrowserRouter>
         </div>
     );

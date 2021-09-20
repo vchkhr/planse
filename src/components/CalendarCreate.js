@@ -6,10 +6,10 @@ import { Redirect } from "react-router-dom";
 const CalendarCreate = (props) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [color, setColor] = useState('');
+    const [color, setColor] = useState(0);
 
     const [createCalendarCreateRedirect, setCalendarCreateRedirect] = useState(false);
-    
+
     const createCalendar = (e) => {
         e.preventDefault();
 
@@ -68,9 +68,8 @@ const CalendarCreate = (props) => {
                         <label htmlFor="description">Description</label>
                     </div>
 
-                    <div className=" mt-3">
-                        <select className="form-select" aria-label="Color" id="color" onChange={e => setColor(e.target.value)}>
-                            <option value="0">Color</option>
+                    <div className="form-floating mt-3">
+                        <select className="form-select" aria-label="Color" id="color" onChange={e => setColor(e.target.value)} defaultValue="0">
                             <option value="0">Red</option>
                             <option value="1">Orange</option>
                             <option value="2">Yellow</option>
@@ -78,6 +77,7 @@ const CalendarCreate = (props) => {
                             <option value="4">Blue</option>
                             <option value="5">Violet</option>
                         </select>
+                        <label htmlFor="color">Color</label>
                     </div>
 
                     <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Create calendar</button>
