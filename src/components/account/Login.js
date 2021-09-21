@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import { useLocation } from "react-router"
-
-// import logo from '../logo.svg';
 
 
 const Login = (props) => {
@@ -79,31 +77,31 @@ const Login = (props) => {
     }
 
     return (
-        <div className="container mainDiv">
-            <div className="form-signin text-center">
-                {loginError ? loginErrorText : ''}
+        <div className="form form-signIn text-center">
+            {loginError ? loginErrorText : ''}
 
-                {justRegisteredText}
+            {justRegisteredText}
 
-                <form onSubmit={submit}>
-                    {/* <img className="mb-4" src={logo} alt="PLANSE" width="72" height="72" /> */}
-                    <h1 className="h3 mb-3 fw-normal">Login</h1>
+            <form onSubmit={submit}>
+                <img className="mb-4" src="/logo.png" alt="PLANSE" width="72" height="72" />
+                <h1 className="h3 mb-3 fw-normal">Login to PLANSE</h1>
 
-                    <div className="form-floating">
-                        <input type="email" className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
-                        <label htmlFor="floatingEmail">Email</label>
-                    </div>
+                <p><Link to="/register">Register instead</Link></p>
 
-                    <div className="form-floating">
-                        <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e => setPassword(e.target.value)} required />
-                        <label htmlFor="floatingPassword">Password</label>
-                    </div>
+                <div className="form-floating">
+                    <input type="email" className="form-control" id="floatingEmail" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
+                    <label htmlFor="floatingEmail">Email</label>
+                </div>
 
-                    <button className="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+                <div className="form-floating">
+                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e => setPassword(e.target.value)} required />
+                    <label htmlFor="floatingPassword">Password</label>
+                </div>
 
-                    <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
-                </form>
-            </div>
+                <button className="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+
+                <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
+            </form>
         </div>
     );
 };

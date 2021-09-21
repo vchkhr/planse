@@ -14,7 +14,7 @@ export const CalendarEntry = (props) => {
     }
 
     return (
-        <div className="d-flex">
+        <div className="d-flex calendar-entry">
             <p className="mt-0 mb-0 flex-fill">
                 <i className={"bi bi-check-square-fill calendar-color-" + props.calendar.color} title="Show or hide this calendar"></i> {props.calendar.name} 
             </p>

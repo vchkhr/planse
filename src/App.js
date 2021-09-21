@@ -3,10 +3,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import './App.css';
 
-import Nav from './components/Nav';
-import Login from './components/Login';
-import Register from './components/Register';
-import Logout from './components/Logout';
+import Login from './components/account/Login';
+import Register from './components/account/Register';
+import Logout from './components/account/Logout';
 
 import Calendar from './components/Calendar';
 import CalendarCreate from './components/CalendarCreate';
@@ -62,8 +61,6 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <Nav user={user} setUser={setUser} />
-
                 <Route path="/" exact component={() => <Calendar user={user} userLoaded={userLoaded} />} />
                 <Route path="/login" component={() => <Login setUser={setUser} />} />
                 <Route path="/register" component={() => <Register setUser={setUser} />} />

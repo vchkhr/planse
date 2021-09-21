@@ -1,41 +1,46 @@
-.mainDiv {
+/* .mainDiv {
     margin-top: 70px;
-}
+} */
 
-.form-signin, .form-signup {
+.form {
     width: 100%;
     max-width: 330px;
     padding: 15px;
     margin: auto;
 }
 
-.form-signin .checkbox, .form-signup .checkbox {
+.form-signIn, .form-signUp, .form-signOut, .form-signInOrUp {
+    padding-top: 100px;
+    padding-bottom: 30px;
+}
+
+.form .checkbox, .form-signUp .checkbox {
     font-weight: 400;
 }
 
-.form-signin .form-floating:focus-within, .form-signup .form-floating:focus-within {
+.form .form-floating:focus-within, .form-signUp .form-floating:focus-within {
     z-index: 2;
 }
 
-.form-signin input[type="email"] {
+.form input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.form-signin input[type="password"] {
+.form input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
 
-.form-signup input[type="text"] {
+.form-signUp input[type="text"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.form-signup input[type="email"] {
+.form-signUp input[type="email"] {
     margin-bottom: -1px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
@@ -43,7 +48,7 @@
     border-bottom-left-radius: 0;
 }
 
-.form-signup input[type="password"] {
+.form-signUp input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -56,6 +61,15 @@
     position: fixed;
     border-right: 2px solid rgb(75, 75, 75);
     padding: 60px 10px 10px 10px;
+}
+
+.calendar {
+    background-color: white;
+    width: calc(100% - 300px);
+    height: 100%;
+    left: 300px;
+    position: fixed;
+    padding: 50px 0px;
 }
 
 .calendar-color-0 {
@@ -100,4 +114,14 @@
 
 #create-event {
     margin-top: 6px;
+}
+
+.calendar-entry {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.calendar .top-nav {
+    height: 50px;
+    width: 100%;
 }

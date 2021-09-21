@@ -128,7 +128,7 @@ const CalendarEdit = (props) => {
 
         return (
             <div className="container mainDiv">
-                <div className="form-signin text-center">
+                <div className="form text-center">
                     <form onSubmit={calendarEdit}>
                         <h1 className="h3 mb-3 fw-normal">Edit <code>{calendarInfo.name}</code> calendar</h1>
 

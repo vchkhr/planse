@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import NavLogo from './NavLogo';
 
-const Nav = (props) => {
+export const Nav = (props) => {
     if (props.user.length === 0) {
         return (
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -12,14 +12,14 @@ const Nav = (props) => {
                     <NavLogo />
 
                     <div className="collapse navbar-collapse" id="navbarCollapse">
-                        <ul className="navbar-nav me-auto mb-2 mb-md-0">
+                        {/* <ul className="navbar-nav me-auto mb-2 mb-md-0">
                             <li className="nav-item">
                                 <Link to="/login" className="nav-link">Login</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/register" className="nav-link">Register</Link>
                             </li>
-                        </ul>
+                        </ul> */}
                         {/* <form className="d-flex">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn btn-outline-success" type="submit">Search</button>
