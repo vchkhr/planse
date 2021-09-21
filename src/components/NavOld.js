@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-const NavLogo = () => {
+const NavOld = () => {
     return (
         <div>
             <Link to="/" className="navbar-brand"> PLANSE</Link>
@@ -13,4 +13,4 @@ const NavLogo = () => {
     );
 }
 
-export default NavLogo;
+export default NavOld;

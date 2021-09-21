@@ -90,8 +90,8 @@ const CalendarDelete = (props) => {
 
     if (calendarsLoaded === false) {
         return (
-            <div className="container mainDiv">
-                <p className="t-center">Loading information about this calendar...</p>
+            <div className="text-center mt-5">
+                <p>Loading information about this calendar...</p>
             </div>
         );
     }
@@ -108,7 +108,7 @@ const CalendarDelete = (props) => {
         }
 
         return (
-            <div className="container mainDiv">
+            <div className="container">
                 <div className="form text-center">
                     <form onSubmit={calendarDelete}>
                         <h1 className="h3 mb-3 fw-normal">Delete <code>{calendarInfo.name}</code> calendar</h1>

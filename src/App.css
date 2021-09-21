@@ -1,15 +1,8 @@
-/* .mainDiv {
-    margin-top: 70px;
-} */
-
 .form {
     width: 100%;
     max-width: 330px;
-    padding: 15px;
     margin: auto;
-}
-
-.form-signIn, .form-signUp, .form-signOut, .form-signInOrUp {
+    padding: 15px;
     padding-top: 100px;
     padding-bottom: 30px;
 }
@@ -56,20 +49,20 @@
 
 .left-bar {
     background-color: rgb(245, 245, 245);
-    width: 300px;
+    width: 270px;
     height: 100%;
     position: fixed;
     border-right: 2px solid rgb(75, 75, 75);
-    padding: 60px 10px 10px 10px;
+    padding: 10px;
 }
 
 .calendar {
     background-color: white;
-    width: calc(100% - 300px);
+    width: calc(100% - 270px);
     height: 100%;
-    left: 300px;
+    left: 270px;
     position: fixed;
-    padding: 50px 0px;
+    padding: 0px;
 }
 
 .calendar-color-0 {
@@ -108,12 +101,8 @@
     color: gray;
 }
 
-.t-center {
+.text-center {
     text-align: center;
-}
-
-#create-event {
-    margin-top: 6px;
 }
 
 .calendar-entry {

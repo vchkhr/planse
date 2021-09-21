@@ -117,8 +117,8 @@ const ArrangementCreate = (props) => {
 
     if (calendarsLoaded === false) {
         return (
-            <div className="container mainDiv">
-                <p className="t-center">Loading information about your calendars...</p>
+            <div className="text-center mt-5">
+                <p>Loading information about your calendars...</p>
             </div>
         );
     }
@@ -161,7 +161,7 @@ const ArrangementCreate = (props) => {
         }
 
         return (
-            <div className="container mainDiv">
+            <div className="container">
                 <div className="form text-center">
                     <form onSubmit={arrangementCreate}>
                         <h1 className="h3 mb-3 fw-normal">Create arrangement</h1>

@@ -91,8 +91,8 @@ const CalendarEdit = (props) => {
 
     if (calendarsLoaded === false) {
         return (
-            <div className="container mainDiv">
-                <p className="t-center">Loading information about this calendar...</p>
+            <div className="text-center mt-5">
+                <p>Loading information about this calendar...</p>
             </div>
         );
     }
@@ -100,7 +100,7 @@ const CalendarEdit = (props) => {
         const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === id)[0];
 
         return (
-            <div className="container mainDiv">
+            <div className="container">
                 <div className="form text-center">
                     <form onSubmit={calendarUpdateMain}>
                         <h1 className="h3 mb-3 fw-normal">Update main calendar</h1>

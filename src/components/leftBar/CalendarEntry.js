@@ -18,6 +18,7 @@ export const CalendarEntry = (props) => {
             <p className="mt-0 mb-0 flex-fill">
                 <i className={"bi bi-check-square-fill calendar-color-" + props.calendar.color} title="Show or hide this calendar"></i> {props.calendar.name} 
             </p>
+            
             <p className="mt-0 mb-0">
                 <span className="pr-3">{mainCalendarText} </span>
                 <span><Link to={"/calendar/edit/" + props.calendar.id} className="link-hidden link-gray"><i className="bi bi-gear" title="Edit this calendar"></i></Link> </span>
