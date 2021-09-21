@@ -17,7 +17,7 @@ const CalendarMain = (props) => {
     if (props.userLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading user information...</p>
+                <p><br />Loading user information...</p>
             </div>
         );
     }

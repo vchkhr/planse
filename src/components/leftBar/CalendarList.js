@@ -53,7 +53,7 @@ export const CalendarList = (props) => {
     else {
         if (calendarsLoaded === false) {
             return (
-                <div className="text-center mt-5">
+                <div className="text-center">
                     <p>Loading calendars...</p>
                 </div>
             );

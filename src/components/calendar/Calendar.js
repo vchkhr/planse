@@ -5,12 +5,16 @@ import { Link } from 'react-router-dom';
 
 import { LeftBar } from '../leftBar/LeftBar';
 import { CalendarList } from '../leftBar/CalendarList';
-import { CalendarTopNav } from '../calendar/CalendarTopNav';
+import { TopNav } from '../calendar/TopNav';
 import { Welcome } from '../account/Welcome';
 
 
 export const Calendar = (props) => {
+    let date = new Date();
+
     const [redirectToLogin, setRedirectToLogin] = useState(false);
+    const [view, setView] = useState('month');
+    const [currentMonth, setcurrentMonth] = useState(date.getMonth() + '.' + date.getFullYear());
 
     if (redirectToLogin) {
         return <Redirect to="/login" />;
@@ -35,7 +39,7 @@ export const Calendar = (props) => {
                     <LeftBar user={props.user} setUser={props.setUser} />
                     
                     <div className="calendar">
-                        <CalendarTopNav user={props.user} userLoaded={props.userLoaded} />
+                        <TopNav user={props.user} userLoaded={props.userLoaded} view={view} setView={setView} currentMonth={currentMonth} />
                     </div>
                 </div>
             );
