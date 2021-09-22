@@ -53,8 +53,8 @@ const CalendarCreate = (props) => {
     }
 
     return (
-        <div className="container mainDiv">
-            <div className="form-signin text-center">
+        <div className="container">
+            <div className="form text-center">
                 <form onSubmit={createCalendar}>
                     <h1 className="h3 mb-3 fw-normal">Create calendar</h1>
 

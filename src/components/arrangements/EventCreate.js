@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 const EventCreate = (props) => {
     return (
-        <div className="container mainDiv">
-            <div className="form-signin text-center">
+        <div className="container">
+            <div className="form text-center">
                 <form>
                     <h1 className="h3 mb-3 fw-normal">Create event</h1>
 

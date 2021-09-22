@@ -1,41 +1,41 @@
-.mainDiv {
-    margin-top: 70px;
-}
-
-.form-signin, .form-signup {
+.form {
     width: 100%;
     max-width: 330px;
-    padding: 15px;
     margin: auto;
+    padding: 15px;
+    padding-top: 100px;
+    padding-bottom: 30px;
 }
 
-.form-signin .checkbox, .form-signup .checkbox {
+.form .checkbox,
+.form-signUp .checkbox {
     font-weight: 400;
 }
 
-.form-signin .form-floating:focus-within, .form-signup .form-floating:focus-within {
+.form .form-floating:focus-within,
+.form-signUp .form-floating:focus-within {
     z-index: 2;
 }
 
-.form-signin input[type="email"] {
+.form input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.form-signin input[type="password"] {
+.form input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
 
-.form-signup input[type="text"] {
+.form-signUp input[type="text"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.form-signup input[type="email"] {
+.form-signUp input[type="email"] {
     margin-bottom: -1px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
@@ -43,43 +43,10 @@
     border-bottom-left-radius: 0;
 }
 
-.form-signup input[type="password"] {
+.form-signUp input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-}
-
-.left-bar {
-    background-color: rgb(245, 245, 245);
-    width: 300px;
-    height: 100%;
-    position: fixed;
-    border-right: 2px solid rgb(75, 75, 75);
-    padding: 60px 10px 10px 10px;
-}
-
-.calendar-color-0 {
-    color: rgb(202, 0, 0);
-}
-
-.calendar-color-1 {
-    color: rgb(202, 155, 1);
-}
-
-.calendar-color-2 {
-    color: rgb(202, 199, 0);
-}
-
-.calendar-color-3 {
-    color: rgb(0, 202, 0);
-}
-
-.calendar-color-4 {
-    color: rgb(0, 20, 202);
-}
-
-.calendar-color-5 {
-    color: rgb(195, 0, 202);
 }
 
 .link-hidden {
@@ -94,10 +61,14 @@
     color: gray;
 }
 
-.t-center {
-    text-align: center;
+.text-thin {
+    font-weight: 200;
 }
 
-#create-event {
-    margin-top: 6px;
+.text-right {
+    text-align: right;
+}
+
+.color-light-gray {
+    color: #8a8a8a;
 }

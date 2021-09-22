@@ -25,17 +25,15 @@ const Logout = (props) => {
     }
 
     return (
-        <div className="container mainDiv">
-            <div className="form-signin text-center">
-                <form onSubmit={submit}>
-                    {/* <img className="mb-4" src={logo} alt="PLANSE" width="72" height="72" /> */}
-                    <h1 className="h3 mb-3 fw-normal">{props.user.name}, do you really want to log out?</h1>
+        <div className="form form-signOut text-center">
+            <form onSubmit={submit}>
+                <img className="mb-4" src="/logo.png" alt="PLANSE" width="72" height="72" />
+                <h1 className="h3 mb-3 fw-normal">{props.user.name}, do you really want to log out?</h1>
 
-                    <button className="w-100 btn btn-lg btn-primary" type="submit">Log Out</button>
+                <button className="w-100 btn btn-lg btn-primary" type="submit">Log Out</button>
 
-                    <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
-                </form>
-            </div>
+                <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
+            </form>
         </div>
     );
 };
