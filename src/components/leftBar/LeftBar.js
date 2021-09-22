@@ -8,7 +8,7 @@ import { Welcome } from '../account/Welcome';
 
 
 export const LeftBar = (props) => {
-    const [redirectToLogin, setRedirectToLogin] = useState(false);
+    const [redirectToLogin] = useState(false);
 
     if (redirectToLogin) {
         return <Redirect to="/login" />;

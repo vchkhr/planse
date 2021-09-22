@@ -1,0 +1,21 @@
+.calendar .month {
+    width: 100%;
+    height: 100%;
+}
+
+.calendar .month .week {
+    height: calc((100% - 30px - 20px) / 6);
+}
+
+.calendar .month .daysOfWeek {
+    height: 20px;
+}
+
+.calendar .month .day {
+    width: calc(100% / 7);
+    padding: 3px;
+}
+
+.calendar .month .daysOfWeek .day {
+    padding-top: 3px;
+}

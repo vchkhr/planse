@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './App.css';
+import './Calendar.css';
+import './CalendarMonthView.css';
 
 import Login from './components/account/Login';
 import Register from './components/account/Register';
