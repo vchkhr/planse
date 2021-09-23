@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Redirect } from "react-router-dom";
 
@@ -22,6 +22,46 @@ const CalendarMain = (props) => {
         );
     }
     else {
+        const [calendars, setCalendars] = useState('');
+        const [calendarsLoaded, setCalendarsLoaded] = useState(false);
+
+        useEffect(() => {
+            fetchData();
+        }, []);
+
+        const fetchData = () => {
+            setCalendarsLoaded(false);
+
+            fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/index', {
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            })
+                .then(
+                    response => {
+                        if (response.ok) {
+                            return response;
+                        }
+                        else {
+                            let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                            error.response = response;
+
+                            throw error;
+                        }
+                    },
+                    error => {
+                        throw error;
+                    }
+                )
+                .then(response => response.json())
+                .then(response => {
+                    setCalendars(response);
+                    setCalendarsLoaded(true);
+                })
+                .catch(error => {
+                    // alert(error);
+                });
+        }
+
         if (props.user.length === 0) {
             return (
                 <Welcome />
@@ -30,9 +70,9 @@ const CalendarMain = (props) => {
         else {
             return (
                 <div>
-                    <LeftBar user={props.user} setUser={props.setUser} />
-                    
-                    <Calendar user={props.user} setUser={props.setUser} />
+                    <LeftBar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} />
+
+                    <Calendar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} />
                 </div>
             );
         }

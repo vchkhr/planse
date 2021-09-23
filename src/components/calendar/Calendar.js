@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 
 import moment from 'moment';
 
-import { LeftBar } from '../leftBar/LeftBar';
 import { TopNav } from '../calendar/TopNav';
 import { CalendarBody } from '../calendar/CalendarBody';
 import { Welcome } from '../account/Welcome';
@@ -27,6 +26,7 @@ export const Calendar = (props) => {
         );
     }
     else {
+
         if (props.user.length === 0) {
             return (
                 <Welcome />
@@ -35,12 +35,10 @@ export const Calendar = (props) => {
         else {
             return (
                 <div>
-                    <LeftBar user={props.user} setUser={props.setUser} />
-                    
                     <div className="calendar">
                         <TopNav user={props.user} userLoaded={props.userLoaded} view={view} setView={setView} viewDate={viewDate} setViewDate={setViewDate} />
 
-                        <CalendarBody user={props.user} userLoaded={props.userLoaded} view={view} viewDate={viewDate} />
+                        <CalendarBody user={props.user} userLoaded={props.userLoaded} view={view} viewDate={viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} />
                     </div>
                 </div>
             );

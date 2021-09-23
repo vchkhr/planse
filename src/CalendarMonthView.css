@@ -11,11 +11,29 @@
     height: 20px;
 }
 
+.calendar .month .daysOfWeek p {
+    margin-top: 0px !important;
+}
+
 .calendar .month .day {
     width: calc(100% / 7);
-    padding: 3px;
+    margin: 2px;
+    border-top: 1px solid #a5a5a5;
+}
+
+.calendar .month .day p {
+    margin: 0px;
+    margin-top: 2px;
+    margin-bottom: 0px;
 }
 
 .calendar .month .daysOfWeek .day {
-    padding-top: 3px;
+    border-top: 0;
+    color: #a5a5a5;
+}
+
+.calendar .month .arrangement p {
+    border: 0;
+    border-radius: 3px;
+    padding: 1px 3px;
 }

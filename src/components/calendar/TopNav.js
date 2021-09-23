@@ -17,9 +17,9 @@ export const TopNav = (props) => {
         const viewButtons = (
             <div className="selectView d-flex">
                 <div className="btn-group btn-group-sm flex-fill" role="group" aria-label="Basic outlined example">
-                    <button type="button" className={props.view === 'week' ? 'btn btn-primary' : 'btn btn-outline-primary'} onClick={() => props.setView('week')}>Week</button>
-                    <button type="button" className={props.view === 'month' ? 'btn btn-primary' : 'btn btn-outline-primary'} onClick={() => props.setView('month')}>Month</button>
-                    <button type="button" className={props.view === 'year' ? 'btn btn-primary' : 'btn btn-outline-primary'} onClick={() => props.setView('year')}>Year</button>
+                    <button type="button" className={props.view === "week" ? "btn btn-primary" : "btn btn-outline-primary"} onClick={() => props.setView("week")}>Week</button>
+                    <button type="button" className={props.view === "month" ? "btn btn-primary" : "btn btn-outline-primary"} onClick={() => props.setView("month")}>Month</button>
+                    <button type="button" className={props.view === "year" ? "btn btn-primary" : "btn btn-outline-primary"} onClick={() => props.setView("year")}>Year</button>
                 </div>
             </div>
         );

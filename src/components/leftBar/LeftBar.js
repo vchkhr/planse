@@ -40,7 +40,7 @@ export const LeftBar = (props) => {
                     </div>
                     
 
-                    <CalendarList user={props.user} userLoaded={props.userLoaded} />
+                    <CalendarList user={props.user} userLoaded={props.userLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} />
 
                     <p className="mt-4">
                         <Link to="/event/create" role="button" className="btn btn-primary w-100"><i className="bi bi-plus-circle-dotted"></i> Create event</Link>
