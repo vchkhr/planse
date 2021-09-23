@@ -17,6 +17,8 @@ const CalendarEdit = (props) => {
     const [calendars, setCalendars] = useState('');
     const [calendarsLoaded, setCalendarsLoaded] = useState(false);
 
+    const history = useHistory();
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -104,8 +106,6 @@ const CalendarEdit = (props) => {
         );
     }
     else {
-        const history = useHistory();
-
         const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === parseInt(props.match.params.id, 10))[0];
 
         let calendarControl = (

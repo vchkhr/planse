@@ -11,6 +11,8 @@ const Login = (props) => {
     const [loginRedirect, setLoginRedirect] = useState(false);
     const [loginError, setLoginError] = useState('');
 
+    let justRegistered = useLocation().state;
+
     const submit = async (e) => {
         e.preventDefault();
         setLoginError('');
@@ -64,7 +66,6 @@ const Login = (props) => {
         );
     }
 
-    let justRegistered = useLocation().state;
     let justRegisteredText = (
         <div></div>
     );
