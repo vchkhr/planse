@@ -52,9 +52,21 @@ export const Day = (props) => {
 
             if (dayDate.isBetween(moment(event.start), moment(event.end), 'days', '[]') === true) {
                 if (event.all_day === 1) {
+                    let multipleDays = (
+                        <span title="This event does not end today"><i className="bi bi-chevron-compact-right"></i></span>
+                    );
+                    if (moment(event.end).diff(dayDate, "days") === 0) {
+                        multipleDays = (
+                            <span></span>
+                        );
+                    }
+
                     events.push(
                         <div className="arrangement arrangement-allDay">
-                            <p className={"calendar-color-" + color + " calendar-background-color-" + color}>{event.name}</p>
+                            <p className={"d-flex calendar-color-" + color + " calendar-background-color-" + color}>
+                                <span className="flex-fill">{event.name}</span>
+                                {multipleDays}
+                            </p>
                         </div>
                     );
                 }
