@@ -49,9 +49,15 @@ export const Day = (props) => {
                     }
                 });
             }
+            if (event.all_day === 1 || moment(event.end).diff(moment(event.start), "days") > 0) {
+                color = "calendar-color-" + color + " calendar-background-color-" + color;
+            }
+            else {
+                color = "calendar-color-" + color;
+            }
 
             if (dayDate.isBetween(moment(event.start), moment(event.end), 'days', '[]') === true) {
-                if (event.all_day === 1) {
+                if (event.all_day === 1 || moment(event.end).diff(dayDate, "days") > 0) {
                     let multipleDays = (
                         <span title="This event does not end today"><i className="bi bi-chevron-compact-right"></i></span>
                     );
@@ -63,7 +69,7 @@ export const Day = (props) => {
 
                     events.push(
                         <div className="arrangement arrangement-allDay">
-                            <p className={"d-flex calendar-color-" + color + " calendar-background-color-" + color}>
+                            <p className={"d-flex " + color}>
                                 <span className="flex-fill">{event.name}</span>
                                 {multipleDays}
                             </p>
@@ -73,7 +79,10 @@ export const Day = (props) => {
                 else {
                     events.push(
                         <div className="arrangement arrangement-timeSpecific">
-                            <p className={"calendar-color-" + color}>{event.name}</p>
+                            <p className={"d-flex " + color}>
+                                <span className="flex-fill">{event.name}</span>
+                                <span>{moment(event.end).format("H:mm")}</span>
+                            </p>
                         </div>
                     );
                 }
