@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { BoxArrowRight } from 'react-bootstrap-icons';
 import { Redirect } from 'react-router-dom';
 
-// import logo from '../logo.svg';
 
 const Logout = (props) => {
     const [logoutRedirect, setLogoutRedirect] = useState(false);
@@ -25,16 +26,17 @@ const Logout = (props) => {
     }
 
     return (
-        <div className="form form-signOut text-center">
-            <form onSubmit={submit}>
-                <img className="mb-4" src="/logo.png" alt="PLANSE" width="72" height="72" />
-                <h1 className="h3 mb-3 fw-normal">{props.user.name}, do you really want to log out?</h1>
+        <Form onSubmit={submit}>
+            <p className="text-center">
+                <img className="mb-4" src="/logo.png" alt="PLANSE" />
+            </p>
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Log Out</button>
+            <h1 className="h3 mb-3 fw-normal text-center">{props.user.name}, do you really want to log out?</h1>
 
-                <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
-            </form>
-        </div>
+            <Button variant="primary" type="submit" size="lg" className="w-100">Log out <BoxArrowRight /></Button>
+
+            <p className="mt-5 mb-3 text-muted text-center">&copy; PLANSE, 2021</p>
+        </Form>
     );
 };
 

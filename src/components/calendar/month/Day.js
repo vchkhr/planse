@@ -1,6 +1,7 @@
 import React from 'react';
 
 import moment from 'moment';
+import { ChevronCompactRight } from 'react-bootstrap-icons';
 
 
 export const Day = (props) => {
@@ -35,7 +36,7 @@ export const Day = (props) => {
 
         let cn = "dayNum mt-0 mb-0"
         if (dayDate.format("MM") !== props.viewDate.format("MM")) {
-            cn = "dayNum color-light-gray"
+            cn = "dayNum text-secondary"
         }
 
         let events = []
@@ -59,7 +60,7 @@ export const Day = (props) => {
             if (dayDate.isBetween(moment(event.start), moment(event.end), 'days', '[]') === true) {
                 if (event.all_day === 1 || moment(event.end).diff(dayDate, "days") > 0) {
                     let multipleDays = (
-                        <span title="This event does not end today"><i className="bi bi-chevron-compact-right"></i></span>
+                        <span title="This event does not end today"><ChevronCompactRight /></span>
                     );
                     if (moment(event.end).diff(dayDate, "days") === 0) {
                         multipleDays = (
@@ -93,7 +94,7 @@ export const Day = (props) => {
             <div>
                 <p className={cn}>{dayDate.format('D')}</p>
 
-                <div className="text-bold">
+                <div className="fw-bold">
                     {events}
                 </div>
             </div>

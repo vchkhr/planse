@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Button, Form, Toast, ToastContainer } from 'react-bootstrap';
+import { BoxArrowRight } from 'react-bootstrap-icons';
 import { Redirect, Link } from 'react-router-dom';
 
 
@@ -9,6 +11,7 @@ const Register = () => {
 
     const [registerRedirect, setRegisterRedirect] = useState(false);
     const [registerError, setRegisterError] = useState('');
+    const [toast, setToast] = useState(false);
 
     const submit = async (e) => {
         e.preventDefault();
@@ -43,10 +46,12 @@ const Register = () => {
             .then(response => {
                 setRegisterRedirect(true);
                 setRegisterError('');
+                setToast(false);
                 // props.setUser(response);
             })
             .catch(error => {
                 setRegisterError(error.toString());
+                setToast(true);
             });
     }
 
@@ -58,45 +63,64 @@ const Register = () => {
     }
 
     let registerErrorText = (
-        <div className="alert alert-danger" role="alert">{registerError}</div>
+        <Toast onClose={() => setToast(false)} show={toast} delay={5000} autohide>
+                <Toast.Header>
+                    <img src="logo-20x20.png" className="rounded me-2" alt="PLANSE" />
+                    <strong className="me-auto">Register Error</strong>
+                </Toast.Header>
+                <Toast.Body>{registerError}</Toast.Body>
+            </Toast>
     );
     if (registerError === 'Error: Error 409: Conflict' || registerError === 'Error: Error 409: ') {
         registerErrorText = (
-            <div className="alert alert-danger" role="alert">This email is already registered</div>
+            <Toast onClose={() => setToast(false)} show={toast} delay={5000} autohide>
+                <Toast.Header>
+                    <img src="logo-20x20.png" className="rounded me-2" alt="PLANSE" />
+                    <strong className="me-auto">Register Error</strong>
+                </Toast.Header>
+                <Toast.Body>This email is already registered.</Toast.Body>
+            </Toast>
         );
     }
 
     return (
-        <div className="form form-signUp text-center">
-            {registerError ? registerErrorText : ''}
+        <div>
+            <ToastContainer position="bottom-end" className="p-3">
+                {registerError ? registerErrorText : ''}
+            </ToastContainer>
 
-            <form onSubmit={submit}>
-                <img className="mb-4" src="/logo.png" alt="PLANSE" width="72" height="72" />
-                <h1 className="h3 mb-3 fw-normal">Register on PLANSE</h1>
+            <Form className="register" onSubmit={submit}>
+                <p className="text-center">
+                    <img className="mb-4" src="/logo.png" alt="PLANSE" />
+                </p>
 
-                <p><Link to="/login">Login instead</Link></p>
+                <h1 className="h3 mb-3 fw-normal text-center">Register on PLANSE</h1>
 
-                <div className="form-floating">
-                    <input type="text" className="form-control" id="floatingName" placeholder="Name" onChange={e => setName(e.target.value)} required />
-                    <label htmlFor="floatingName">Name</label>
-                </div>
+                <p className="text-center">
+                    <Link to="/login">Login instead</Link>
+                </p>
 
-                <div className="form-floating">
-                    <input type="email" className="form-control" id="floatingEmail" placeholder="Email" onChange={e => setEmail(e.target.value)} required />
-                    <label htmlFor="floatingEmail">Email</label>
-                </div>
+                <Form.Floating controlId="formName">
+                    <Form.Control type="text" className="top" placeholder="Ed Baldwin" onChange={e => setName(e.target.value)} required />
+                    <Form.Label>Name</Form.Label>
+                </Form.Floating>
 
-                <div className="form-floating">
-                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e => setPassword(e.target.value)} required />
-                    <label htmlFor="floatingPassword">Password</label>
-                </div>
+                <Form.Floating controlId="formEmail">
+                    <Form.Control type="email" className="middle" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
+                    <Form.Label>Email address</Form.Label>
+                </Form.Floating>
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+                <Form.Floating controlId="formPassword">
+                    <Form.Control type="password" className="bottom" placeholder="password" onChange={e => setPassword(e.target.value)} required />
+                    <Form.Label>Password</Form.Label>
+                </Form.Floating>
 
-                <p className="mt-3 mb-3 text-muted">You will be redirected to the login page. Email verification doesn't needed</p>
+                <Button variant="primary" type="submit" size="lg" className="w-100">Register <BoxArrowRight /></Button>
 
-                <p className="mt-5 mb-3 text-muted">&copy; PLANSE, 2021</p>
-            </form>
+                <p className="mt-3 mb-3 text-muted text-center">You will be redirected to the login page.<br />Email verification doesn't needed.<br />We'll never share your email with anyone else</p>
+
+                <p className="mt-5 mb-3 text-muted text-center">&copy; PLANSE, 2021</p>
+            </Form>
         </div>
     );
 };

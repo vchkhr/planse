@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
 import { useLocation } from 'react-router';
-import { Alert, Button, Form, Toast, ToastContainer } from 'react-bootstrap';
+import { Button, Form, Toast, ToastContainer } from 'react-bootstrap';
+import { BoxArrowInRight } from 'react-bootstrap-icons';
 
 
 const Login = (props) => {
@@ -12,6 +13,8 @@ const Login = (props) => {
     const [loginRedirect, setLoginRedirect] = useState(false);
     const [loginError, setLoginError] = useState('');
     const [toast, setToast] = useState(false);
+
+    const [toastRegistered, setToastRegistered] = useState(true);
 
     let justRegistered = useLocation().state;
 
@@ -50,10 +53,12 @@ const Login = (props) => {
                 setLoginRedirect(true);
                 setLoginError('');
                 props.setUser(response);
+                setToastRegistered(false);
             })
             .catch(error => {
                 setLoginError(error.toString());
                 setToast(true);
+                setToastRegistered(false);
             });
     }
 
@@ -62,11 +67,17 @@ const Login = (props) => {
     }
 
     let loginErrorText = (
-        <Alert variant="danger">{loginError}</Alert>
+        <Toast onClose={() => setToast(false)} show={toast} delay={5000} autohide>
+            <Toast.Header>
+                <img src="logo-20x20.png" className="rounded me-2" alt="PLANSE" />
+                <strong className="me-auto">Invalid Login</strong>
+            </Toast.Header>
+            <Toast.Body>{loginError}</Toast.Body>
+        </Toast>
     );
     if (loginError === 'Error: Error 401: Unauthorized' || loginError === 'Error: Error 401: ') {
         loginErrorText = (
-            <Toast onClose={() => setToast(false)} show={toast} delay={3000} autohide>
+            <Toast onClose={() => setToast(false)} show={toast} delay={5000} autohide>
                 <Toast.Header>
                     <img src="logo-20x20.png" className="rounded me-2" alt="PLANSE" />
                     <strong className="me-auto">Invalid Login</strong>
@@ -82,8 +93,14 @@ const Login = (props) => {
     if (justRegistered !== undefined && !loginError) {
         if (justRegistered['justRegistered'] !== 'false') {
             justRegisteredText = (
-                <Alert variant="success">Account has been successfully registered. Now you can login</Alert>
-            )
+                <Toast onClose={() => setToastRegistered(false)} show={toastRegistered} delay={5000} autohide>
+                    <Toast.Header>
+                        <img src="logo-20x20.png" className="rounded me-2" alt="PLANSE" />
+                        <strong className="me-auto">Account Registered</strong>
+                    </Toast.Header>
+                    <Toast.Body>Now you can login with your email and password.</Toast.Body>
+                </Toast>
+            );
         }
     }
 
@@ -91,13 +108,12 @@ const Login = (props) => {
         <div>
             <ToastContainer position="bottom-end" className="p-3">
                 {loginError ? loginErrorText : ''}
+                {justRegisteredText}
             </ToastContainer>
-
-            {justRegisteredText}
 
             <Form onSubmit={submit}>
                 <p className="text-center">
-                    <img className="mb-4" src="/logo.png" alt="PLANSE" width="72" height="72" />
+                    <img className="mb-4" src="/logo.png" alt="PLANSE" />
                 </p>
 
                 <h1 className="h3 mb-3 fw-normal text-center">Login to PLANSE</h1>
@@ -107,16 +123,16 @@ const Login = (props) => {
                 </p>
 
                 <Form.Floating controlId="formEmail">
-                    <Form.Control type="email" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" className="top" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
+                    <Form.Label>Email</Form.Label>
                 </Form.Floating>
 
                 <Form.Floating controlId="formPassword">
-                    <Form.Control type="password" placeholder="password" onChange={e => setPassword(e.target.value)} required />
+                    <Form.Control type="password" className="bottom" placeholder="password" onChange={e => setPassword(e.target.value)} required />
                     <Form.Label>Password</Form.Label>
                 </Form.Floating>
 
-                <Button variant="primary" type="submit" size="lg" className="w-100">Log in</Button>
+                <Button variant="primary" type="submit" size="lg" className="w-100">Log in <BoxArrowInRight /></Button>
 
                 <p className="mt-5 mb-3 text-muted text-center">&copy; PLANSE, 2021</p>
             </Form>

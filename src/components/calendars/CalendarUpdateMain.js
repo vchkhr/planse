@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 import { withRouter } from 'react-router';
 import { Redirect } from "react-router-dom";
@@ -100,17 +101,17 @@ const CalendarEdit = (props) => {
         const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === id)[0];
 
         return (
-            <div className="container">
-                <div className="form text-center">
-                    <form onSubmit={calendarUpdateMain}>
-                        <h1 className="h3 mb-3 fw-normal">Update main calendar</h1>
+            <Form onSubmit={calendarUpdateMain}>
+                <p className="text-center">
+                    <img className="mb-4" src="/logo.png" alt="PLANSE" />
+                </p>
 
-                        <p>You are going to change your main calendar to the <code>{calendarInfo.name}</code> calendar.</p>
+                <h1 className="h3 mb-3 fw-normal text-center">Update main calendar</h1>
 
-                        <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Update main calendar</button>
-                    </form>
-                </div>
-            </div>
+                <p className="text-center">You are going to change your main calendar to the <code>{calendarInfo.name}</code> calendar.</p>
+
+                <Button variant="primary" size="lg" className="w-100 mt-3" type="submit">Update main calendar</Button>
+            </Form>
         );
     }
 };

@@ -1,0 +1,62 @@
+$primary: #4f7cac;
+$success: #63a375;
+$warning: #edc79b;
+$danger: #c7634d;
+$info: #b9e6ff;
+
+.btn-primary,
+.btn-outline-primary:hover,
+.btn-danger,
+.btn-danger-primary:hover {
+    color: white !important;
+}
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+.calendar-color-0 {
+    color: $red;
+}
+
+.calendar-color-1 {
+    color: $orange;
+}
+
+.calendar-color-2 {
+    color: $yellow-600;
+}
+
+.calendar-color-3 {
+    color: $green;
+}
+
+.calendar-color-4 {
+    color: $blue;
+}
+
+.calendar-color-5 {
+    color: $purple;
+}
+
+.calendar-background-color-0 {
+    background-color: $red-100;
+}
+
+.calendar-background-color-1 {
+    background-color: $orange-100;
+}
+
+.calendar-background-color-2 {
+    background-color: $yellow-100;
+}
+
+.calendar-background-color-3 {
+    background-color: $green-100;
+}
+
+.calendar-background-color-4 {
+    background-color: $blue-100;
+}
+
+.calendar-background-color-5 {
+    background-color: $purple-100;
+}

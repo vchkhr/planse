@@ -1,0 +1,39 @@
+.calendar .month {
+    width: 100%;
+    height: 100%;
+
+    .week {
+        height: calc((100% - 30px - 20px) / 6);
+    }
+
+    .daysOfWeek {
+        height: 20px;
+
+        p {
+            margin-top: 0px !important;
+        }
+
+        .day {
+            border-top: 0;
+            color: #a5a5a5;
+        }
+    }
+
+    .day {
+        width: calc(100% / 7);
+        margin: 2px;
+        border-top: 1px solid #a5a5a5;
+
+        p {
+            margin: 0px;
+            margin-top: 2px;
+            margin-bottom: 0px;
+        }
+    }
+
+    .arrangement p {
+        border: 0;
+        border-radius: 3px;
+        padding: 1px 3px;
+    }
+}
