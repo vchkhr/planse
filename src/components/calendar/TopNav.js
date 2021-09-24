@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 import moment from 'moment';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Button, ButtonGroup, Spinner } from 'react-bootstrap';
 import { ChevronCompactRight, ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 
 
@@ -11,7 +11,9 @@ export const TopNav = (props) => {
     if (props.userLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading user information...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }

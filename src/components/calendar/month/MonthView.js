@@ -3,34 +3,16 @@ import React from 'react';
 import moment from 'moment';
 
 import { Day } from '../month/Day';
+import { Spinner } from 'react-bootstrap';
 
 
 export const MonthView = (props) => {
-    if (props.userLoaded === false) {
+    if (props.userLoaded === false || props.userLoaded === false || props.calendarsLoaded === false || props.eventsLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading user information...</p>
-            </div>
-        );
-    }
-    else if (props.userLoaded === false) {
-        return (
-            <div className="text-center mt-5">
-                <p>Loading user information...</p>
-            </div>
-        );
-    }
-    else if (props.calendarsLoaded === false) {
-        return (
-            <div className="text-center mt-5">
-                <p>Loading calendars information...</p>
-            </div>
-        );
-    }
-    else if (props.eventsLoaded === false) {
-        return (
-            <div className="text-center mt-5">
-                <p>Loading events information...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }

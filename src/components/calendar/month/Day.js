@@ -2,27 +2,16 @@ import React from 'react';
 
 import moment from 'moment';
 import { ChevronCompactRight } from 'react-bootstrap-icons';
+import { Spinner } from 'react-bootstrap';
 
 
 export const Day = (props) => {
-    if (props.userLoaded === false) {
+    if (props.userLoaded === false || props.calendarsLoaded === false || props.eventsLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading user information...</p>
-            </div>
-        );
-    }
-    else if (props.calendarsLoaded === false) {
-        return (
-            <div className="text-center mt-5">
-                <p>Loading calendars information...</p>
-            </div>
-        );
-    }
-    else if (props.eventsLoaded === false) {
-        return (
-            <div className="text-center mt-5">
-                <p>Loading events information...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }
@@ -41,11 +30,11 @@ export const Day = (props) => {
 
         let events = []
 
-        props.events.map((event) => {
+        props.events.forEach((event) => {
             let color = event.color;
             if (color === null) {
-                props.calendars.map((calendar) => {
-                    if (calendar.id, event.calendar_id) {
+                props.calendars.forEach((calendar) => {
+                    if (calendar.id === event.calendar_id) {
                         color = calendar.color;
                     }
                 });

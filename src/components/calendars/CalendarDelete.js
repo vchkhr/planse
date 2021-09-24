@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Button, Form } from 'react-bootstrap';
+import { Alert, Button, Form, Spinner } from 'react-bootstrap';
 import { CalendarX } from 'react-bootstrap-icons';
 
 import { withRouter } from 'react-router';
@@ -94,7 +94,9 @@ const CalendarDelete = (props) => {
     if (calendarsLoaded !== true) {
         return (
             <div className="text-center mt-5">
-                <p>Loading information about this calendar...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }

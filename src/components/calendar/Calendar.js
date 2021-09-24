@@ -7,6 +7,7 @@ import moment from 'moment';
 import { TopNav } from '../calendar/TopNav';
 import { CalendarBody } from '../calendar/CalendarBody';
 import { Welcome } from '../account/Welcome';
+import { Spinner } from 'react-bootstrap';
 
 
 export const Calendar = (props) => {
@@ -21,7 +22,9 @@ export const Calendar = (props) => {
     if (props.userLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading user information...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }

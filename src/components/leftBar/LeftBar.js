@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { CalendarList } from '../leftBar/CalendarList';
 import { Welcome } from '../account/Welcome';
 import { Calendar3, CalendarPlus, PlusCircleDotted } from 'react-bootstrap-icons';
+import { Spinner } from 'react-bootstrap';
 
 
 export const LeftBar = (props) => {
@@ -18,7 +19,9 @@ export const LeftBar = (props) => {
     if (props.userLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading user information...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }

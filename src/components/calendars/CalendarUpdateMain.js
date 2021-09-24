@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 
 import { withRouter } from 'react-router';
 import { Redirect } from "react-router-dom";
@@ -93,7 +93,9 @@ const CalendarEdit = (props) => {
     if (calendarsLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading information about this calendar...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }

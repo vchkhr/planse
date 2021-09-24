@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 
 import { MonthView } from '../calendar/month/MonthView';
 
@@ -44,17 +45,12 @@ export const CalendarBody = (props) => {
             });
     }
 
-    if (props.userLoaded === false) {
+    if (props.userLoaded === false || props.calendarsLoaded !== true) {
         return (
             <div className="text-center mt-5">
-                <p>Loading user information...</p>
-            </div>
-        );
-    }
-    else if (props.calendarsLoaded !== true) {
-        return (
-            <div className="text-center mt-5">
-                <p>Loading calendars...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }

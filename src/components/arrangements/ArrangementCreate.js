@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonGroup, Form } from 'react-bootstrap';
+import { Button, ButtonGroup, Form, Spinner } from 'react-bootstrap';
 import { PlusCircleDotted } from 'react-bootstrap-icons';
 
 import { Redirect } from "react-router-dom";
@@ -120,7 +120,9 @@ const ArrangementCreate = (props) => {
     if (calendarsLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading information about your calendars...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }
