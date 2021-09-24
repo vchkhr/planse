@@ -4,10 +4,10 @@ import { Redirect } from "react-router-dom";
 
 import moment from 'moment';
 
-import { LeftBar } from '../leftBar/LeftBar';
 import { TopNav } from '../calendar/TopNav';
 import { CalendarBody } from '../calendar/CalendarBody';
 import { Welcome } from '../account/Welcome';
+import { Spinner } from 'react-bootstrap';
 
 
 export const Calendar = (props) => {
@@ -22,11 +22,14 @@ export const Calendar = (props) => {
     if (props.userLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading user information...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }
     else {
+
         if (props.user.length === 0) {
             return (
                 <Welcome />
@@ -34,14 +37,10 @@ export const Calendar = (props) => {
         }
         else {
             return (
-                <div>
-                    <LeftBar user={props.user} setUser={props.setUser} />
-                    
-                    <div className="calendar">
-                        <TopNav user={props.user} userLoaded={props.userLoaded} view={view} setView={setView} viewDate={viewDate} setViewDate={setViewDate} />
+                <div className="calendar">
+                    <TopNav user={props.user} userLoaded={props.userLoaded} view={view} setView={setView} viewDate={viewDate} setViewDate={setViewDate} />
 
-                        <CalendarBody user={props.user} userLoaded={props.userLoaded} view={view} viewDate={viewDate} />
-                    </div>
+                    <CalendarBody user={props.user} userLoaded={props.userLoaded} view={view} viewDate={viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} />
                 </div>
             );
         }

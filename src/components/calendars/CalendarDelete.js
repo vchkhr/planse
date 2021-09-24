@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Alert, Button, Form, Spinner } from 'react-bootstrap';
+import { CalendarX } from 'react-bootstrap-icons';
 
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 import { Redirect } from "react-router-dom";
 
 
@@ -85,13 +87,16 @@ const CalendarDelete = (props) => {
             })
             .catch(error => {
                 alert(error);
+                setCalendarsLoaded(false);
             });
     }
 
-    if (calendarsLoaded === false) {
+    if (calendarsLoaded !== true) {
         return (
             <div className="text-center mt-5">
-                <p>Loading information about this calendar...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }
@@ -99,26 +104,30 @@ const CalendarDelete = (props) => {
         const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === id)[0];
 
         let deleteButton = (
-            <button className="w-100 btn btn-lg btn-danger mt-3" type="submit">Delete calendar</button>
+            <div>
+                <Alert key={calendarInfo.id} variant="danger" className="text-center mt-3">This action is irreversible</Alert>
+                <Button variant="danger" size="lg" className="w-100 mt-3" type="submit">Delete calendar <CalendarX /></Button>
+            </div>
         );
+
         if (props.user.main_calendar === calendarInfo.id) {
             deleteButton = (
-                <p>You can't delete your main calendar.</p>
+                <Alert key={calendarInfo.id} variant="warning" className="text-center">You can't delete your main calendar</Alert>
             );
         }
 
         return (
-            <div className="container">
-                <div className="form text-center">
-                    <form onSubmit={calendarDelete}>
-                        <h1 className="h3 mb-3 fw-normal">Delete <code>{calendarInfo.name}</code> calendar</h1>
+            <Form onSubmit={calendarDelete}>
+                <p className="text-center">
+                    <img className="mb-4" src="/logo.png" alt="PLANSE" />
+                </p>
 
-                        <p>You are going to delete this calendar. All events in this calendar, as well as access settings will be deleted.</p>
+                <h1 className="h3 mb-3 fw-normal text-center">Delete <code>{calendarInfo.name}</code> calendar</h1>
 
-                        {deleteButton}
-                    </form>
-                </div>
-            </div>
+                <p className="text-center">You are going to delete this calendar.<br />All events in this calendar, as well as access settings will be deleted</p>
+
+                {deleteButton}
+            </Form>
         );
     }
 };

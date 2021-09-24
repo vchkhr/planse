@@ -1,48 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Spinner } from 'react-bootstrap';
 
 import { CalendarEntry } from './CalendarEntry';
 
 export const CalendarList = (props) => {
-    const [calendars, setCalendars] = useState('');
-    const [calendarsLoaded, setCalendarsLoaded] = useState(false);
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = () => {
-        setCalendarsLoaded(false);
-
-        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/index', {
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-        })
-            .then(
-                response => {
-                    if (response.ok) {
-                        return response;
-                    }
-                    else {
-                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
-                        error.response = response;
-
-                        throw error;
-                    }
-                },
-                error => {
-                    throw error;
-                }
-            )
-            .then(response => response.json())
-            .then(response => {
-                setCalendars(response);
-                setCalendarsLoaded(true);
-            })
-            .catch(error => {
-                // alert(error);
-            });
-    }
-
     if (props.userLoaded === false) {
         return (
             <div>
@@ -51,15 +12,17 @@ export const CalendarList = (props) => {
         );
     }
     else {
-        if (calendarsLoaded === false) {
+        if (props.calendarsLoaded !== true) {
             return (
-                <div className="text-center">
-                    <p>Loading calendars...</p>
-                </div>
+                <div className="text-center mt-5">
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            </div>
             );
         }
         else {
-            let calendarsList = calendars.map((calendar) => {
+            let calendarsList = props.calendars.map((calendar) => {
                 return <CalendarEntry key={calendar.id} calendar={calendar} user={props.user} />
             })
 

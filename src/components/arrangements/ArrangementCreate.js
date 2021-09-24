@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Button, ButtonGroup, Form, Spinner } from 'react-bootstrap';
+import { PlusCircleDotted } from 'react-bootstrap-icons';
 
 import { Redirect } from "react-router-dom";
 
@@ -118,7 +120,9 @@ const ArrangementCreate = (props) => {
     if (calendarsLoaded === false) {
         return (
             <div className="text-center mt-5">
-                <p>Loading information about your calendars...</p>
+                <Spinner animation="grow" variant="primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         );
     }
@@ -130,95 +134,89 @@ const ArrangementCreate = (props) => {
         })
 
         let selectAllDay = (
-            <div className="form-floating mt-3">
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-primary active" onClick={() => setAllDay(true)}>All day</button>
-                    <button type="button" className="btn btn-primary" onClick={() => setAllDay(false)}>Selected time</button>
-                </div>
-            </div>
+            <Form.Floating controlId="formAllDay" className="mt-3">
+                <ButtonGroup aria-label="All Day" className="d-flex">
+                    <Button variant="primary" className="w-100 active" onClick={() => setAllDay(true)}>All day</Button>
+                    <Button variant="primary" className="w-100" onClick={() => setAllDay(false)}>Selected time</Button>
+                </ButtonGroup>
+            </Form.Floating>
         );
+
         if (allDay === false) {
             selectAllDay = (
                 <div>
-                    <div className="form-floating mt-3">
-                        <div className="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" className="btn btn-primary" onClick={() => setAllDay(true)}>All day</button>
-                            <button type="button" className="btn btn-primary active" onClick={() => setAllDay(false)}>Selected time</button>
-                        </div>
-                    </div>
+                    <Form.Floating controlId="formAllDay" className="mt-3">
+                        <ButtonGroup aria-label="All Day" className="d-flex">
+                            <Button variant="primary" className="w-100" onClick={() => setAllDay(true)}>All day</Button>
+                            <Button variant="primary" className="w-100 active" onClick={() => setAllDay(false)}>Selected time</Button>
+                        </ButtonGroup>
+                    </Form.Floating>
 
-                    <div className="form-floating mt-3">
-                            <input type="time" className="form-control" id="start-time" placeholder="Start Time* " onChange={e => setStartTime(e.target.value)} required />
-                            <label htmlFor="start-time">Start Time *</label>
-                        </div>
+                    <Form.Floating controlId="formStartTime" className="mt-3">
+                        <Form.Control type="time" className="top" placeholder="Start Time *" onChange={e => setStartTime(e.target.value)} required />
+                        <Form.Label>Start Time *</Form.Label>
+                    </Form.Floating>
 
-                        <div className="form-floating mt-3">
-                            <input type="time" className="form-control" id="end-time" placeholder="End Time *" onChange={e => setEndTime(e.target.value)} required />
-                            <label htmlFor="end-time">End Time *</label>
-                        </div>
+                    <Form.Floating controlId="formEndTime">
+                        <Form.Control type="time" className="bottom" placeholder="End Time *" onChange={e => setEndTime(e.target.value)} required />
+                        <Form.Label>End Time *</Form.Label>
+                    </Form.Floating>
                 </div>
             );
         }
 
         return (
-            <div className="container">
-                <div className="form text-center">
-                    <form onSubmit={arrangementCreate}>
-                        <h1 className="h3 mb-3 fw-normal">Create arrangement</h1>
+            <Form onSubmit={arrangementCreate}>
+                <p className="text-center">
+                    <img className="mb-4" src="/logo.png" alt="PLANSE" />
+                </p>
 
-                        <div className="form-floating">
-                            <input type="text" className="form-control" id="name" placeholder="Name" onChange={e => setName(e.target.value)} required />
-                            <label htmlFor="name">Name *</label>
-                            <div className="invalid-feedback">
-                                Please choose a username.
-                            </div>
-                        </div>
+                <h1 className="h3 mb-3 fw-normal text-center">Create arrangement</h1>
 
-                        <div className="form-floating mt-3">
-                            <input type="text" className="form-control" id="description" placeholder="Description" onChange={e => setDescription(e.target.value)} />
-                            <label htmlFor="description">Description</label>
-                        </div>
+                <Form.Floating controlId="formName">
+                    <Form.Control type="text" className="top" placeholder="Name" onChange={e => setName(e.target.value)} required />
+                    <Form.Label>Name *</Form.Label>
+                </Form.Floating>
 
-                        <hr className="mt-5 mb-5" />
+                <Form.Floating controlId="formDescription">
+                    <Form.Control type="text" className="bottom" placeholder="Description" onChange={e => setDescription(e.target.value)} />
+                    <Form.Label>Description</Form.Label>
+                </Form.Floating>
 
-                        <div className="form-floating mt-3">
-                            <input type="date" className="form-control" id="start-date" placeholder="Start Date* " onChange={e => setStartDate(e.target.value)} required />
-                            <label htmlFor="start-date">Start Date *</label>
-                        </div>
+                <Form.Floating controlId="formStartDate" className="mt-3">
+                    <Form.Control type="date" className="top" placeholder="Start Date *" onChange={e => setStartDate(e.target.value)} required />
+                    <Form.Label>Start Date *</Form.Label>
+                </Form.Floating>
 
-                        <div className="form-floating mt-3">
-                            <input type="date" className="form-control" id="end-date" placeholder="End Date *" onChange={e => setEndDate(e.target.value)} required />
-                            <label htmlFor="end-date">End Date *</label>
-                        </div>
+                <Form.Floating controlId="formEndDate">
+                    <Form.Control type="date" className="bottom" placeholder="End Date *" onChange={e => setEndDate(e.target.value)} required />
+                    <Form.Label>End Date *</Form.Label>
+                </Form.Floating>
 
-                        {selectAllDay}
+                {selectAllDay}
 
-                        <hr className="mt-5 mb-5" />
+                <Form.Floating controlId="formCalendar" className="mt-3">
+                    <Form.Select className="top" aria-label="Calendar *" onChange={e => setCalendar(e.target.value)} defaultValue={props.user.main_calendar} >
+                        {calendarsList}
+                    </Form.Select>
+                    <Form.Label>Calendar *</Form.Label>
+                </Form.Floating>
 
-                        <div className="form-floating mt-3">
-                            <select className="form-select" aria-label="Calendar" id="calendar" onChange={e => setCalendar(e.target.value)} defaultValue={props.user.main_calendar}>
-                                {calendarsList}
-                            </select>
-                            <label htmlFor="calendar">Calendar</label>
-                        </div>
+                <Form.Floating controlId="formColor">
+                    <Form.Select className="bottom" aria-label="Color *" onChange={e => setColor(e.target.value)} defaultValue="" >
+                        <option value="">Color of calendar</option>
+                        <option value="0">Red</option>
+                        <option value="1">Orange</option>
+                        <option value="2">Yellow</option>
+                        <option value="3">Green</option>
+                        <option value="4">Blue</option>
+                        <option value="5">Purple</option>
+                    </Form.Select>
+                    <Form.Label>Color *</Form.Label>
+                </Form.Floating>
 
-                        <div className="form-floating mt-3">
-                            <select className="form-select" aria-label="Color" id="color" onChange={e => setColor(e.target.value)} defaultValue="">
-                                <option value="">Color of calendar</option>
-                                <option value="0">Red</option>
-                                <option value="1">Orange</option>
-                                <option value="2">Yellow</option>
-                                <option value="3">Green</option>
-                                <option value="4">Blue</option>
-                                <option value="5">Violet</option>
-                            </select>
-                            <label htmlFor="color">Color</label>
-                        </div>
-
-                        <button className="w-100 btn btn-lg btn-primary mt-3 mb-5" type="submit">Create arrangement</button>
-                    </form>
-                </div>
-            </div>
+                <Button variant="primary" type="submit" size="lg" className="w-100 mt-3"><PlusCircleDotted /> Create arrangement</Button>
+            </Form>
         );
     }
 };

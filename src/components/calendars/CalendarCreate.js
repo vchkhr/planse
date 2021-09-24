@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import { CalendarPlus } from 'react-bootstrap-icons';
 
 import { Redirect } from "react-router-dom";
 
@@ -53,37 +55,37 @@ const CalendarCreate = (props) => {
     }
 
     return (
-        <div className="container">
-            <div className="form text-center">
-                <form onSubmit={createCalendar}>
-                    <h1 className="h3 mb-3 fw-normal">Create calendar</h1>
+        <Form onSubmit={createCalendar}>
+            <p className="text-center">
+                <img className="mb-4" src="/logo.png" alt="PLANSE" />
+            </p>
 
-                    <div className="form-floating">
-                        <input type="text" className="form-control" id="name" placeholder="Name" onChange={e => setName(e.target.value)} required />
-                        <label htmlFor="name">Name *</label>
-                    </div>
+            <h1 className="h3 mb-3 fw-normal text-center">Create calendar</h1>
 
-                    <div className="form-floating mt-3">
-                        <input type="text" className="form-control" id="description" placeholder="Description" onChange={e => setDescription(e.target.value)} />
-                        <label htmlFor="description">Description</label>
-                    </div>
+            <Form.Floating controlId="formName" className="mt-3">
+                <Form.Control type="text" className="top" placeholder="Home" onChange={e => setName(e.target.value)} required />
+                <Form.Label>Name *</Form.Label>
+            </Form.Floating>
 
-                    <div className="form-floating mt-3">
-                        <select className="form-select" aria-label="Color" id="color" onChange={e => setColor(e.target.value)} defaultValue="0">
-                            <option value="0">Red</option>
-                            <option value="1">Orange</option>
-                            <option value="2">Yellow</option>
-                            <option value="3">Green</option>
-                            <option value="4">Blue</option>
-                            <option value="5">Violet</option>
-                        </select>
-                        <label htmlFor="color">Color</label>
-                    </div>
+            <Form.Floating controlId="formDescription">
+                <Form.Control type="text" className="middle" placeholder="Calendar for home events" onChange={e => setDescription(e.target.value)} />
+                <Form.Label>Description</Form.Label>
+            </Form.Floating>
 
-                    <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Create calendar</button>
-                </form>
-            </div>
-        </div>
+            <Form.Floating controlId="formColor">
+                <Form.Select className="bottom" aria-label="Color *" onChange={e => setColor(e.target.value)} defaultValue="0" >
+                    <option value="0">Red</option>
+                    <option value="1">Orange</option>
+                    <option value="2">Yellow</option>
+                    <option value="3">Green</option>
+                    <option value="4">Blue</option>
+                    <option value="5">Purple</option>
+                </Form.Select>
+                <Form.Label>Color *</Form.Label>
+            </Form.Floating>
+
+            <Button variant="primary" type="submit" size="lg" className="w-100 mt-3">Create calendar <CalendarPlus /></Button>
+        </Form>
     );
 };
 
