@@ -18,13 +18,24 @@ export const TopNav = (props) => {
         );
     }
     else {
+        let todayButton = (<div></div>);
+        if (moment(props.viewDate).format('MM YYYY') !== moment().format('MM YYYY')) {
+            todayButton = (
+                <ButtonGroup size="sm" aria-label="View" className="goToToday">
+                    <Button variant="outline-primary" onClick={() => props.setViewDate(moment())}>Go to Today</Button>
+                </ButtonGroup>
+            );
+        }
+
         const viewButtons = (
             <div className="selectView d-flex">
-                <ButtonGroup size="sm" aria-label="View">
+                <ButtonGroup size="sm" aria-label="View" className="viewButtons">
                     <Button variant={props.view === 'week' ? 'primary' : 'outline-primary'} onClick={() => props.setView("week")}>Week</Button>
                     <Button variant={props.view === 'month' ? 'primary' : 'outline-primary'} onClick={() => props.setView("month")}>Month</Button>
                     <Button variant={props.view === 'year' ? 'primary' : 'outline-primary'} onClick={() => props.setView("year")}>Year</Button>
                 </ButtonGroup>
+
+                {todayButton}
             </div>
         );
 
