@@ -58,21 +58,17 @@ export const Day = (props) => {
                     }
 
                     events.push(
-                        <div className="arrangement arrangement-allDay">
-                            <p className={"d-flex " + color}>
-                                <span className="flex-fill">{event.name}</span>
-                                {multipleDays}
-                            </p>
+                        <div className={"arrangement arrangement-allDay d-flex " + color}>
+                            <p className="flex-fill eventName">{event.name}</p>
+                            <p>{multipleDays}</p>
                         </div>
                     );
                 }
                 else {
                     events.push(
-                        <div className="arrangement arrangement-timeSpecific">
-                            <p className={"d-flex " + color}>
-                                <span className="flex-fill">{event.name}</span>
-                                <span>{moment(event.end).format("H:mm")}</span>
-                            </p>
+                        <div className={"arrangement arrangement-timeSpecific d-flex " + color}>
+                            <p className="flex-fill eventName">{event.name}</p>
+                            <p>{moment(event.end).format("H:mm")}</p>
                         </div>
                     );
                 }
