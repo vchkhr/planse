@@ -14,7 +14,7 @@ const ArrangementCreate = (props) => {
     const [endDate, setEndDate] = useState(moment().add(2, "hours").format("YYYY-MM-DD"));
     const [allDay, setAllDay] = useState(true);
     const [startTime, setStartTime] = useState(moment().add(1, "hours").format("HH") + ":00");
-    const [endTime, setEndTime] = useState(moment().add(2, "hours").format("HH" + ":00"));
+    const [endTime, setEndTime] = useState(moment().add(2, "hours").format("HH") + ":00");
 
     const [calendar, setCalendar] = useState(props.user.main_calendar);
     const [color, setColor] = useState('');
