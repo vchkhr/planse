@@ -48,7 +48,7 @@ export const Day = (props) => {
                     );
                     if (moment(event.end).diff(dayDate, "days") === 0) {
                         multipleDays = (
-                            <span></span>
+                            <span className={"arrangement-" + event.id}></span>
                         );
                     }
 
@@ -72,7 +72,7 @@ export const Day = (props) => {
 
         return (
             <div>
-                <p className={cn + " " + props.today}>{dayDate.format('D')} {props.today === "" ? "" : " — Today"}</p>
+                <p className={cn + " " + props.today + " day-" + dayDate.format("DD-MM-YYYY")}>{dayDate.format('D')} {props.today === "" ? "" : " — Today"}</p>
 
                 <div>
                     {events}

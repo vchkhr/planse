@@ -7,7 +7,7 @@ import moment from 'moment';
 import { TopNav } from '../calendar/TopNav';
 import { CalendarBody } from '../calendar/CalendarBody';
 import { Welcome } from '../account/Welcome';
-import { Spinner } from 'react-bootstrap';
+import { Modal, Spinner } from 'react-bootstrap';
 
 
 export const Calendar = (props) => {
@@ -16,10 +16,28 @@ export const Calendar = (props) => {
     const [viewDate, setViewDate] = useState(moment());
     const [showEventModal, setShowEventModal] = useState(false);
 
+    let modalContent = (
+        <div></div>
+    );
+
     if (showEventModal.target) {
         let event = showEventModal.target.classList.value;
-        if (event.indexOf('day-')) {
+        if (event.indexOf('day-') > 0) {
+            let day = event.split('day-')[1].split(' ')[0];
+            console.log(day);
 
+            modalContent = (
+                <Modal show={true} onHide={() => setShowEventModal(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Create event</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                </Modal>
+            );
+        }
+        else if (event.indexOf('arrangement-') > 0) {
+            let arrangement = event.split('arrangement-')[1].split(' ')[0];
+            console.log(arrangement)
         }
     }
 
@@ -46,6 +64,8 @@ export const Calendar = (props) => {
         else {
             return (
                 <div className="calendar">
+                    {modalContent}
+
                     <TopNav user={props.user} userLoaded={props.userLoaded} view={view} setView={setView} viewDate={viewDate} setViewDate={setViewDate} />
 
                     <CalendarBody user={props.user} userLoaded={props.userLoaded} view={view} viewDate={viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={showEventModal} setShowEventModal={setShowEventModal} />
