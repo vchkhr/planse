@@ -57,17 +57,17 @@ export const CalendarBody = (props) => {
     else {
         if (props.view === 'week') {
             return (
-                <MonthView viewDate={props.viewDate} events={events} eventsLoaded={eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} />
+                <MonthView viewDate={props.viewDate} events={events} eventsLoaded={eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} />
             );
         }
         else if (props.view === 'month') {
             return (
-                <MonthView viewDate={props.viewDate} events={events} eventsLoaded={eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} />
+                <MonthView viewDate={props.viewDate} events={events} eventsLoaded={eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} />
             );
         }
         else if (props.view === 'year') {
             return (
-                <MonthView viewDate={props.viewDate} events={events} eventsLoaded={eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} />
+                <MonthView viewDate={props.viewDate} events={events} eventsLoaded={eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} />
             );
         }
     }

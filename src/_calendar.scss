@@ -40,8 +40,13 @@
             margin-left: 4px;
             width: 210px;
 
-            button {
+            .viewButtons button {
                 width: calc(210px / 3);
+            }
+
+            .goToToday button {
+                margin-left: 10px;
+                width: 100px;
             }
         }
 
@@ -56,6 +61,11 @@
                 padding-right: 6px;
                 vertical-align: 2px;
             }
+        }
+
+        .notToday {
+            margin-left: calc(200px + 16px + 100px + 10px);
+            width: calc(100% - 10px - 210px - 100px - 10px);
         }
 
         .account {

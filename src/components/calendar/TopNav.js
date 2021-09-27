@@ -18,13 +18,27 @@ export const TopNav = (props) => {
         );
     }
     else {
+        let todayButton = (<div></div>);
+        let currentDateClassName = "currentDate d-flex";
+        if (moment(props.viewDate).format('MM YYYY') !== moment().format('MM YYYY')) {
+            todayButton = (
+                <ButtonGroup size="sm" aria-label="View" className="goToToday">
+                    <Button variant="outline-primary" onClick={() => props.setViewDate(moment())}>Go to Today</Button>
+                </ButtonGroup>
+            );
+
+            currentDateClassName += " notToday";
+        }
+
         const viewButtons = (
             <div className="selectView d-flex">
-                <ButtonGroup size="sm" aria-label="View">
+                <ButtonGroup size="sm" aria-label="View" className="viewButtons">
                     <Button variant={props.view === 'week' ? 'primary' : 'outline-primary'} onClick={() => props.setView("week")}>Week</Button>
                     <Button variant={props.view === 'month' ? 'primary' : 'outline-primary'} onClick={() => props.setView("month")}>Month</Button>
                     <Button variant={props.view === 'year' ? 'primary' : 'outline-primary'} onClick={() => props.setView("year")}>Year</Button>
                 </ButtonGroup>
+
+                {todayButton}
             </div>
         );
 
@@ -41,7 +55,7 @@ export const TopNav = (props) => {
                 <div className="top-nav">
                     {viewButtons}
 
-                    <div className="currentDate d-flex">
+                    <div className={currentDateClassName}>
                         {username}
                     </div>
                 </div>
@@ -52,7 +66,7 @@ export const TopNav = (props) => {
                 <div className="top-nav">
                     {viewButtons}
 
-                    <div className="currentDate d-flex">
+                    <div className={currentDateClassName}>
                         <div className="flex-fill">
                             <h3 className="text-center">
                                 <span className="chevron" onClick={() => props.setViewDate(moment(props.viewDate).subtract(1, "months"))}><ChevronLeft /></span>
@@ -74,7 +88,7 @@ export const TopNav = (props) => {
                 <div className="top-nav">
                     {viewButtons}
 
-                    <div className="currentDate d-flex">
+                    <div className={currentDateClassName}>
                         {username}
                     </div>
                 </div>

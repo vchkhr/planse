@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Form, Spinner } from 'react-bootstrap';
 import { PlusCircleDotted } from 'react-bootstrap-icons';
@@ -9,11 +10,11 @@ const ArrangementCreate = (props) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [startDate, setStartDate] = useState(moment().add(1, "hours").format("YYYY-MM-DD"));
+    const [endDate, setEndDate] = useState(moment().add(2, "hours").format("YYYY-MM-DD"));
     const [allDay, setAllDay] = useState(true);
-    const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
+    const [startTime, setStartTime] = useState(moment().add(1, "hours").format("HH") + ":00");
+    const [endTime, setEndTime] = useState(moment().add(2, "hours").format("HH") + ":00");
 
     const [calendar, setCalendar] = useState(props.user.main_calendar);
     const [color, setColor] = useState('');
@@ -39,6 +40,17 @@ const ArrangementCreate = (props) => {
         if (all_day === true) {
             start = startDate + " 00:00:00";
             end = endDate + " 00:00:00";
+
+            if (moment(endDate).isBefore(moment(startDate))) {
+                alert("Start date should be before end date.");
+                return;
+            }
+        }
+        else {
+            if (moment(endDate + " " + endTime).isBefore(moment(startDate + " " + startTime))) {
+                alert("Start date should be before end date.");
+                return;
+            }
         }
 
         fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/create', {
@@ -153,12 +165,12 @@ const ArrangementCreate = (props) => {
                     </Form.Floating>
 
                     <Form.Floating controlId="formStartTime" className="mt-3">
-                        <Form.Control type="time" className="top" placeholder="Start Time *" onChange={e => setStartTime(e.target.value)} required />
+                        <Form.Control type="time" className="top" placeholder="Start Time *" onChange={e => setStartTime(e.target.value)} defaultValue={startTime} required />
                         <Form.Label>Start Time *</Form.Label>
                     </Form.Floating>
 
                     <Form.Floating controlId="formEndTime">
-                        <Form.Control type="time" className="bottom" placeholder="End Time *" onChange={e => setEndTime(e.target.value)} required />
+                        <Form.Control type="time" className="bottom" placeholder="End Time *" onChange={e => setEndTime(e.target.value)} defaultValue={endTime} required />
                         <Form.Label>End Time *</Form.Label>
                     </Form.Floating>
                 </div>
@@ -184,12 +196,12 @@ const ArrangementCreate = (props) => {
                 </Form.Floating>
 
                 <Form.Floating controlId="formStartDate" className="mt-3">
-                    <Form.Control type="date" className="top" placeholder="Start Date *" onChange={e => setStartDate(e.target.value)} required />
+                    <Form.Control type="date" className="top" placeholder="Start Date *" onChange={e => setStartDate(e.target.value)} defaultValue={startDate} required />
                     <Form.Label>Start Date *</Form.Label>
                 </Form.Floating>
 
                 <Form.Floating controlId="formEndDate">
-                    <Form.Control type="date" className="bottom" placeholder="End Date *" onChange={e => setEndDate(e.target.value)} required />
+                    <Form.Control type="date" className="bottom" placeholder="End Date *" onChange={e => setEndDate(e.target.value)} defaultValue={endDate} required />
                     <Form.Label>End Date *</Form.Label>
                 </Form.Floating>
 

@@ -16,12 +16,7 @@ export const Day = (props) => {
         );
     }
     else {
-        const week = parseInt(props.week, 10);
-        const day = parseInt(props.day, 10);
-        const firstDay = props.firstDay;
-        const firstDayDate = parseInt(props.firstDayDate, 10);
-
-        let dayDate = moment(firstDay).add(day - firstDayDate + week * 7, "days");
+        let dayDate = props.dayDate;
 
         let cn = "dayNum mt-0 mb-0"
         if (dayDate.format("MM") !== props.viewDate.format("MM")) {
@@ -49,30 +44,26 @@ export const Day = (props) => {
             if (dayDate.isBetween(moment(event.start), moment(event.end), 'days', '[]') === true) {
                 if (event.all_day === 1 || moment(event.end).diff(dayDate, "days") > 0) {
                     let multipleDays = (
-                        <span title="This event does not end today"><ChevronCompactRight /></span>
+                        <span title="This event does not end today" className={"arrangement-" + event.id}><ChevronCompactRight className={"arrangement-" + event.id} /></span>
                     );
                     if (moment(event.end).diff(dayDate, "days") === 0) {
                         multipleDays = (
-                            <span></span>
+                            <span className={"arrangement-" + event.id}></span>
                         );
                     }
 
                     events.push(
-                        <div className="arrangement arrangement-allDay">
-                            <p className={"d-flex " + color}>
-                                <span className="flex-fill">{event.name}</span>
-                                {multipleDays}
-                            </p>
+                        <div className={"arrangement arrangement-allDay " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                            <p className={"name arrangement-" + event.id}>{event.name}</p>
+                            <p className={"info arrangement-" + event.id}>{multipleDays}</p>
                         </div>
                     );
                 }
                 else {
                     events.push(
-                        <div className="arrangement arrangement-timeSpecific">
-                            <p className={"d-flex " + color}>
-                                <span className="flex-fill">{event.name}</span>
-                                <span>{moment(event.end).format("H:mm")}</span>
-                            </p>
+                        <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                            <p className={"name arrangement-" + event.id}>{event.name}</p>
+                            <p className={"info arrangement-" + event.id}>{moment(event.end).format("H:mm")}</p>
                         </div>
                     );
                 }
@@ -81,9 +72,9 @@ export const Day = (props) => {
 
         return (
             <div>
-                <p className={cn}>{dayDate.format('D')}</p>
+                <p className={cn + " " + props.today + " day-" + dayDate.format("DD-MM-YYYY")}>{dayDate.format('D')} {props.today === "" ? "" : " — Today"}</p>
 
-                <div className="fw-bold">
+                <div>
                     {events}
                 </div>
             </div>
