@@ -31,7 +31,7 @@ export const Calendar = (props) => {
                     <Modal.Header closeButton>
                         <Modal.Title>Create event</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Body></Modal.Body>
                 </Modal>
             );
         }
