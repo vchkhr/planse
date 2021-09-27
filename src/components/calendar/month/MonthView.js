@@ -35,7 +35,7 @@ export const MonthView = (props) => {
 
         let weeksJS = weeks.map((week, index) => {
             return (
-                <div className="week d-flex" key={index}>
+                <div className="week d-flex" key={index} style={{zIndex: index}}>
                     <Week className="week d-flex" week={week} index={index} key={index} firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
                 </div>
             );
