@@ -58,7 +58,7 @@ export const Day = (props) => {
                     }
 
                     events.push(
-                        <div className={"arrangement arrangement-allDay d-flex " + color}>
+                        <div className={"arrangement arrangement-allDay d-flex " + color} key={event.id}>
                             <p className="flex-fill eventName">{event.name}</p>
                             <p>{multipleDays}</p>
                         </div>
@@ -66,7 +66,7 @@ export const Day = (props) => {
                 }
                 else {
                     events.push(
-                        <div className={"arrangement arrangement-timeSpecific d-flex " + color}>
+                        <div className={"arrangement arrangement-timeSpecific d-flex " + color} key={event.id}>
                             <p className="flex-fill eventName">{event.name}</p>
                             <p>{moment(event.end).format("H:mm")}</p>
                         </div>

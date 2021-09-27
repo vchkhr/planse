@@ -2,7 +2,7 @@ import React from 'react';
 
 import moment from 'moment';
 
-import { Day } from '../month/Day';
+import { Week } from '../month/Week';
 import { Spinner } from 'react-bootstrap';
 
 
@@ -23,6 +23,23 @@ export const MonthView = (props) => {
         if (firstDayDate === -1) {
             firstDayDate = 6;
         }
+
+        let weeks = [
+            ['0', '1', '2', '3', '4', '5', '6'],
+            ['0', '1', '2', '3', '4', '5', '6'],
+            ['0', '1', '2', '3', '4', '5', '6'],
+            ['0', '1', '2', '3', '4', '5', '6'],
+            ['0', '1', '2', '3', '4', '5', '6'],
+            ['0', '1', '2', '3', '4', '5', '6']
+        ];
+
+        let weeksJS = weeks.map((week, index) => {
+            return (
+                <div className="week d-flex" key={index}>
+                    <Week className="week d-flex" week={week} index={index} key={index} firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
+                </div>
+            );
+        });
 
         return (
             <div className="month">
@@ -56,185 +73,7 @@ export const MonthView = (props) => {
                     </div>
                 </div>
 
-                <div className="week d-flex">
-                    <div className="day">
-                        <Day week="0" day="0" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="0" day="1" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="0" day="2" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="0" day="3" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="0" day="4" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="0" day="5" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="0" day="6" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-                </div>
-
-                <div className="week d-flex">
-                    <div className="day">
-                        <Day week="1" day="0" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="1" day="1" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="1" day="2" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="1" day="3" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="1" day="4" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="1" day="5" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="1" day="6" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-                </div>
-
-                <div className="week d-flex">
-                    <div className="day">
-                        <Day week="2" day="0" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="2" day="1" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="2" day="2" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="2" day="3" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="2" day="4" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="2" day="5" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="2" day="6" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-                </div>
-
-                <div className="week d-flex">
-                    <div className="day">
-                        <Day week="3" day="0" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="3" day="1" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="3" day="2" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="3" day="3" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="3" day="4" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="3" day="5" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="3" day="6" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-                </div>
-
-                <div className="week d-flex">
-                    <div className="day">
-                        <Day week="4" day="0" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="4" day="1" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="4" day="2" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="4" day="3" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="4" day="4" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="4" day="5" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="4" day="6" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-                </div>
-
-                <div className="week d-flex">
-                    <div className="day">
-                        <Day week="5" day="0" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="5" day="1" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="5" day="2" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="5" day="3" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="5" day="4" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="5" day="5" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-
-                    <div className="day">
-                        <Day week="5" day="6" firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-                </div>
+                {weeksJS}
             </div>
         );
     }
