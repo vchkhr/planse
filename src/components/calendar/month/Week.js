@@ -33,7 +33,7 @@ export const Week = (props) => {
                     console.log(today)
 
                     return (
-                        <div className={"day " + today} key={day}>
+                        <div className={"day day-" + day + " " + today} key={day}>
                             <Day day={day} key={day} dayDate={dayDate} today={today} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
                         </div>
                     )
