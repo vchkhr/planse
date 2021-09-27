@@ -1,7 +1,7 @@
 import React from 'react';
-import { Spinner } from 'react-bootstrap';
 
 import moment from 'moment';
+import { Spinner } from 'react-bootstrap';
 import { Day } from '../month/Day';
 
 
@@ -30,11 +30,9 @@ export const Week = (props) => {
                         today = "today"
                     }
 
-                    console.log(today)
-
                     return (
-                        <div className={"day day-" + day + " " + today} key={day}>
-                            <Day day={day} key={day} dayDate={dayDate} today={today} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
+                        <div className={"day day-" + dayDate.format("DD-MM-YYYY") + " " + today} key={day} onClick={(e) => { props.setShowEventModal(e) }}>
+                            <Day day={day} key={day} dayDate={dayDate} today={today} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} />
                         </div>
                     )
                 })}

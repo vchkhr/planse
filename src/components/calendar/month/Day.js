@@ -44,7 +44,7 @@ export const Day = (props) => {
             if (dayDate.isBetween(moment(event.start), moment(event.end), 'days', '[]') === true) {
                 if (event.all_day === 1 || moment(event.end).diff(dayDate, "days") > 0) {
                     let multipleDays = (
-                        <span title="This event does not end today"><ChevronCompactRight /></span>
+                        <span title="This event does not end today" className={"arrangement-" + event.id}><ChevronCompactRight className={"arrangement-" + event.id} /></span>
                     );
                     if (moment(event.end).diff(dayDate, "days") === 0) {
                         multipleDays = (
@@ -53,17 +53,17 @@ export const Day = (props) => {
                     }
 
                     events.push(
-                        <div className={"arrangement arrangement-allDay " + color} key={event.id}>
-                            <p className="name">{event.name}</p>
-                            <p className="info">{multipleDays}</p>
+                        <div className={"arrangement arrangement-allDay " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                            <p className={"name arrangement-" + event.id}>{event.name}</p>
+                            <p className={"info arrangement-" + event.id}>{multipleDays}</p>
                         </div>
                     );
                 }
                 else {
                     events.push(
-                        <div className={"arrangement arrangement-timeSpecific " + color} key={event.id}>
-                            <p className="name">{event.name}</p>
-                            <p className="info">{moment(event.end).format("H:mm")}</p>
+                        <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                            <p className={"name arrangement-" + event.id}>{event.name}</p>
+                            <p className={"info arrangement-" + event.id}>{moment(event.end).format("H:mm")}</p>
                         </div>
                     );
                 }

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Form, Spinner } from 'react-bootstrap';
 import { PlusCircleDotted } from 'react-bootstrap-icons';
@@ -33,12 +34,22 @@ const ArrangementCreate = (props) => {
         const all_day = allDay;
         const calendar_id = calendar;
 
-        let start = startDate + " " + startTime + ":00";
-        let end = endDate + " " + endTime + ":00";
+        let startDateLoc = startDate;
+        let endDateLoc = endDate;
+
+        if (startDateLoc === "") {
+            startDateLoc = moment().format("YYYY-MM-DD");
+        }
+        if (endDateLoc === "") {
+            endDateLoc = moment().format("YYYY-MM-DD");
+        }
+
+        let start = startDateLoc + " " + startTime + ":00";
+        let end = endDateLoc + " " + endTime + ":00";
 
         if (all_day === true) {
-            start = startDate + " 00:00:00";
-            end = endDate + " 00:00:00";
+            start = startDateLoc + " 00:00:00";
+            end = endDateLoc + " 00:00:00";
         }
 
         fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/create', {
@@ -184,12 +195,12 @@ const ArrangementCreate = (props) => {
                 </Form.Floating>
 
                 <Form.Floating controlId="formStartDate" className="mt-3">
-                    <Form.Control type="date" className="top" placeholder="Start Date *" onChange={e => setStartDate(e.target.value)} required />
+                    <Form.Control type="date" className="top" placeholder="Start Date *" onChange={e => setStartDate(e.target.value)} defaultValue={moment().format("YYYY-MM-DD")} required />
                     <Form.Label>Start Date *</Form.Label>
                 </Form.Floating>
 
                 <Form.Floating controlId="formEndDate">
-                    <Form.Control type="date" className="bottom" placeholder="End Date *" onChange={e => setEndDate(e.target.value)} required />
+                    <Form.Control type="date" className="bottom" placeholder="End Date *" onChange={e => setEndDate(e.target.value)} defaultValue={moment().format("YYYY-MM-DD")} required />
                     <Form.Label>End Date *</Form.Label>
                 </Form.Floating>
 
