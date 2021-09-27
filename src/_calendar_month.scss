@@ -30,19 +30,27 @@
             margin-bottom: 0px;
         }
 
-        p.eventName {
-            white-space: nowrap;
-            overflow: scroll;
-        }
+        // p.eventName {
+        //     white-space: nowrap;
+        //     overflow: scroll;
+        // }
     }
 
-    .day.current {
-        border-top: 2px solid $danger;
+    div.today {
+        border-top: 1px solid $danger;
     }
 
-    .arrangement p {
+    p.today {
+        color: $danger;
+        font-weight: 700;
+    }
+
+    .arrangement {
         border: 0;
         border-radius: 3px;
-        padding: 1px 3px;
+
+        p {
+            padding: 1px 3px;
+        }
     }
 }

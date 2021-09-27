@@ -16,12 +16,7 @@ export const Day = (props) => {
         );
     }
     else {
-        const week = parseInt(props.week, 10);
-        const day = parseInt(props.day, 10);
-        const firstDay = props.firstDay;
-        const firstDayDate = parseInt(props.firstDayDate, 10);
-
-        let dayDate = moment(firstDay).add(day - firstDayDate + week * 7, "days");
+        let dayDate = props.dayDate;
 
         let cn = "dayNum mt-0 mb-0"
         if (dayDate.format("MM") !== props.viewDate.format("MM")) {
@@ -59,7 +54,7 @@ export const Day = (props) => {
 
                     events.push(
                         <div className={"arrangement arrangement-allDay d-flex " + color} key={event.id}>
-                            <p className="flex-fill eventName">{event.name}</p>
+                            <p className="eventName">{event.name}</p>
                             <p>{multipleDays}</p>
                         </div>
                     );
@@ -67,7 +62,7 @@ export const Day = (props) => {
                 else {
                     events.push(
                         <div className={"arrangement arrangement-timeSpecific d-flex " + color} key={event.id}>
-                            <p className="flex-fill eventName">{event.name}</p>
+                            <p className="eventName">{event.name}</p>
                             <p>{moment(event.end).format("H:mm")}</p>
                         </div>
                     );
@@ -77,9 +72,9 @@ export const Day = (props) => {
 
         return (
             <div>
-                <p className={cn}>{dayDate.format('D')}</p>
+                <p className={cn + " " + props.today}>{dayDate.format('D')} {props.today === "" ? "" : " — Today"}</p>
 
-                <div className="fw-bold">
+                <div>
                     {events}
                 </div>
             </div>

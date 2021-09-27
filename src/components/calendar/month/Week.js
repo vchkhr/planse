@@ -1,6 +1,7 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
 
+import moment from 'moment';
 import { Day } from '../month/Day';
 
 
@@ -17,11 +18,26 @@ export const Week = (props) => {
     else {
         return (
             <>
-                {props.week.map((day) => (
-                    <div className="day" key={day}>
-                        <Day week={props.index} day={day} key={day} firstDay={props.firstDay} firstDayDate={props.firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
-                    </div>
-                ))}
+                {props.week.map((day) => {
+                    const week = parseInt(props.index, 10);
+                    const firstDay = props.firstDay;
+                    const firstDayDate = parseInt(props.firstDayDate, 10);
+
+                    let dayDate = moment(firstDay).add(day - firstDayDate + week * 7, "days");
+
+                    let today = "";
+                    if (dayDate.format("DD MM YYYY") === moment().format("DD MM YYYY")) {
+                        today = "today"
+                    }
+
+                    console.log(today)
+
+                    return (
+                        <div className={"day " + today} key={day}>
+                            <Day day={day} key={day} dayDate={dayDate} today={today} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} />
+                        </div>
+                    )
+                })}
             </>
         );
     }
