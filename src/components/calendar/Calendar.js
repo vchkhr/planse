@@ -24,7 +24,6 @@ export const Calendar = (props) => {
         let event = showEventModal.target.classList.value;
         if (event.indexOf('day-') > 0) {
             let day = event.split('day-')[1].split(' ')[0];
-            console.log(day);
 
             modalContent = (
                 <Modal show={true} onHide={() => setShowEventModal(false)}>
@@ -37,7 +36,6 @@ export const Calendar = (props) => {
         }
         else if (event.indexOf('arrangement-') > 0) {
             let arrangement = event.split('arrangement-')[1].split(' ')[0];
-            console.log(arrangement)
         }
     }
 

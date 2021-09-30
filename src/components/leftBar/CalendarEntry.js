@@ -20,7 +20,7 @@ export const CalendarEntry = (props) => {
         <div className="d-flex calendar-entry">
             <p className="mt-0 mb-0 flex-fill">
                 <span className={"calendar-color-" + props.calendar.color} title="Show or hide this calendar">
-                    <CheckSquareFill /> {props.calendar.name}
+                    <Link to="#" className="color-inherit"><CheckSquareFill /></Link> {props.calendar.name}
                 </span>
             </p>
 
