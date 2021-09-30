@@ -26,6 +26,11 @@ export const Day = (props) => {
         let events = []
 
         props.events.forEach((event) => {
+            let visible = props.calendars.filter((calendar) => calendar.id === event.calendar_id)[0].visible;
+            if (visible === 0) {
+                return;
+            }
+
             let color = event.color;
             if (color === null) {
                 props.calendars.forEach((calendar) => {

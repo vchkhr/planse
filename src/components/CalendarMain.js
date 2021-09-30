@@ -19,10 +19,10 @@ const CalendarMain = (props) => {
     const isMobile = useMediaQuery({ query: `(max-width: 1100px)` });
 
     useEffect(() => {
-        fetchData();
+        fetchCalendars();
     }, []);
 
-    const fetchData = () => {
+    const fetchCalendars = () => {
         setCalendarsLoaded(false);
 
         fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/index', {
@@ -84,7 +84,7 @@ const CalendarMain = (props) => {
         else {
             return (
                 <div>
-                    <LeftBar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} />
+                    <LeftBar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} fetchCalendars={fetchCalendars} />
 
                     <Calendar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} />
                 </div>
