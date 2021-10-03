@@ -122,12 +122,12 @@ const Login = (props) => {
                     <Link to="/register">Register instead</Link>
                 </p>
 
-                <Form.Floating controlId="formEmail">
+                <Form.Floating controlid="formEmail">
                     <Form.Control type="email" className="top" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
                     <Form.Label>Email</Form.Label>
                 </Form.Floating>
 
-                <Form.Floating controlId="formPassword">
+                <Form.Floating controlid="formPassword">
                     <Form.Control type="password" className="bottom" placeholder="password" onChange={e => setPassword(e.target.value)} required />
                     <Form.Label>Password</Form.Label>
                 </Form.Floating>

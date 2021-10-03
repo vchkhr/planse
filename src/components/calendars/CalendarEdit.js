@@ -136,17 +136,17 @@ const CalendarEdit = (props) => {
 
                     <h1 className="h3 mb-3 fw-normal text-center">Edit <code>{calendarInfo.name}</code> calendar</h1>
 
-                    <Form.Floating controlId="formName">
+                    <Form.Floating controlid="formName">
                         <Form.Control type="text" className="top" placeholder="Home" onChange={e => setName(e.target.value)} defaultValue={calendarInfo.name} required />
                         <Form.Label>Name *</Form.Label>
                     </Form.Floating>
 
-                    <Form.Floating controlId="formDescription">
+                    <Form.Floating controlid="formDescription">
                         <Form.Control type="text" className="middle" placeholder="Calendar for home events" defaultValue={calendarInfo.description} onChange={e => setDescription(e.target.value)} />
                         <Form.Label>Description</Form.Label>
                     </Form.Floating>
 
-                    <Form.Floating controlId="formColor">
+                    <Form.Floating controlid="formColor">
                         <Form.Select className="bottom" aria-label="Color *" onChange={e => setColor(e.target.value)} defaultValue={calendarInfo.color} >
                             <option value="0">&#x1F33A; Red</option>
                             <option value="1">&#x1F3C0; Orange</option>
