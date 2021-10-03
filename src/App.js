@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 
 import Login from './components/account/Login';
 import Register from './components/account/Register';
@@ -58,7 +58,7 @@ function App() {
 
     return (
         <div className="App">
-            <BrowserRouter>
+            <HashRouter>
                 <Route path="/" exact component={() => <CalendarMain user={user} userLoaded={userLoaded} />} />
                 <Route path="/login" component={() => <Login setUser={setUser} />} />
                 <Route path="/register" component={() => <Register setUser={setUser} />} />
@@ -71,7 +71,7 @@ function App() {
 
                 <Route path="/event/create" component={() => <EventCreate user={user} />} />
                 <Route path="/arrangement/create" component={() => <ArrangementCreate user={user} />} />
-            </BrowserRouter>
+            </HashRouter>
         </div>
     );
 }
