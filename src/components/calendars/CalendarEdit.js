@@ -129,7 +129,7 @@ const CalendarEdit = (props) => {
 
         return (
             <div>
-                <Form onSubmit={calendarEdit}>
+                <Form className="formCard" onSubmit={calendarEdit}>
                     <p className="text-center">
                         <img className="mb-4" src="/logo.png" alt="PLANSE" />
                     </p>

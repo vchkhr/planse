@@ -26,7 +26,7 @@ const Logout = (props) => {
     }
 
     return (
-        <Form onSubmit={submit}>
+        <Form className="formCard" onSubmit={submit}>
             <p className="text-center">
                 <img className="mb-4" src="/logo.png" alt="PLANSE" />
             </p>

@@ -117,7 +117,7 @@ const CalendarDelete = (props) => {
         }
 
         return (
-            <Form onSubmit={calendarDelete}>
+            <Form className="formCard" onSubmit={calendarDelete}>
                 <p className="text-center">
                     <img className="mb-4" src="/logo.png" alt="PLANSE" />
                 </p>

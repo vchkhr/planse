@@ -103,7 +103,7 @@ const CalendarEdit = (props) => {
         const calendarInfo = calendars.filter((calendar) => parseInt(calendar.id, 10) === id)[0];
 
         return (
-            <Form onSubmit={calendarUpdateMain}>
+            <Form className="formCard" onSubmit={calendarUpdateMain}>
                 <p className="text-center">
                     <img className="mb-4" src="/logo.png" alt="PLANSE" />
                 </p>

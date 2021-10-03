@@ -50,50 +50,41 @@ export const TopNav = (props) => {
             </div>
         );
 
-        if (props.view === "week") {
-            return (
-                <div className="top-nav">
-                    {viewButtons}
+        let viewAdjust = "weeks";
+        let displayDate = "MMMM";
+        let displayDateLight = "YYYY";
 
-                    <div className={currentDateClassName}>
-                        {username}
-                    </div>
-                </div>
-            );
-        }
-        else if (props.view === "month") {
-            return (
-                <div className="top-nav">
-                    {viewButtons}
-
-                    <div className={currentDateClassName}>
-                        <div className="flex-fill">
-                            <h3 className="text-center">
-                                <span className="chevron" onClick={() => props.setViewDate(moment(props.viewDate).subtract(1, "months"))}><ChevronLeft /></span>
-
-                                <span>{moment(props.viewDate).format('MMMM')} </span>
-                                <span className="fw-lighter">{moment(props.viewDate).format('YYYY')}</span>
-
-                                <span className="chevron" onClick={() => props.setViewDate(moment(props.viewDate).add(1, "months"))}><ChevronRight /></span>
-                            </h3>
-                        </div>
-
-                        {username}
-                    </div>
-                </div>
-            );
+        if (props.view === "month") {
+            viewAdjust = "months";
+            displayDate = "MMMM";
+            displayDateLight = "YYYY";
         }
         else if (props.view === "year") {
-            return (
-                <div className="top-nav">
-                    {viewButtons}
-
-                    <div className={currentDateClassName}>
-                        {username}
-                    </div>
-                </div>
-            );
+            viewAdjust = "years";
+            displayDate = "YYYY";
+            displayDateLight = false;
         }
+
+        return (
+            <div className="top-nav">
+                {viewButtons}
+
+                <div className={currentDateClassName}>
+                    <div className="flex-fill">
+                        <h3 className="text-center">
+                            <span className="chevron" onClick={() => props.setViewDate(moment(props.viewDate).subtract(1, viewAdjust))}><ChevronLeft /></span>
+
+                            <span>{moment(props.viewDate).format(displayDate)} </span>
+                            {displayDateLight === false ? "" : <span className="fw-lighter">{moment(props.viewDate).format(displayDateLight)}</span>}
+
+                            <span className="chevron" onClick={() => props.setViewDate(moment(props.viewDate).add(1, viewAdjust))}><ChevronRight /></span>
+                        </h3>
+                    </div>
+
+                    {username}
+                </div>
+            </div>
+        );
     }
 };
 
