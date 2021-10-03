@@ -1,11 +1,11 @@
-Form {
+.formCard {
+    margin: 100px auto 100px auto;
+    padding: 15px;
     width: 100%;
     max-width: 330px;
-    margin: auto;
-    padding: 15px;
-    padding-top: 100px;
-    padding-bottom: 30px;
+}
 
+Form {
     .top {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;

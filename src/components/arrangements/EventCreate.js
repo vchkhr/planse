@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const EventCreate = (props) => {
     return (
-        <Form>
+        <Form className="formCard">
             <p className="text-center">
                 <img className="mb-4" src="/logo.png" alt="PLANSE" />
             </p>
