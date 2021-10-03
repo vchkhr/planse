@@ -5,17 +5,15 @@ import { Modal } from 'react-bootstrap';
 import { Button, ButtonGroup, Form, Spinner } from 'react-bootstrap';
 import { PlusCircleDotted } from 'react-bootstrap-icons';
 
-import { Redirect } from "react-router-dom";
-
 
 export const CreateArrangement = (props) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
-    const [calendarSelectedDate, setCalendarSelectedDate] = useState(props.calendarSelectedDate === false ? moment() : props.calendarSelectedDate);
+    const [calendarSelectedDate] = useState(props.calendarSelectedDate === false ? moment() : props.calendarSelectedDate);
 
     const [startDate, setStartDate] = useState(calendarSelectedDate.format("YYYY-MM-DD"));
-    const [endDate, setEndDate] = useState(calendarSelectedDate.format("YYYY-MM-DD"));
+    const [endDate, setEndDate] = useState(moment().add(1, "hours").format("HH") >= 22 && calendarSelectedDate !== false ? calendarSelectedDate.add(1, "days").format("YYYY-MM-DD") : calendarSelectedDate.format("YYYY-MM-DD"));
     const [allDay, setAllDay] = useState(true);
     const [startTime, setStartTime] = useState(moment().add(1, "hours").format("HH") + ":00");
     const [endTime, setEndTime] = useState(moment().add(2, "hours").format("HH") + ":00");
@@ -28,12 +26,6 @@ export const CreateArrangement = (props) => {
 
     useEffect(() => {
         fetchData();
-
-        setCalendarSelectedDate(props.calendarSelectedDate === false ? moment() : props.calendarSelectedDate);
-
-        if (moment().add(1, "hours").format("HH") >= 22 && calendarSelectedDate !== false) {
-            setEndDate(calendarSelectedDate.add(1, "days").format("YYYY-MM-DD"));
-        }
     }, []);
 
     const arrangementCreate = (e) => {
