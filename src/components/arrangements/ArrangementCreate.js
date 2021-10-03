@@ -27,7 +27,7 @@ const ArrangementCreate = (props) => {
     useEffect(() => {
         fetchData();
 
-        if (moment().add(1, "hours").format("HH") >= 22) {
+        if (moment().add(1, "hours").format("HH") >= 22 || moment().format("DD") !== moment().add(1, "hours").format("DD")) {
             setEndDate(moment().add(1, "days").format("YYYY-MM-DD"));
         }
     }, []);

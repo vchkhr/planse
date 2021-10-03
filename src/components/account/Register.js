@@ -89,7 +89,7 @@ const Register = () => {
                 {registerError ? registerErrorText : ''}
             </ToastContainer>
 
-            <Form className="register" onSubmit={submit}>
+            <Form className="formCard register" onSubmit={submit}>
                 <p className="text-center">
                     <img className="mb-4" src="/logo.png" alt="PLANSE" />
                 </p>

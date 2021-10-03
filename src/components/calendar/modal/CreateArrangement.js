@@ -13,7 +13,7 @@ export const CreateArrangement = (props) => {
     const [calendarSelectedDate] = useState(props.calendarSelectedDate === false ? moment() : props.calendarSelectedDate);
 
     const [startDate, setStartDate] = useState(calendarSelectedDate.format("YYYY-MM-DD"));
-    const [endDate, setEndDate] = useState(moment().add(1, "hours").format("HH") >= 22 && calendarSelectedDate !== false ? calendarSelectedDate.add(1, "days").format("YYYY-MM-DD") : calendarSelectedDate.format("YYYY-MM-DD"));
+    const [endDate, setEndDate] = useState((moment().add(1, "hours").format("HH") >= 22 || moment().format("DD") !== moment().add(1, "hours").format("DD")) && calendarSelectedDate !== false ? calendarSelectedDate.add(1, "days").format("YYYY-MM-DD") : calendarSelectedDate.format("YYYY-MM-DD"));
     const [allDay, setAllDay] = useState(true);
     const [startTime, setStartTime] = useState(moment().add(1, "hours").format("HH") + ":00");
     const [endTime, setEndTime] = useState(moment().add(2, "hours").format("HH") + ":00");
