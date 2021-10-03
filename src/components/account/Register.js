@@ -100,17 +100,17 @@ const Register = () => {
                     <Link to="/login">Login instead</Link>
                 </p>
 
-                <Form.Floating controlId="formName">
+                <Form.Floating controlid="formName">
                     <Form.Control type="text" className="top" placeholder="Ed Baldwin" onChange={e => setName(e.target.value)} required />
                     <Form.Label>Name</Form.Label>
                 </Form.Floating>
 
-                <Form.Floating controlId="formEmail">
+                <Form.Floating controlid="formEmail">
                     <Form.Control type="email" className="middle" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} required />
                     <Form.Label>Email address</Form.Label>
                 </Form.Floating>
 
-                <Form.Floating controlId="formPassword">
+                <Form.Floating controlid="formPassword">
                     <Form.Control type="password" className="bottom" placeholder="password" onChange={e => setPassword(e.target.value)} required />
                     <Form.Label>Password</Form.Label>
                 </Form.Floating>
