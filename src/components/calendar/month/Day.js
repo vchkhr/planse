@@ -1,7 +1,7 @@
 import React from 'react';
 
 import moment from 'moment';
-import { ChevronCompactRight } from 'react-bootstrap-icons';
+import { ArrowRightShort, ChevronCompactRight } from 'react-bootstrap-icons';
 import { Spinner } from 'react-bootstrap';
 
 
@@ -26,6 +26,9 @@ export const Day = (props) => {
         let events = []
 
         props.events.forEach((event) => {
+            let start = moment(event.start);
+            let end = moment(event.end);
+
             let visible = props.calendars.filter((calendar) => calendar.id === event.calendar_id)[0].visible;
             if (visible === 0) {
                 return;
@@ -39,38 +42,97 @@ export const Day = (props) => {
                     }
                 });
             }
-            if (event.all_day === 1 || moment(event.end).diff(moment(event.start), "days") > 0) {
+            if (event.all_day === 1 || end.diff(start, "days") > 0) {
                 color = "calendar-color-" + color + " calendar-background-color-" + color;
             }
             else {
                 color = "calendar-color-" + color;
             }
 
-            if (dayDate.isBetween(moment(event.start), moment(event.end), 'days', '[]') === true) {
-                if (event.all_day === 1 || moment(event.end).diff(dayDate, "days") > 0) {
-                    let multipleDays = (
-                        <span title="This event does not end today" className={"arrangement-" + event.id}><ChevronCompactRight className={"arrangement-" + event.id} /></span>
-                    );
-                    if (moment(event.end).diff(dayDate, "days") === 0) {
-                        multipleDays = (
-                            <span className={"arrangement-" + event.id}></span>
+            if (dayDate.isBetween(start, end, 'days', '[]') === true) {
+                if (event.all_day === 0) {
+                    // Events with start or end time
+                    if (start.format("DD-MM-YYYY") === end.format("DD-MM-YYYY")) {
+                        // Single day events
+                        let startText = start.format("mm") === "00" ? start.format("HH") : start.format("HH:mm");
+                        let endText = end.format("mm") === "00" ? end.format("HH") : end.format("HH:mm");
+
+                        events.push(
+                            <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                                <p className={"name arrangement-" + event.id}>{event.name}</p>
+                                <p className={"info arrangement-" + event.id}>{startText}<ArrowRightShort />{endText}</p>
+                            </div>
                         );
                     }
+                    else {
+                        // Multiple day events
+                        if (start.format("DD-MM-YYYY") === dayDate.format("DD-MM-YYYY")) {
+                            // First day
+                            let startText = start.format("mm") === "00" ? start.format("HH") : start.format("HH:mm");
 
-                    events.push(
-                        <div className={"arrangement arrangement-allDay " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
-                            <p className={"name arrangement-" + event.id}>{event.name}</p>
-                            <p className={"info arrangement-" + event.id}>{multipleDays}</p>
-                        </div>
-                    );
+                            events.push(
+                                <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                                    <p className={"name arrangement-" + event.id}>{event.name}</p>
+                                    <p className={"info arrangement-" + event.id}>{startText}<ArrowRightShort /></p>
+                                </div>
+                            );
+                        }
+                        else if (end.format("DD-MM-YYYY") === dayDate.format("DD-MM-YYYY")) {
+                            // Intermediate day
+                            let endText = end.format("mm") === "00" ? end.format("HH") : end.format("HH:mm");
+
+                            events.push(
+                                <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                                    <p className={"name arrangement-" + event.id}>{event.name}</p>
+                                    <p className={"info arrangement-" + event.id}><ArrowRightShort />{endText}</p>
+                                </div>
+                            );
+                        }
+                        else {
+                            // Last day
+                            events.push(
+                                <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                                    <p className={"name arrangement-" + event.id}>{event.name}</p>
+                                    <p className={"info arrangement-" + event.id}><ArrowRightShort /></p>
+                                </div>
+                            );
+                        }
+                    }
                 }
                 else {
-                    events.push(
-                        <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
-                            <p className={"name arrangement-" + event.id}>{event.name}</p>
-                            <p className={"info arrangement-" + event.id}>{moment(event.end).format("H:mm")}</p>
-                        </div>
-                    );
+                    // All day events
+                    if (start.format("DD-MM-YYYY") === end.format("DD-MM-YYYY")) {
+                        // Single day events
+                        events.push(
+                            <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                                <p className={"name arrangement-" + event.id}>{event.name}</p>
+                                <p className={"info arrangement-" + event.id}></p>
+                            </div>
+                        );
+                    }
+                    else {
+                        // Multiple day events
+                        if (end.format("DD-MM-YYYY") === dayDate.format("DD-MM-YYYY")) {
+                            // Last day
+                            let endText = end.format("mm") === "00" ? end.format("HH") : end.format("HH:mm");
+
+                            events.push(
+                                <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                                    <p className={"name arrangement-" + event.id}>{event.name}</p>
+                                    <p className={"info arrangement-" + event.id}></p>
+                                </div>
+                            );
+                        }
+                        else {
+                            // First or Intermediate day
+                            events.push(
+                                <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                                    <p className={"name arrangement-" + event.id}>{event.name}</p>
+                                    <p className={"info arrangement-" + event.id}><ArrowRightShort /></p>
+                                </div>
+                            );
+                        }
+                    }
                 }
             }
         });
