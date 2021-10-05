@@ -114,8 +114,6 @@ export const Day = (props) => {
                         // Multiple day events
                         if (end.format("DD-MM-YYYY") === dayDate.format("DD-MM-YYYY")) {
                             // Last day
-                            let endText = end.format("mm") === "00" ? end.format("HH") : end.format("HH:mm");
-
                             events.push(
                                 <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
                                     <p className={"name arrangement-" + event.id}>{event.name}</p>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Redirect } from "react-router-dom";
 
@@ -10,6 +10,7 @@ import { Welcome } from '../account/Welcome';
 import { Spinner } from 'react-bootstrap';
 import CreateEvent from './modal/CreateEvent';
 import CreateArrangement from './modal/CreateArrangement';
+import ArrangementDetails from './modal/ArrangementDetails';
 
 
 export const Calendar = (props) => {
@@ -17,11 +18,17 @@ export const Calendar = (props) => {
     const [view, setView] = useState('month');
     const [viewDate, setViewDate] = useState(moment());
 
-    const [calendarSelectedDate, setCalendarSelectedDate] = useState(false)
+    const [calendarSelectedDate, setCalendarSelectedDate] = useState(false);
+    
     const [showEventModal, setShowEventModal] = useState(false);
     const [showArrangementModal, setShowArrangementModal] = useState(false);
+    const [showArrangementDetailsModal, setShowArrangementDetailsModal] = useState(false);
 
     let createEvent = (
+        <div></div>
+    );
+
+    let arrangementDetails = (
         <div></div>
     );
 
@@ -29,11 +36,17 @@ export const Calendar = (props) => {
         let event = showEventModal.target.classList.value;
         if (event.indexOf('day-') > 0) {
             createEvent = (
-                <CreateEvent showEventModal={showEventModal} setShowEventModal={setShowEventModal} setShowArrangementModal={setShowArrangementModal} event={event} setCalendarSelectedDate={setCalendarSelectedDate} />
+                <CreateEvent setShowEventModal={setShowEventModal} setShowArrangementModal={setShowArrangementModal} event={event} setCalendarSelectedDate={setCalendarSelectedDate} />
             );
         }
         else if (event.indexOf('arrangement-') > 0) {
-            // let arrangement = event.split('arrangement-')[1].split(' ')[0];
+            let arrangement = event.split('arrangement-')[1].split(' ')[0];
+
+            if (arrangement !== "timeSpecific" && arrangement !== "allDay") {
+                arrangementDetails = (
+                    <ArrangementDetails user={props.user} setShowEventModal={setShowEventModal} showArrangementDetailsModal={showArrangementDetailsModal} setShowArrangementDetailsModal={setShowArrangementDetailsModal} arrangement={arrangement} />
+                );
+            }
         }
     }
 
@@ -72,6 +85,7 @@ export const Calendar = (props) => {
                 <div className="calendar">
                     {createEvent}
                     {createArrangement}
+                    {arrangementDetails}
 
                     <TopNav user={props.user} userLoaded={props.userLoaded} view={view} setView={setView} viewDate={viewDate} setViewDate={setViewDate} />
 
