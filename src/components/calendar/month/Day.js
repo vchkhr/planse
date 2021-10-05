@@ -1,7 +1,7 @@
 import React from 'react';
 
 import moment from 'moment';
-import { ArrowRightShort, ChevronCompactRight } from 'react-bootstrap-icons';
+import { ArrowRightShort } from 'react-bootstrap-icons';
 import { Spinner } from 'react-bootstrap';
 
 
@@ -50,7 +50,7 @@ export const Day = (props) => {
             }
 
             if (dayDate.isBetween(start, end, 'days', '[]') === true) {
-                if (event.all_day === 0) {
+                if (event.all_day === 0 && props.showTimeSpecificEvents === true) {
                     // Events with start or end time
                     if (start.format("DD-MM-YYYY") === end.format("DD-MM-YYYY")) {
                         // Single day events
@@ -99,7 +99,7 @@ export const Day = (props) => {
                         }
                     }
                 }
-                else {
+                else if (event.all_day === 1 && props.showAllDayEvents === true) {
                     // All day events
                     if (start.format("DD-MM-YYYY") === end.format("DD-MM-YYYY")) {
                         // Single day events
