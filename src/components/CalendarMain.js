@@ -16,10 +16,17 @@ const CalendarMain = (props) => {
     const [calendars, setCalendars] = useState('');
     const [calendarsLoaded, setCalendarsLoaded] = useState(false);
 
+    const [events, setEvents] = useState([]);
+    const [eventsLoaded, setEventsLoaded] = useState(false);
+
+    const [showAllDayEvents, setShowAllDayEvents] = useState(true);
+    const [showTimeSpecificEvents, setShowTimeSpecificEvents] = useState(true);
+
     const isMobile = useMediaQuery({ query: `(max-width: 1100px)` });
 
     useEffect(() => {
         fetchCalendars();
+        updateEvents();
     }, []);
 
     const fetchCalendars = () => {
@@ -55,6 +62,39 @@ const CalendarMain = (props) => {
             });
     }
 
+    const updateEvents = () => {
+        setEventsLoaded(false);
+
+        fetch(process.env.REACT_APP_DOMAIN + '/api/user/arrangements', {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+        })
+            .then(
+                response => {
+                    if (response.ok) {
+                        return response;
+                    }
+                    else {
+                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        error.response = response;
+
+                        throw error;
+                    }
+                },
+                error => {
+                    throw error;
+                }
+            )
+            .then(response => response.json())
+            .then(response => {
+                setEvents(response);
+                setEventsLoaded(true);
+            })
+            .catch(error => {
+                // alert(error);
+            });
+    }
+
     if (redirectToLogin) {
         return <Redirect to="/login" />;
     }
@@ -84,9 +124,9 @@ const CalendarMain = (props) => {
         else {
             return (
                 <div>
-                    <LeftBar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} fetchCalendars={fetchCalendars} />
+                    <LeftBar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} updateEvents={updateEvents} showAllDayEvents={showAllDayEvents} setShowAllDayEvents={setShowAllDayEvents} showTimeSpecificEvents={showTimeSpecificEvents} setShowTimeSpecificEvents={setShowTimeSpecificEvents} />
 
-                    <Calendar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} />
+                    <Calendar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} showAllDayEvents={showAllDayEvents} showTimeSpecificEvents={showTimeSpecificEvents} updateEvents={updateEvents} events={events} eventsLoaded={eventsLoaded} />
                 </div>
             );
         }

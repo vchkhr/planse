@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Redirect } from "react-router-dom";
 
@@ -10,6 +10,7 @@ import { Welcome } from '../account/Welcome';
 import { Spinner } from 'react-bootstrap';
 import CreateEvent from './modal/CreateEvent';
 import CreateArrangement from './modal/CreateArrangement';
+import ArrangementDetails from './modal/ArrangementDetails';
 
 
 export const Calendar = (props) => {
@@ -17,51 +18,17 @@ export const Calendar = (props) => {
     const [view, setView] = useState('month');
     const [viewDate, setViewDate] = useState(moment());
 
-    const [events, setEvents] = useState([]);
-    const [eventsLoaded, setEventsLoaded] = useState(false);
-
-    const [calendarSelectedDate, setCalendarSelectedDate] = useState(false)
+    const [calendarSelectedDate, setCalendarSelectedDate] = useState(false);
+    
     const [showEventModal, setShowEventModal] = useState(false);
     const [showArrangementModal, setShowArrangementModal] = useState(false);
-
-    useEffect(() => {
-        updateEvents();
-    }, []);
-
-    const updateEvents = () => {
-        setEventsLoaded(false);
-
-        fetch(process.env.REACT_APP_DOMAIN + '/api/user/arrangements', {
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-        })
-            .then(
-                response => {
-                    if (response.ok) {
-                        return response;
-                    }
-                    else {
-                        let error = new Error('Error ' + response.status + ': ' + response.statusText);
-                        error.response = response;
-
-                        throw error;
-                    }
-                },
-                error => {
-                    throw error;
-                }
-            )
-            .then(response => response.json())
-            .then(response => {
-                setEvents(response);
-                setEventsLoaded(true);
-            })
-            .catch(error => {
-                // alert(error);
-            });
-    }
+    const [showArrangementDetailsModal, setShowArrangementDetailsModal] = useState(false);
 
     let createEvent = (
+        <div></div>
+    );
+
+    let arrangementDetails = (
         <div></div>
     );
 
@@ -69,11 +36,17 @@ export const Calendar = (props) => {
         let event = showEventModal.target.classList.value;
         if (event.indexOf('day-') > 0) {
             createEvent = (
-                <CreateEvent showEventModal={showEventModal} setShowEventModal={setShowEventModal} setShowArrangementModal={setShowArrangementModal} event={event} setCalendarSelectedDate={setCalendarSelectedDate} />
+                <CreateEvent setShowEventModal={setShowEventModal} setShowArrangementModal={setShowArrangementModal} event={event} setCalendarSelectedDate={setCalendarSelectedDate} />
             );
         }
         else if (event.indexOf('arrangement-') > 0) {
-            // let arrangement = event.split('arrangement-')[1].split(' ')[0];
+            let arrangement = event.split('arrangement-')[1].split(' ')[0];
+
+            if (arrangement !== "timeSpecific" && arrangement !== "allDay") {
+                arrangementDetails = (
+                    <ArrangementDetails user={props.user} setShowEventModal={setShowEventModal} showArrangementDetailsModal={showArrangementDetailsModal} setShowArrangementDetailsModal={setShowArrangementDetailsModal} arrangement={arrangement} />
+                );
+            }
         }
     }
 
@@ -83,7 +56,7 @@ export const Calendar = (props) => {
 
     if (showArrangementModal === true) {
         createArrangement = (
-            <CreateArrangement showArrangementModal={showArrangementModal} setShowArrangementModal={setShowArrangementModal} user={props.user} userLoaded={props.userLoaded} calendarSelectedDate={calendarSelectedDate} updateEvents={updateEvents} />
+            <CreateArrangement showArrangementModal={showArrangementModal} setShowArrangementModal={setShowArrangementModal} user={props.user} userLoaded={props.userLoaded} calendarSelectedDate={calendarSelectedDate} updateEvents={props.updateEvents} />
         );
     }
 
@@ -112,10 +85,11 @@ export const Calendar = (props) => {
                 <div className="calendar">
                     {createEvent}
                     {createArrangement}
+                    {arrangementDetails}
 
                     <TopNav user={props.user} userLoaded={props.userLoaded} view={view} setView={setView} viewDate={viewDate} setViewDate={setViewDate} />
 
-                    <CalendarBody user={props.user} userLoaded={props.userLoaded} view={view} viewDate={viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={showEventModal} setShowEventModal={setShowEventModal} events={events} eventsLoaded={eventsLoaded} />
+                    <CalendarBody user={props.user} userLoaded={props.userLoaded} view={view} viewDate={viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={showEventModal} setShowEventModal={setShowEventModal} events={props.events} eventsLoaded={props.eventsLoaded} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} />
                 </div>
             );
         }
