@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Button, ButtonGroup, Form, Modal, Spinner } from 'react-bootstrap';
 
@@ -21,14 +21,7 @@ export const ArrangementDetails = (props) => {
     const [calendar, setCalendar] = useState('');
     const [color, setColor] = useState('');
 
-    useEffect(() => {
-        props.setShowArrangementDetailsModal(true);
-
-        fetchEvent();
-        fetchCalendars();
-    }, []);
-
-    const fetchEvent = () => {
+    const fetchEvent = useCallback(() => {
         setEventLoaded(false);
 
         fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/' + props.arrangement, {
@@ -72,9 +65,9 @@ export const ArrangementDetails = (props) => {
             .catch(error => {
                 // alert(error);
             });
-    }
+    }, [props.arrangement]);
 
-    const fetchCalendars = () => {
+    const fetchCalendars = useCallback(() => {
         setCalendarsLoaded(false);
 
         fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/index', {
@@ -105,7 +98,14 @@ export const ArrangementDetails = (props) => {
             .catch(error => {
                 // alert(error);
             });
-    }
+    }, []);
+
+    useEffect(() => {
+        props.setShowArrangementDetailsModal(true);
+
+        fetchEvent();
+        fetchCalendars();
+    }, [props, fetchEvent, fetchCalendars]);
 
     let hideModal = () => {
         props.setShowArrangementDetailsModal(false);
@@ -185,12 +185,12 @@ export const ArrangementDetails = (props) => {
                 </Form.Floating>
 
                 <Form.Floating controlid="formStartDate" className="mt-3">
-                    <Form.Control type="date" className="top" placeholder="Start Date *" onChange={e => setStartDate(e.target.value)} defaultValue={startDate} defaultValue={startDate} required />
+                    <Form.Control type="date" className="top" placeholder="Start Date *" onChange={e => setStartDate(e.target.value)} defaultValue={startDate} required />
                     <Form.Label>Start Date *</Form.Label>
                 </Form.Floating>
 
                 <Form.Floating controlid="formEndDate">
-                    <Form.Control type="date" className="bottom" placeholder="End Date *" onChange={e => setEndDate(e.target.value)} defaultValue={endDate} defaultValue={endDate} required />
+                    <Form.Control type="date" className="bottom" placeholder="End Date *" onChange={e => setEndDate(e.target.value)} defaultValue={endDate} required />
                     <Form.Label>End Date *</Form.Label>
                 </Form.Floating>
 
@@ -226,7 +226,7 @@ export const ArrangementDetails = (props) => {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>{content}</p>
+                {content}
             </Modal.Body>
         </Modal>
     );
