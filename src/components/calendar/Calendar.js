@@ -44,7 +44,7 @@ export const Calendar = (props) => {
 
             if (arrangement !== "timeSpecific" && arrangement !== "allDay") {
                 arrangementDetails = (
-                    <ArrangementDetails user={props.user} setShowEventModal={setShowEventModal} showArrangementDetailsModal={showArrangementDetailsModal} setShowArrangementDetailsModal={setShowArrangementDetailsModal} arrangement={arrangement} />
+                    <ArrangementDetails user={props.user} setShowEventModal={setShowEventModal} showArrangementDetailsModal={showArrangementDetailsModal} setShowArrangementDetailsModal={setShowArrangementDetailsModal} updateEvents={props.updateEvents} arrangement={arrangement} />
                 );
             }
         }
