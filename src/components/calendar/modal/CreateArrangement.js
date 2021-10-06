@@ -213,13 +213,13 @@ export const CreateArrangement = (props) => {
 
                         <Form.Floating controlid="formColor">
                             <Form.Select className="bottom" aria-label="Color *" onChange={e => setColor(e.target.value)} defaultValue="" >
-                                <option value="">Color of calendar</option>
-                                <option value="0">&#x1F33A; Red</option>
-                                <option value="1">&#x1F3C0; Orange</option>
-                                <option value="2">&#x2600;&#xFE0F; Yellow</option>
-                                <option value="3">&#x1F966; Green</option>
-                                <option value="4">&#x1F40B; Blue</option>
-                                <option value="5">&#x1F47E; Purple</option>
+                                <option value="0">Color of calendar</option>
+                                <option value="1">&#x1F33A; Red</option>
+                                <option value="2">&#x1F3C0; Orange</option>
+                                <option value="3">&#x2600;&#xFE0F; Yellow</option>
+                                <option value="4">&#x1F966; Green</option>
+                                <option value="5">&#x1F40B; Blue</option>
+                                <option value="6">&#x1F47E; Purple</option>
                             </Form.Select>
                             <Form.Label>Color *</Form.Label>
                         </Form.Floating>

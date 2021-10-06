@@ -35,7 +35,7 @@ export const Day = (props) => {
             }
 
             let color = event.color;
-            if (color === null) {
+            if (color === "0") {
                 props.calendars.forEach((calendar) => {
                     if (calendar.id === event.calendar_id) {
                         color = calendar.color;
