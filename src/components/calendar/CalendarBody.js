@@ -15,7 +15,7 @@ export const CalendarBody = (props) => {
         );
     }
     else {
-        if (props.view === 'week') {
+        if (props.view === 'agenda') {
             return (
                 <MonthView user={props.user} viewDate={props.viewDate} events={props.events} eventsLoaded={props.eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} />
             );

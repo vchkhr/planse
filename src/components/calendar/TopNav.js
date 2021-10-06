@@ -33,7 +33,7 @@ export const TopNav = (props) => {
         const viewButtons = (
             <div className="selectView d-flex">
                 <ButtonGroup size="sm" aria-label="View" className="viewButtons">
-                    <Button variant={props.view === 'week' ? 'primary' : 'outline-primary'} onClick={() => props.setView("week")}>Week</Button>
+                    <Button variant={props.view === 'agenda' ? 'primary' : 'outline-primary'} onClick={() => props.setView("agenda")}>Agenda</Button>
                     <Button variant={props.view === 'month' ? 'primary' : 'outline-primary'} onClick={() => props.setView("month")}>Month</Button>
                     <Button variant={props.view === 'year' ? 'primary' : 'outline-primary'} onClick={() => props.setView("year")}>Year</Button>
                 </ButtonGroup>
@@ -50,7 +50,7 @@ export const TopNav = (props) => {
             </div>
         );
 
-        let viewAdjust = "weeks";
+        let viewAdjust = false;
         let displayDate = "MMMM";
         let displayDateLight = "YYYY";
 
