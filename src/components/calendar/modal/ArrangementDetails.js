@@ -133,14 +133,6 @@ export const ArrangementDetails = (props) => {
             }
         }
 
-        console.log(name)
-        console.log(description)
-        console.log(start)
-        console.log(end)
-        console.log(all_day)
-        console.log(calendar_id)
-        console.log(color)
-
         fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/update/' + props.arrangement, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
