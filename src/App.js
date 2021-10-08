@@ -11,8 +11,9 @@ import CalendarEdit from './components/calendars/CalendarEdit';
 import CalendarUpdateMain from './components/calendars/CalendarUpdateMain';
 import CalendarDelete from './components/calendars/CalendarDelete';
 
-import EventCreate from './components/arrangements/EventCreate';
-import ArrangementCreate from './components/arrangements/ArrangementCreate';
+import EventCreate from './components/events/EventCreate';
+import ArrangementCreate from './components/events/ArrangementCreate';
+import ReminderCreate from 'components/events/ReminderCreate';
 
 
 function App() {
@@ -66,11 +67,12 @@ function App() {
 
                 <Route path="/calendar/create" component={() => <CalendarCreate user={user} />} />
                 <Route path="/calendar/edit/:id" component={() => <CalendarEdit user={user} />} />
-                <Route path="/calendar/updateMain/:id" component={() => <CalendarUpdateMain user={user} setUser={setUser} />} />
+                <Route path="/calendar/editMain/:id" component={() => <CalendarUpdateMain user={user} setUser={setUser} />} />
                 <Route path="/calendar/delete/:id" component={() => <CalendarDelete user={user} />} />
 
                 <Route path="/event/create" component={() => <EventCreate user={user} />} />
                 <Route path="/arrangement/create" component={() => <ArrangementCreate user={user} />} />
+                <Route path="/reminder/create" component={() => <ReminderCreate user={user} />} />
             </HashRouter>
         </div>
     );

@@ -65,7 +65,7 @@ const CalendarMain = (props) => {
     const updateEvents = () => {
         setEventsLoaded(false);
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/user/arrangements', {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/events', {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         })

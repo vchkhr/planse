@@ -1,11 +1,10 @@
-import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { Button, ButtonGroup, Form, Modal, Spinner } from 'react-bootstrap';
 import { Save, Trash, XCircle } from 'react-bootstrap-icons';
 
 
-export const ArrangementDetails = (props) => {
+export const ReminderDetails = (props) => {
     const [eventLoaded, setEventLoaded] = useState(false);
 
     const [calendars, setCalendars] = useState('');
@@ -15,18 +14,16 @@ export const ArrangementDetails = (props) => {
     const [description, setDescription] = useState('');
 
     const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
     const [allDay, setAllDay] = useState('');
     const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
 
     const [calendar, setCalendar] = useState('');
     const [color, setColor] = useState('');
 
-    const fetchArrangement = useCallback(() => {
+    const fetchReminder = useCallback(() => {
         setEventLoaded(false);
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/' + props.arrangement, {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/reminder/' + props.reminder, {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         })
@@ -58,16 +55,13 @@ export const ArrangementDetails = (props) => {
                 setStartDate(response.start.split(' ')[0]);
                 setStartTime(response.start.split(' ')[1]);
 
-                setEndDate(response.end.split(' ')[0]);
-                setEndTime(response.end.split(' ')[1]);
-
                 setCalendar(response.calendar_id);
                 setColor(response.color);
             })
             .catch(error => {
                 // alert(error);
             });
-    }, [props.arrangement]);
+    }, [props.reminder]);
 
     const fetchCalendars = useCallback(() => {
         setCalendarsLoaded(false);
@@ -103,38 +97,25 @@ export const ArrangementDetails = (props) => {
     }, []);
 
     useEffect(() => {
-        props.setShowArrangementDetailsModal(true);
+        props.setShowReminderDetailsModal(true);
 
-        fetchArrangement();
+        fetchReminder();
         fetchCalendars();
-    }, [props, fetchArrangement, fetchCalendars]);
+    }, [props, fetchReminder, fetchCalendars]);
 
-    const arrangementEdit = (e) => {
+    const reminderEdit = (e) => {
         e.preventDefault();
 
         const all_day = allDay;
         const calendar_id = calendar;
 
         let start = startDate + " " + startTime + ":00";
-        let end = endDate + " " + endTime + ":00";
 
         if (all_day === true) {
             start = startDate + " 00:00:00";
-            end = endDate + " 00:00:00";
-
-            if (moment(endDate).isBefore(moment(startDate))) {
-                alert("Start date should be before end date.");
-                return;
-            }
-        }
-        else {
-            if (moment(endDate + " " + endTime).isBefore(moment(startDate + " " + startTime))) {
-                alert("Start date should be before end date.");
-                return;
-            }
         }
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/edit/' + props.arrangement, {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/reminder/edit/' + props.reminder, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -142,7 +123,6 @@ export const ArrangementDetails = (props) => {
                 name,
                 description,
                 start,
-                end,
                 all_day,
                 calendar_id,
                 color
@@ -174,8 +154,8 @@ export const ArrangementDetails = (props) => {
             });
     }
 
-    const deleteArrangement = () => {
-        fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/delete/' + props.arrangement, {
+    const deleteReminder = () => {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/reminder/delete/' + props.reminder, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -210,7 +190,7 @@ export const ArrangementDetails = (props) => {
     }
 
     let hideModal = () => {
-        props.setShowArrangementDetailsModal(false);
+        props.setShowReminderDetailsModal(false);
         props.setShowEventModal(false);
     }
 
@@ -251,12 +231,7 @@ export const ArrangementDetails = (props) => {
 
                 <Form.Floating controlid="formStartTime" className="mt-3">
                     <Form.Control type="time" className="top" placeholder="Start Time *" onChange={e => setStartTime(e.target.value)} defaultValue={startTime} required />
-                    <Form.Label>Start Time *</Form.Label>
-                </Form.Floating>
-
-                <Form.Floating controlid="formEndTime">
-                    <Form.Control type="time" className="bottom" placeholder="End Time *" onChange={e => setEndTime(e.target.value)} defaultValue={endTime} required />
-                    <Form.Label>End Time *</Form.Label>
+                    <Form.Label>Time *</Form.Label>
                 </Form.Floating>
             </div>
         );
@@ -275,7 +250,7 @@ export const ArrangementDetails = (props) => {
 
         content = (
             <div>
-                <Form onSubmit={arrangementEdit}>
+                <Form onSubmit={reminderEdit}>
                     <Form.Floating controlid="formName">
                         <Form.Control type="text" className="top" placeholder="Name" onChange={e => setName(e.target.value)} defaultValue={name} required />
                         <Form.Label>Name *</Form.Label>
@@ -288,12 +263,7 @@ export const ArrangementDetails = (props) => {
 
                     <Form.Floating controlid="formStartDate" className="mt-3">
                         <Form.Control type="date" className="top" placeholder="Start Date *" onChange={e => setStartDate(e.target.value)} defaultValue={startDate} required />
-                        <Form.Label>Start Date *</Form.Label>
-                    </Form.Floating>
-
-                    <Form.Floating controlid="formEndDate">
-                        <Form.Control type="date" className="bottom" placeholder="End Date *" onChange={e => setEndDate(e.target.value)} defaultValue={endDate} required />
-                        <Form.Label>End Date *</Form.Label>
+                        <Form.Label>Date *</Form.Label>
                     </Form.Floating>
 
                     {selectAllDay}
@@ -319,7 +289,7 @@ export const ArrangementDetails = (props) => {
                     </Form.Floating>
 
                     <div className="d-flex justify-content-between mt-3">
-                        <Button variant="outline-danger" onClick={() => deleteArrangement()}><Trash /> Delete</Button>
+                        <Button variant="outline-danger" onClick={() => deleteReminder()}><Trash /> Delete</Button>
 
                         <div className="btn-group">
                             <Button variant="outline-secondary" onClick={() => hideModal()}><XCircle /> Close</Button>
@@ -332,7 +302,7 @@ export const ArrangementDetails = (props) => {
     }
 
     return (
-        <Modal show={props.showArrangementDetailsModal} onHide={() => hideModal()}>
+        <Modal show={props.showReminderDetailsModal} onHide={() => hideModal()}>
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
@@ -343,4 +313,4 @@ export const ArrangementDetails = (props) => {
     );
 }
 
-export default ArrangementDetails;
+export default ReminderDetails;

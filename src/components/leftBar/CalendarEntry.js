@@ -7,7 +7,7 @@ export const CalendarEntry = (props) => {
     let setVisibleCalendar = (id) => {
         const visible = props.calendar.visible === 1 ? 0 : 1;
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/update/' + id, {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/edit/' + id, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
