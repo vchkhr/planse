@@ -2,6 +2,7 @@ import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { Button, ButtonGroup, Form, Modal, Spinner } from 'react-bootstrap';
+import { Save, Trash, XCircle } from 'react-bootstrap-icons';
 
 
 export const ArrangementDetails = (props) => {
@@ -318,11 +319,11 @@ export const ArrangementDetails = (props) => {
                     </Form.Floating>
 
                     <div className="d-flex justify-content-between mt-3">
-                        <Button variant="outline-danger" onClick={() => deleteArrangement()}>Delete</Button>
+                        <Button variant="outline-danger" onClick={() => deleteArrangement()}><Trash /> Delete</Button>
 
                         <div className="btn-group">
-                            <Button variant="outline-secondary" onClick={() => hideModal()}>Close</Button>
-                            <Button variant="primary" type="submit">Save</Button>
+                            <Button variant="outline-secondary" onClick={() => hideModal()}><XCircle /> Close</Button>
+                            <Button variant="primary" type="submit"><Save /> Save</Button>
                         </div>
                     </div>
                 </Form>

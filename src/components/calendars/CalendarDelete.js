@@ -106,7 +106,7 @@ const CalendarDelete = (props) => {
         let deleteButton = (
             <div>
                 <Alert key={calendarInfo.id} variant="danger" className="text-center mt-3">This action is irreversible</Alert>
-                <Button variant="danger" size="lg" className="w-100 mt-3" type="submit">Delete calendar <CalendarX /></Button>
+                <Button variant="danger" size="lg" className="w-100 mt-3" type="submit"><CalendarX /> Delete calendar</Button>
             </div>
         );
 

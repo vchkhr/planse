@@ -158,7 +158,7 @@ const CalendarEdit = (props) => {
                         <Form.Label>Color *</Form.Label>
                     </Form.Floating>
 
-                    <Button variant="primary" size="lg" className="w-100 mt-3" type="submit">Save changes <Save /></Button>
+                    <Button variant="primary" size="lg" className="w-100 mt-3" type="submit"><Save /> Save changes</Button>
                     
                     <hr className="mt-3" />
                     {calendarControl}
