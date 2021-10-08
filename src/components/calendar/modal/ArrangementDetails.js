@@ -133,7 +133,7 @@ export const ArrangementDetails = (props) => {
             }
         }
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/update/' + props.arrangement, {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/edit/' + props.arrangement, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -322,7 +322,7 @@ export const ArrangementDetails = (props) => {
 
                         <div className="btn-group">
                             <Button variant="outline-secondary" onClick={() => hideModal()}>Close</Button>
-                            <Button variant="outline-success" type="submit">Save</Button>
+                            <Button variant="primary" type="submit">Save</Button>
                         </div>
                     </div>
                 </Form>

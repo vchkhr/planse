@@ -66,7 +66,7 @@ function App() {
 
                 <Route path="/calendar/create" component={() => <CalendarCreate user={user} />} />
                 <Route path="/calendar/edit/:id" component={() => <CalendarEdit user={user} />} />
-                <Route path="/calendar/updateMain/:id" component={() => <CalendarUpdateMain user={user} setUser={setUser} />} />
+                <Route path="/calendar/editMain/:id" component={() => <CalendarUpdateMain user={user} setUser={setUser} />} />
                 <Route path="/calendar/delete/:id" component={() => <CalendarDelete user={user} />} />
 
                 <Route path="/event/create" component={() => <EventCreate user={user} />} />

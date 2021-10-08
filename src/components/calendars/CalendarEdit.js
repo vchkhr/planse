@@ -28,7 +28,7 @@ const CalendarEdit = (props) => {
     const calendarEdit = (e) => {
         e.preventDefault();
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/update/' + props.match.params.id, {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/edit/' + props.match.params.id, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -114,7 +114,7 @@ const CalendarEdit = (props) => {
 
         let calendarControl = (
             <div className="mt-3">
-                <Link to={{ pathname: "/calendar/updateMain/" + props.match.params.id, state: { mainName: calendarInfo.name } }} className="w-100 btn btn-lg btn-warning">Make the main calendar</Link>
+                <Link to={{ pathname: "/calendar/editMain/" + props.match.params.id, state: { mainName: calendarInfo.name } }} className="w-100 btn btn-lg btn-warning">Make the main calendar</Link>
 
                 <Button variant="danger" size="lg" className="w-100 mt-3" onClick={() => history.push("/calendar/delete/" + props.match.params.id)}>Delete calendar</Button>
             </div>

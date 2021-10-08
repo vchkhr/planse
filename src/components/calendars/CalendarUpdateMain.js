@@ -20,7 +20,7 @@ const CalendarEdit = (props) => {
     const calendarUpdateMain = (e) => {
         e.preventDefault();
 
-        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/updateMain/' + id, {
+        fetch(process.env.REACT_APP_DOMAIN + '/api/calendar/editMain/' + id, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
