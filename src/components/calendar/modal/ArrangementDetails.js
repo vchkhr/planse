@@ -321,8 +321,8 @@ export const ArrangementDetails = (props) => {
                         <Button variant="outline-danger" onClick={() => deleteArrangement()}>Delete</Button>
 
                         <div className="btn-group">
-                            <Button variant="outline-secondary" onClick={() => hideModal()}>Cancel</Button>
-                            <Button variant="success" type="submit">Save</Button>
+                            <Button variant="outline-secondary" onClick={() => hideModal()}>Close</Button>
+                            <Button variant="outline-success" type="submit">Save</Button>
                         </div>
                     </div>
                 </Form>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Modal } from 'react-bootstrap';
 import { Button, ButtonGroup, Form, Spinner } from 'react-bootstrap';
-import { PlusCircleDotted } from 'react-bootstrap-icons';
+import { ChevronLeft, PlusCircleDotted } from 'react-bootstrap-icons';
 
 
 export const CreateArrangement = (props) => {
@@ -225,6 +225,7 @@ export const CreateArrangement = (props) => {
                         </Form.Floating>
 
                         <Button variant="primary" type="submit" size="lg" className="w-100 mt-3"><PlusCircleDotted /> Create arrangement</Button>
+                        <Button variant="outline-secondary" className="w-100 mt-3" onClick={() => props.setShowArrangementModal(false)}><ChevronLeft />Go back to Calendar</Button>
                     </Form>
                 </Modal.Body>
             </Modal>

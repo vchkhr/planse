@@ -1,9 +1,9 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Form, Spinner } from 'react-bootstrap';
-import { PlusCircleDotted } from 'react-bootstrap-icons';
+import { ChevronLeft, PlusCircleDotted } from 'react-bootstrap-icons';
 
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 
 const ArrangementCreate = (props) => {
@@ -232,6 +232,7 @@ const ArrangementCreate = (props) => {
                 </Form.Floating>
 
                 <Button variant="primary" type="submit" size="lg" className="w-100 mt-3"><PlusCircleDotted /> Create arrangement</Button>
+                <Link to="/" className="btn btn-outline-secondary w-100 mt-3"><ChevronLeft />Go back to Calendar</Link>
             </Form>
         );
     }

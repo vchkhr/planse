@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form, Spinner } from 'react-bootstrap';
-import { CalendarX } from 'react-bootstrap-icons';
+import { CalendarX, ChevronLeft } from 'react-bootstrap-icons';
 
 import { withRouter } from 'react-router';
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 
 const CalendarDelete = (props) => {
@@ -127,6 +127,8 @@ const CalendarDelete = (props) => {
                 <p className="text-center">You are going to delete this calendar.<br />All events in this calendar, as well as access settings will be deleted</p>
 
                 {deleteButton}
+
+                <Link to="/" className="btn btn-outline-secondary w-100 mt-3"><ChevronLeft />Go back to Calendar</Link>
             </Form>
         );
     }

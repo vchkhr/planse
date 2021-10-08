@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
+import { ChevronLeft } from 'react-bootstrap-icons';
 
 import { withRouter } from 'react-router';
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 
 const CalendarEdit = (props) => {
@@ -113,6 +114,7 @@ const CalendarEdit = (props) => {
                 <p className="text-center">You are going to change your main calendar to the <code>{calendarInfo.name}</code> calendar.</p>
 
                 <Button variant="primary" size="lg" className="w-100 mt-3" type="submit">Update main calendar</Button>
+                <Link to="/" className="btn btn-outline-secondary w-100 mt-3"><ChevronLeft />Go back to Calendar</Link>
             </Form>
         );
     }

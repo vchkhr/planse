@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
-import { Save } from 'react-bootstrap-icons';
+import { ChevronLeft, Save } from 'react-bootstrap-icons';
 
 import { withRouter } from 'react-router';
 import { Redirect } from "react-router-dom";
@@ -162,6 +162,9 @@ const CalendarEdit = (props) => {
                     
                     <hr className="mt-3" />
                     {calendarControl}
+
+                    <hr className="mt-3" />
+                    <Link to="/" className="btn btn-outline-secondary w-100"><ChevronLeft />Go back to Calendar</Link>
                 </Form>
             </div>
         );

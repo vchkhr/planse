@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Bell, CalendarEvent, Sticky } from 'react-bootstrap-icons';
+import { Bell, CalendarEvent, ChevronLeft, Sticky } from 'react-bootstrap-icons';
 
 import { Link } from 'react-router-dom';
 
@@ -17,6 +17,7 @@ const EventCreate = (props) => {
             <Link to="/arrangement/create" className="w-100 btn btn-lg btn-primary mt-3"><CalendarEvent /> Arrangement</Link>
             <Button variant="outline-primary" size="lg" className="w-100 mt-3" disabled><Bell /> Reminder</Button>
             <Button variant="outline-primary" size="lg" className="w-100 mt-3" disabled><Sticky /> Task</Button>
+            <Link to="/" className="btn btn-outline-secondary w-100 mt-3"><ChevronLeft />Go back to Calendar</Link>
         </Form>
     );
 };

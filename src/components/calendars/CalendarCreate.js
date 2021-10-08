@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { CalendarPlus } from 'react-bootstrap-icons';
+import { CalendarPlus, ChevronLeft } from 'react-bootstrap-icons';
 
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 
 const CalendarCreate = (props) => {
@@ -85,6 +85,7 @@ const CalendarCreate = (props) => {
             </Form.Floating>
 
             <Button variant="primary" type="submit" size="lg" className="w-100 mt-3">Create calendar <CalendarPlus /></Button>
+            <Link to="/" className="btn btn-outline-secondary w-100 mt-3"><ChevronLeft />Go back to Calendar</Link>
         </Form>
     );
 };

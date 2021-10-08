@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Modal } from 'react-bootstrap';
 import { Button, Form } from 'react-bootstrap';
-import { Bell, CalendarEvent, Sticky } from 'react-bootstrap-icons';
+import { Bell, CalendarEvent, ChevronLeft, Sticky } from 'react-bootstrap-icons';
 
 
 export const CreateEvent = (props) => {
@@ -23,6 +23,7 @@ export const CreateEvent = (props) => {
                     <Button variant="primary" size="lg" className="w-100 mt-3" onClick={() => { props.setShowEventModal(false); props.setShowArrangementModal(true); props.setCalendarSelectedDate(moment(props.event.split('day-')[1].split(' ')[0], "DD-MM-YYYY")) }}><CalendarEvent /> Arrangement</Button>
                     <Button variant="outline-primary" size="lg" className="w-100 mt-3" disabled><Bell /> Reminder</Button>
                     <Button variant="outline-primary" size="lg" className="w-100 mt-3" disabled><Sticky /> Task</Button>
+                    <Button variant="outline-secondary" className="w-100 mt-3" onClick={() => props.setShowEventModal(false)}><ChevronLeft />Go back to Calendar</Button>
                 </Form>
             </Modal.Body>
         </Modal>
