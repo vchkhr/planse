@@ -16,7 +16,7 @@ const EventCreate = (props) => {
 
             <Link to="/arrangement/create" className="w-100 btn btn-lg btn-primary mt-3"><CalendarEvent /> Arrangement</Link>
             <Link to="/reminder/create" className="w-100 btn btn-lg btn-outline-primary mt-3"><Bell /> Reminder</Link>
-            <Button variant="outline-primary" size="lg" className="w-100 mt-3" disabled><Sticky /> Task</Button>
+            <Link to="/task/create" className="w-100 btn btn-lg btn-outline-primary mt-3"><Sticky /> Task</Link>
             <Link to="/" className="btn btn-outline-secondary w-100 mt-3"><ChevronLeft />Go back to Calendar</Link>
         </Form>
     );

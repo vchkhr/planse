@@ -1,7 +1,7 @@
 import React from 'react';
 
 import moment from 'moment';
-import { ArrowRightShort, Bell } from 'react-bootstrap-icons';
+import { ArrowRightShort, Bell, Sticky, StickyFill } from 'react-bootstrap-icons';
 import { Spinner } from 'react-bootstrap';
 
 
@@ -108,7 +108,6 @@ export const Day = (props) => {
                             events.push(
                                 <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
                                     <p className={"name arrangement-" + event.id}>{event.name}</p>
-                                    <p className={"info arrangement-" + event.id}></p>
                                 </div>
                             );
                         }
@@ -119,7 +118,6 @@ export const Day = (props) => {
                                 events.push(
                                     <div className={"arrangement arrangement-timeSpecific " + color + " arrangement-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
                                         <p className={"name arrangement-" + event.id}>{event.name}</p>
-                                        <p className={"info arrangement-" + event.id}></p>
                                     </div>
                                 );
                             }
@@ -163,10 +161,35 @@ export const Day = (props) => {
                         events.push(
                             <div className={"reminder reminder-timeSpecific " + color + " reminder-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
                                 <p className={"name reminder-" + event.id}><Bell /> {event.name}</p>
-                                <p className={"info reminder-" + event.id}></p>
                             </div>
                         );
                     }
+                }
+            }
+            else if (event.type === "task") {
+                let start = moment(event.start);
+
+                let is_done = "";
+                let icon = (
+                    <StickyFill />
+                );
+                if (event.is_done === 1) {
+                    color = "calendar-color-" + color;
+                    is_done = "task-done";
+                    icon = (
+                        <Sticky />
+                    );
+                }
+                else {
+                    color = "calendar-color-" + color + " calendar-background-color-" + color;
+                }
+
+                if (dayDate.isBetween(start, start, 'days', '[]') === true) {
+                    events.push(
+                        <div className={"task task-timeSpecific " + color + " task-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                            <p className={"name task-" + event.id + " " + is_done}>{icon} {event.name}</p>
+                        </div>
+                    );
                 }
             }
         });

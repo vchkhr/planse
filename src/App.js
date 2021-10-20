@@ -14,6 +14,7 @@ import CalendarDelete from './components/calendars/CalendarDelete';
 import EventCreate from './components/events/EventCreate';
 import ArrangementCreate from './components/events/ArrangementCreate';
 import ReminderCreate from 'components/events/ReminderCreate';
+import TaskCreate from 'components/events/TaskCreate';
 
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
                 <Route path="/event/create" component={() => <EventCreate user={user} />} />
                 <Route path="/arrangement/create" component={() => <ArrangementCreate user={user} />} />
                 <Route path="/reminder/create" component={() => <ReminderCreate user={user} />} />
+                <Route path="/task/create" component={() => <TaskCreate user={user} />} />
             </HashRouter>
         </div>
     );
