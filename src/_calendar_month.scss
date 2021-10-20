@@ -1,4 +1,4 @@
-.calendar .month {
+.viewMonth {
     width: 100%;
     height: 100%;
     margin-left: 2.5px;
@@ -48,7 +48,8 @@
     }
 
     .arrangement,
-    .reminder {
+    .reminder,
+    .task {
         border: 0;
         border-radius: 5px;
         margin-bottom: 1px;
@@ -67,5 +68,10 @@
         p.info {
             white-space: nowrap;
         }
+    }
+
+    .task-done {
+        text-decoration-skip: spaces;
+        text-decoration: line-through;
     }
 }

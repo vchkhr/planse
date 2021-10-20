@@ -24,25 +24,27 @@ export const MonthView = (props) => {
             firstDayDate = 6;
         }
 
-        let weeks = [
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6']
-        ];
+        let weeks = []
+        for (let i = 0; i <= 5; i++) {
+            let arr = [];
+
+            for (let j = 0; j <= 6; j++) {
+                arr.push(j.toString());
+            }
+
+            weeks.push(arr);
+        }
 
         let weeksJS = weeks.map((week, index) => {
             return (
                 <div className="week d-flex" key={index} style={{zIndex: index}}>
-                    <Week className="week d-flex" week={week} index={index} key={index} firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} />
+                    <Week className="week d-flex" week={week} index={index} key={index} firstDay={firstDay} firstDayDate={firstDayDate} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks}/>
                 </div>
             );
         });
 
         return (
-            <div className="month">
+            <div className="viewMonth">
                 <div className="daysOfWeek d-flex">
                     <div className="day">
                         <p>Mon</p>

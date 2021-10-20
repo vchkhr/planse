@@ -50,7 +50,7 @@ export const LeftBar = (props) => {
                         <h6 className="text-muted flex-fill">Events</h6>
                     </div>
 
-                    <EventsTypeSelector showAllDayEvents={props.showAllDayEvents} setShowAllDayEvents={props.setShowAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} setShowTimeSpecificEvents={props.setShowTimeSpecificEvents} updateEvents={props.updateEvents} />
+                    <EventsTypeSelector showAllDayEvents={props.showAllDayEvents} setShowAllDayEvents={props.setShowAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} setShowTimeSpecificEvents={props.setShowTimeSpecificEvents} updateEvents={props.updateEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} setShowArrangements={props.setShowArrangements} setShowReminders={props.setShowReminders} setShowTasks={props.setShowTasks} />
 
                     <p className="mt-3">
                         <Link to="/event/create" className="btn btn-primary w-100"><PlusCircleDotted /> Create event</Link>

@@ -22,7 +22,11 @@ const CalendarMain = (props) => {
     const [showAllDayEvents, setShowAllDayEvents] = useState(true);
     const [showTimeSpecificEvents, setShowTimeSpecificEvents] = useState(true);
 
-    const isMobile = useMediaQuery({ query: `(max-width: 1100px)` });
+    const [showArrangements, setShowArrangements] = useState(true);
+    const [showReminders, setShowReminders] = useState(true);
+    const [showTasks, setShowTasks] = useState(true);
+
+    const isScreenSmall = useMediaQuery({ query: `(max-width: 850px)` });
 
     useEffect(() => {
         fetchCalendars();
@@ -99,7 +103,7 @@ const CalendarMain = (props) => {
         return <Redirect to="/login" />;
     }
 
-    if (isMobile === true && process.env.REACT_APP_DOMAIN !== "http://localhost:8000") {
+    if (isScreenSmall === true && process.env.REACT_APP_DOMAIN !== "http://localhost:8000") {
         return (
             <ScreenSmall />
         );
@@ -124,9 +128,9 @@ const CalendarMain = (props) => {
         else {
             return (
                 <div>
-                    <LeftBar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} updateEvents={updateEvents} showAllDayEvents={showAllDayEvents} setShowAllDayEvents={setShowAllDayEvents} showTimeSpecificEvents={showTimeSpecificEvents} setShowTimeSpecificEvents={setShowTimeSpecificEvents} />
+                    <LeftBar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} updateEvents={updateEvents} showAllDayEvents={showAllDayEvents} setShowAllDayEvents={setShowAllDayEvents} showTimeSpecificEvents={showTimeSpecificEvents} setShowTimeSpecificEvents={setShowTimeSpecificEvents} showArrangements={showArrangements} showReminders={showReminders} showTasks={showTasks} setShowArrangements={setShowArrangements} setShowReminders={setShowReminders} setShowTasks={setShowTasks} />
 
-                    <Calendar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} showAllDayEvents={showAllDayEvents} showTimeSpecificEvents={showTimeSpecificEvents} updateEvents={updateEvents} events={events} eventsLoaded={eventsLoaded} />
+                    <Calendar user={props.user} setUser={props.setUser} calendars={calendars} calendarsLoaded={calendarsLoaded} showAllDayEvents={showAllDayEvents} showTimeSpecificEvents={showTimeSpecificEvents} updateEvents={updateEvents} events={events} eventsLoaded={eventsLoaded} showArrangements={showArrangements} showReminders={showReminders} showTasks={showTasks} />
                 </div>
             );
         }

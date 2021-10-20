@@ -8,11 +8,15 @@ import { TopNav } from '../calendar/TopNav';
 import { CalendarBody } from '../calendar/CalendarBody';
 import { Welcome } from '../account/Welcome';
 import { Spinner } from 'react-bootstrap';
+
 import CreateEvent from './modal/CreateEvent';
 import CreateArrangement from './modal/CreateArrangement';
-import ArrangementDetails from './modal/ArrangementDetails';
 import CreateReminder from './modal/CreateReminder';
+import CreateTask from './modal/CreateTask';
+
+import ArrangementDetails from './modal/ArrangementDetails';
 import ReminderDetails from './modal/ReminderDetails';
+import TaskDetails from './modal/TaskDetails';
 
 
 export const Calendar = (props) => {
@@ -25,9 +29,11 @@ export const Calendar = (props) => {
     const [showEventModal, setShowEventModal] = useState(false);
     const [showArrangementModal, setShowArrangementModal] = useState(false);
     const [showReminderModal, setShowReminderModal] = useState(false);
+    const [showTaskModal, setShowTaskModal] = useState(false);
 
     const [showArrangementDetailsModal, setShowArrangementDetailsModal] = useState(false);
     const [showReminderDetailsModal, setShowReminderDetailsModal] = useState(false);
+    const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
 
     let createEvent = (
         <div></div>
@@ -38,12 +44,15 @@ export const Calendar = (props) => {
     let reminderDetails = (
         <div></div>
     );
+    let taskDetails = (
+        <div></div>
+    );
 
     if (showEventModal.target) {
         let event = showEventModal.target.classList.value;
         if (event.indexOf('day-') > 0) {
             createEvent = (
-                <CreateEvent setShowEventModal={setShowEventModal} setShowArrangementModal={setShowArrangementModal} setShowReminderModal={setShowReminderModal} event={event} setCalendarSelectedDate={setCalendarSelectedDate} />
+                <CreateEvent setShowEventModal={setShowEventModal} setShowArrangementModal={setShowArrangementModal} setShowReminderModal={setShowReminderModal} setShowTaskModal={setShowTaskModal} event={event} setCalendarSelectedDate={setCalendarSelectedDate} />
             );
         }
         else if (event.indexOf('arrangement-') > 0) {
@@ -55,12 +64,21 @@ export const Calendar = (props) => {
                 );
             }
         }
-        else {
+        else if (event.indexOf('reminder-') > 0) {
             let reminder = event.split('reminder-')[1].split(' ')[0];
 
             if (reminder !== "timeSpecific" && reminder !== "allDay") {
                 reminderDetails = (
                     <ReminderDetails user={props.user} setShowEventModal={setShowEventModal} showReminderDetailsModal={showReminderDetailsModal} setShowReminderDetailsModal={setShowReminderDetailsModal} updateEvents={props.updateEvents} reminder={reminder} />
+                );
+            }
+        }
+        else if (event.indexOf('task-') > 0) {
+            let task = event.split('task-')[1].split(' ')[0];
+
+            if (task !== "timeSpecific" && task !== "allDay") {
+                taskDetails = (
+                    <TaskDetails user={props.user} setShowEventModal={setShowEventModal} showTaskDetailsModal={showTaskDetailsModal} setShowTaskDetailsModal={setShowTaskDetailsModal} updateEvents={props.updateEvents} task={task} />
                 );
             }
         }
@@ -81,6 +99,15 @@ export const Calendar = (props) => {
     if (showReminderModal === true) {
         createReminder = (
             <CreateReminder showReminderModal={showReminderModal} setShowReminderModal={setShowReminderModal} user={props.user} userLoaded={props.userLoaded} calendarSelectedDate={calendarSelectedDate} updateEvents={props.updateEvents} />
+        );
+    }
+
+    let createTask = (
+        <div></div>
+    );
+    if (showTaskModal === true) {
+        createTask = (
+            <CreateTask showTaskModal={showTaskModal} setShowTaskModal={setShowTaskModal} user={props.user} userLoaded={props.userLoaded} calendarSelectedDate={calendarSelectedDate} updateEvents={props.updateEvents} />
         );
     }
 
@@ -110,13 +137,15 @@ export const Calendar = (props) => {
                     {createEvent}
                     {createArrangement}
                     {createReminder}
+                    {createTask}
 
                     {arrangementDetails}
                     {reminderDetails}
+                    {taskDetails}
 
                     <TopNav user={props.user} userLoaded={props.userLoaded} view={view} setView={setView} viewDate={viewDate} setViewDate={setViewDate} />
 
-                    <CalendarBody user={props.user} userLoaded={props.userLoaded} view={view} viewDate={viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={showEventModal} setShowEventModal={setShowEventModal} events={props.events} eventsLoaded={props.eventsLoaded} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} />
+                    <CalendarBody user={props.user} userLoaded={props.userLoaded} view={view} setView={setView} viewDate={viewDate} setViewDate={setViewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={showEventModal} setShowEventModal={setShowEventModal} events={props.events} eventsLoaded={props.eventsLoaded} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} />
                 </div>
             );
         }

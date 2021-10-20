@@ -29,7 +29,7 @@ export const CreateEvent = (props) => {
 
                     <Button variant="outline-primary" size="lg" className="w-100 mt-3" onClick={() => { props.setShowReminderModal(true); setDate() }}><Bell /> Reminder</Button>
 
-                    <Button variant="outline-primary" size="lg" className="w-100 mt-3" disabled><Sticky /> Task</Button>
+                    <Button variant="outline-primary" size="lg" className="w-100 mt-3" onClick={() => { props.setShowTaskModal(true); setDate() }}><Sticky /> Task</Button>
                     
                     <Button variant="outline-secondary" className="w-100 mt-3" onClick={() => props.setShowEventModal(false)}><ChevronLeft />Go back to Calendar</Button>
                 </Form>
