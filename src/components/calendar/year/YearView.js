@@ -1,7 +1,5 @@
 import React from 'react';
 
-import moment from 'moment';
-
 import { YearRow } from '../year/YearRow';
 import { Spinner } from 'react-bootstrap';
 
@@ -33,7 +31,7 @@ export const YearView = (props) => {
         let monthsJS = months.map((row, index) => {
             return (
                 <div className="yearRow d-flex">
-                    <YearRow className="yearRow d-flex" row={row} index={index} key={index} viewDate={props.viewDate} view={props.view} setView={props.setView} viewDate={props.viewDate} setViewDate={props.setViewDate} />
+                    <YearRow className="yearRow d-flex" row={row} index={index} key={index} view={props.view} setView={props.setView} viewDate={props.viewDate} setViewDate={props.setViewDate} />
                 </div>
             );
         });

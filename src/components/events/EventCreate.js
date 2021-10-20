@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Bell, CalendarEvent, ChevronLeft, Sticky } from 'react-bootstrap-icons';
 
 import { Link } from 'react-router-dom';

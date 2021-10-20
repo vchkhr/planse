@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import moment from 'moment';
 import { Modal } from 'react-bootstrap';
-import { Button, ButtonGroup, Form, Spinner } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import { ChevronLeft, PlusCircleDotted } from 'react-bootstrap-icons';
 
 
@@ -13,7 +13,7 @@ export const CreateTask = (props) => {
     const [calendarSelectedDate] = useState(props.calendarSelectedDate === false ? moment() : props.calendarSelectedDate);
 
     const [startDate, setStartDate] = useState(calendarSelectedDate.format("YYYY-MM-DD"));
-    const [isDone, setIsDone] = useState(false);
+    const [isDone] = useState(false);
 
     const [calendar, setCalendar] = useState(props.user.main_calendar);
     const [color, setColor] = useState('');

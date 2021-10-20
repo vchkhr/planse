@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import moment from 'moment';
 import { Button, ButtonGroup, Spinner } from 'react-bootstrap';
-import { ChevronCompactRight, ChevronLeft, ChevronRight, Dot } from 'react-bootstrap-icons';
+import { ChevronCompactRight, ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import { useMediaQuery } from 'react-responsive';
 
 

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonGroup, Form, Spinner } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import { ChevronLeft, PlusCircleDotted } from 'react-bootstrap-icons';
 
 import { Link, Redirect } from "react-router-dom";
@@ -11,7 +11,7 @@ const TaskCreate = (props) => {
     const [description, setDescription] = useState('');
 
     const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
-    const [isDone, setIsDone] = useState(false);
+    const [isDone] = useState(false);
 
     const [calendar, setCalendar] = useState(props.user.main_calendar);
     const [color, setColor] = useState('');
