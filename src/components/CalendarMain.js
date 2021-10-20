@@ -26,7 +26,7 @@ const CalendarMain = (props) => {
     const [showReminders, setShowReminders] = useState(true);
     const [showTasks, setShowTasks] = useState(true);
 
-    const isMobile = useMediaQuery({ query: `(max-width: 1100px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 850px)` });
 
     useEffect(() => {
         fetchCalendars();
@@ -103,7 +103,7 @@ const CalendarMain = (props) => {
         return <Redirect to="/login" />;
     }
 
-    if (isMobile === true && process.env.REACT_APP_DOMAIN !== "http://localhost:8000") {
+    if (isMobile === true) { // && process.env.REACT_APP_DOMAIN !== "http://localhost:8000") {
         return (
             <ScreenSmall />
         );

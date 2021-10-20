@@ -4,8 +4,12 @@ import moment from 'moment';
 import { ArrowRightShort, Bell, Sticky, StickyFill } from 'react-bootstrap-icons';
 import { Spinner } from 'react-bootstrap';
 
+import { useMediaQuery } from 'react-responsive';
+
 
 export const Day = (props) => {
+    const isMobile = useMediaQuery({ query: `(max-width: 1350px)` });
+
     if (props.userLoaded === false || props.calendarsLoaded === false || props.eventsLoaded === false) {
         return (
             <div className="text-center mt-5">
@@ -198,7 +202,7 @@ export const Day = (props) => {
 
         return (
             <div>
-                <p className={cn + " " + props.today + " day-" + dayDate.format("DD-MM-YYYY")}>{dayDate.format('D')} {props.today === "" ? "" : " — Today"}</p>
+                <p className={cn + " " + props.today + " day-" + dayDate.format("DD-MM-YYYY")}>{dayDate.format('D')} {(props.today === "" || isMobile) ? "" : " — Today"}</p>
 
                 <div>
                     {events}
