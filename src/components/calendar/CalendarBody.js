@@ -2,6 +2,7 @@ import React from 'react';
 import { Spinner } from 'react-bootstrap';
 
 import { MonthView } from '../calendar/month/MonthView';
+import { YearView } from '../calendar/year/YearView';
 
 
 export const CalendarBody = (props) => {
@@ -27,7 +28,7 @@ export const CalendarBody = (props) => {
         }
         else if (props.view === 'year') {
             return (
-                <MonthView user={props.user} viewDate={props.viewDate} events={props.events} eventsLoaded={props.eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} />
+                <YearView user={props.user} viewDate={props.viewDate} events={props.events} eventsLoaded={props.eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} />
             );
         }
     }

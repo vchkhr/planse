@@ -41,16 +41,11 @@ a.color-inherit {
 
             .goToToday button {
                 margin-left: 10px;
-                width: 100px;
             }
 
             @media (max-width: 1350px) {
                 .viewButtons button {
                     width: calc(100px / 3);
-                }
-    
-                .goToToday button {
-                    width: 50px;
                 }
             }
         }
@@ -69,5 +64,9 @@ a.color-inherit {
         .account {
             margin-top: 12px;
         }
+    }
+
+    .top-nav.warn {
+        background-color: yellow;
     }
 }

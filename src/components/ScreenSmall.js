@@ -8,7 +8,7 @@ export const ScreenSmall = () => {
             <img className="mx-auto mb-4" src="img/desktop-computer.png" alt="Desktop Computer" width="72" height="72" />
 
             <h1 className="display-6 fw-bold">PLANSE Can't Work On This Screen</h1>
-            <p className="lead mb-4">Please resize the window to make it wider. If the window is full screen, use another large screen device such as a desktop computer.</p>
+            <p className="lead mb-4">Please resize the window to make it wider. If the window is full screen, use another larger screen device such as a desktop computer.</p>
         </div>
     );
 };

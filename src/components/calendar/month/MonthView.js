@@ -24,14 +24,16 @@ export const MonthView = (props) => {
             firstDayDate = 6;
         }
 
-        let weeks = [
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6'],
-            ['0', '1', '2', '3', '4', '5', '6']
-        ];
+        let weeks = []
+        for (let i = 0; i <= 5; i++) {
+            let arr = [];
+
+            for (let j = 0; j <= 6; j++) {
+                arr.push(j.toString());
+            }
+
+            weeks.push(arr);
+        }
 
         let weeksJS = weeks.map((week, index) => {
             return (
@@ -42,7 +44,7 @@ export const MonthView = (props) => {
         });
 
         return (
-            <div className="month">
+            <div className="viewMonth">
                 <div className="daysOfWeek d-flex">
                     <div className="day">
                         <p>Mon</p>

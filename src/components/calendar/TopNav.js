@@ -10,6 +10,7 @@ import { useMediaQuery } from 'react-responsive';
 
 export const TopNav = (props) => {
     const isMobile = useMediaQuery({ query: `(max-width: 1350px)` });
+    const isScreenSmall = useMediaQuery({ query: `(max-width: 850px)` });
 
     if (props.userLoaded === false) {
         return (
@@ -26,7 +27,7 @@ export const TopNav = (props) => {
         if (moment(props.viewDate).format('MM YYYY') !== moment().format('MM YYYY')) {
             todayButton = (
                 <ButtonGroup size="sm" aria-label="View" className="goToToday">
-                    <Button variant="outline-primary" onClick={() => props.setViewDate(moment())}> {isMobile ? 'TOD' : 'Go to Today'} </Button>
+                    <Button variant="outline-primary" onClick={() => props.setViewDate(moment())}> {isMobile ? 'TOD' : 'Today'} </Button>
                 </ButtonGroup>
             );
 
@@ -38,7 +39,7 @@ export const TopNav = (props) => {
                 <ButtonGroup size="sm" aria-label="View" className="viewButtons">
                     <Button variant={props.view === 'agenda' ? 'primary' : 'outline-primary'} onClick={() => props.setView("agenda")} disabled> {isMobile ? 'A' : 'Agenda'} </Button>
                     <Button variant={props.view === 'month' ? 'primary' : 'outline-primary'} onClick={() => props.setView("month")}> {isMobile ? 'M' : 'Month'} </Button>
-                    <Button variant={props.view === 'year' ? 'primary' : 'outline-primary'} onClick={() => props.setView("year")} disabled> {isMobile ? 'Y' : 'Year'} </Button>
+                    <Button variant={props.view === 'year' ? 'primary' : 'outline-primary'} onClick={() => props.setView("year")}> {isMobile ? 'Y' : 'Year'} </Button>
                 </ButtonGroup>
 
                 {todayButton}
@@ -73,8 +74,13 @@ export const TopNav = (props) => {
             displayDateLight = false;
         }
 
+        let topNavClass = ""
+        if (isScreenSmall) {
+            topNavClass = "warn";
+        }
+
         return (
-            <div className="top-nav container">
+            <div className={"top-nav container " + topNavClass}>
                 <div className="row">
                     <div className="col">
                         {viewButtons}
