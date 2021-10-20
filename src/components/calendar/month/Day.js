@@ -185,11 +185,13 @@ export const Day = (props) => {
                 }
 
                 if (dayDate.isBetween(start, start, 'days', '[]') === true) {
-                    events.push(
-                        <div className={"task task-timeSpecific " + color + " task-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
-                            <p className={"name task-" + event.id + " " + is_done}>{icon} {event.name}</p>
-                        </div>
-                    );
+                    if (props.showAllDayEvents === true) {
+                        events.push(
+                            <div className={"task task-timeSpecific " + color + " task-" + event.id} key={event.id} onClick={(e) => { props.setShowEventModal(e) }}>
+                                <p className={"name task-" + event.id + " " + is_done}>{icon} {event.name}</p>
+                            </div>
+                        );
+                    }
                 }
             }
         });
