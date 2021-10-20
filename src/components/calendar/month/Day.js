@@ -40,7 +40,7 @@ export const Day = (props) => {
                 });
             }
 
-            if (event.type === "arrangement") {
+            if (event.type === "arrangement" && props.showArrangements === true) {
                 let start = moment(event.start);
                 let end = moment(event.end);
 
@@ -134,7 +134,7 @@ export const Day = (props) => {
                     }
                 }
             }
-            else if (event.type === "reminder") {
+            else if (event.type === "reminder" && props.showReminders === true) {
                 let start = moment(event.start);
 
                 if (event.all_day === 1) {
@@ -166,7 +166,7 @@ export const Day = (props) => {
                     }
                 }
             }
-            else if (event.type === "task") {
+            else if (event.type === "task" && props.showTasks === true) {
                 let start = moment(event.start);
 
                 let is_done = "";
