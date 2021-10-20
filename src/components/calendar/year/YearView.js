@@ -33,8 +33,7 @@ export const YearView = (props) => {
         let monthsJS = months.map((row, index) => {
             return (
                 <div className="yearRow d-flex">
-                    <YearRow className="yearRow d-flex" row={row} index={index} key={index} viewDate={props.viewDate} />
-                    {/* <YearRow className="yearRow d-flex" row={row} index={index} key={index} firstDay={firstDay} viewDate={props.viewDate} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} eventsLoaded={props.eventsLoaded} events={props.events} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks}/> */}
+                    <YearRow className="yearRow d-flex" row={row} index={index} key={index} viewDate={props.viewDate} view={props.view} setView={props.setView} viewDate={props.viewDate} setViewDate={props.setViewDate} />
                 </div>
             );
         });

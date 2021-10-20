@@ -20,7 +20,7 @@ export const YearRow = (props) => {
                 {props.row.map((month) => {
                     return (
                         <div className="month">
-                            <Month className="month" index={props.index} month={month} viewDate={props.viewDate} />
+                            <Month className="month" index={props.index} month={month} viewDate={props.viewDate} view={props.view} setView={props.setView} viewDate={props.viewDate} setViewDate={props.setViewDate} />
                         </div>
                     )
                 })}

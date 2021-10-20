@@ -46,9 +46,14 @@ export const Month = (props) => {
             );
         });
 
+        let clickMonth = () => {
+            props.setView("month");
+            props.setViewDate(date);
+        }
+
         return (
             <div style={{zIndex: props.index + 1}}>
-                <p className="text-center pb-2 name">{date.format("MMMM")}</p>
+                <p className="text-center pb-2 name" onClick={()=> {clickMonth()}}>{date.format("MMMM")}</p>
                 {weeksJS}
             </div>
         );
