@@ -37,7 +37,7 @@ export const TopNav = (props) => {
         const viewButtons = (
             <div className="selectView">
                 <ButtonGroup size="sm" aria-label="View" className="viewButtons">
-                    <Button variant={props.view === 'agenda' ? 'primary' : 'outline-primary'} onClick={() => props.setView("agenda")} disabled> {isMobile ? 'A' : 'Agenda'} </Button>
+                    <Button variant={props.view === 'agenda' ? 'primary' : 'outline-primary'} onClick={() => props.setView("agenda")}> {isMobile ? 'A' : 'Agenda'} </Button>
                     <Button variant={props.view === 'month' ? 'primary' : 'outline-primary'} onClick={() => props.setView("month")}> {isMobile ? 'M' : 'Month'} </Button>
                     <Button variant={props.view === 'year' ? 'primary' : 'outline-primary'} onClick={() => props.setView("year")}> {isMobile ? 'Y' : 'Year'} </Button>
                 </ButtonGroup>
@@ -49,7 +49,7 @@ export const TopNav = (props) => {
         const username = (
             <div className="account">
                 <p className="text-end">
-                    <Link to="/logout" className="text-decoration-none"> {isMobile ? props.user.name.match(/[A-Z]/g).join('') : props.user.name} <ChevronCompactRight /></Link>
+                    <Link to="/logout" className="text-decoration-none"> {isMobile ? props.user.name.match(/\b(\w)/g).join('') : props.user.name} <ChevronCompactRight /></Link>
                 </p>
             </div>
         );

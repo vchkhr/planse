@@ -21,7 +21,7 @@ import TaskDetails from './modal/TaskDetails';
 
 export const Calendar = (props) => {
     const [redirectToLogin] = useState(false);
-    const [view, setView] = useState('month');
+    const [view, setView] = useState('agenda');
     const [viewDate, setViewDate] = useState(moment());
 
     const [calendarSelectedDate, setCalendarSelectedDate] = useState(false);
