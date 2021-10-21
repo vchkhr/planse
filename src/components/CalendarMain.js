@@ -26,7 +26,7 @@ const CalendarMain = (props) => {
     const [showReminders, setShowReminders] = useState(true);
     const [showTasks, setShowTasks] = useState(true);
 
-    const isScreenSmall = useMediaQuery({ query: `(max-width: 850px)` });
+    const isScreenSmall = useMediaQuery({ query: `(max-width: 1000px)` });
 
     useEffect(() => {
         fetchCalendars();

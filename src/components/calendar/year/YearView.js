@@ -15,8 +15,6 @@ export const YearView = (props) => {
         );
     }
     else {
-        // const firstDay = moment("01 01 " + moment(props.viewDate).format('YYYY'), "DD MM YYYY");
-
         let months = []
         for (let i = 0; i < 3; i++) {
             let arr = [];

@@ -35,7 +35,7 @@ export const LeftBar = (props) => {
         else {
             return (
                 <div className="left-bar">
-                    <h5 className="calendar-entry"><Calendar3 /> PLANSE Calendars</h5>
+                    <h5 className="calendar-entry"><Calendar3 /> PLANSE</h5>
 
                     <div className="d-flex calendar-entry">
                         <h6 className="text-muted flex-fill">Your calendars</h6>

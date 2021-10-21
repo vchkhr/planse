@@ -1,6 +1,7 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
 
+import { AgendaView } from '../calendar/agenda/AgendaView';
 import { MonthView } from '../calendar/month/MonthView';
 import { YearView } from '../calendar/year/YearView';
 
@@ -18,7 +19,7 @@ export const CalendarBody = (props) => {
     else {
         if (props.view === 'agenda') {
             return (
-                <MonthView user={props.user} viewDate={props.viewDate} events={props.events} eventsLoaded={props.eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} />
+                <AgendaView user={props.user} events={props.events} eventsLoaded={props.eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} view={props.view} setView={props.setView} viewDate={props.viewDate} setViewDate={props.setViewDate} />
             );
         }
         else if (props.view === 'month') {

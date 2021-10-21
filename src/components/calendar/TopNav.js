@@ -10,7 +10,7 @@ import { useMediaQuery } from 'react-responsive';
 
 export const TopNav = (props) => {
     const isMobile = useMediaQuery({ query: `(max-width: 1350px)` });
-    const isScreenSmall = useMediaQuery({ query: `(max-width: 850px)` });
+    const isScreenSmall = useMediaQuery({ query: `(max-width: 1000px)` });
 
     if (props.userLoaded === false) {
         return (
@@ -24,7 +24,7 @@ export const TopNav = (props) => {
     else {
         let todayButton = (<div></div>);
         let currentDateClassName = "currentDate col ";
-        if (moment(props.viewDate).format('MM YYYY') !== moment().format('MM YYYY')) {
+        if ((props.view === "month" && moment(props.viewDate).format('MM YYYY') !== moment().format('MM YYYY')) || (props.view === "year" && moment(props.viewDate).format('YYYY') !== moment().format('YYYY')) || (props.view === "agenda" && moment(props.viewDate).format('DD MM YYYY') !== moment().format('DD MM YYYY'))) {
             todayButton = (
                 <ButtonGroup size="sm" aria-label="View" className="goToToday">
                     <Button variant="outline-primary" onClick={() => props.setViewDate(moment())}> {isMobile ? 'TOD' : 'Today'} </Button>
@@ -54,8 +54,8 @@ export const TopNav = (props) => {
             </div>
         );
 
-        let viewAdjust = false;
-        let displayDate = "MMMM";
+        let viewAdjust = "days";
+        let displayDate = "MMM D";
         let displayDateLight = "YYYY";
 
         if (props.view === "month") {
@@ -90,8 +90,11 @@ export const TopNav = (props) => {
                         <div>
                             <h3 className="text-center">
                                 <span className="chevron" onClick={() => props.setViewDate(moment(props.viewDate).subtract(1, viewAdjust))}><ChevronLeft /></span>
+
                                 <span>{moment(props.viewDate).format(displayDate)} </span>
+
                                 {displayDateLight === false ? "" : <span className="fw-lighter">{moment(props.viewDate).format(displayDateLight)}</span>}
+
                                 <span className="chevron" onClick={() => props.setViewDate(moment(props.viewDate).add(1, viewAdjust))}><ChevronRight /></span>
                             </h3>
                         </div>
