@@ -10,7 +10,7 @@ import { useMediaQuery } from 'react-responsive';
 
 export const TopNav = (props) => {
     const isMobile = useMediaQuery({ query: `(max-width: 1350px)` });
-    const isScreenSmall = useMediaQuery({ query: `(max-width: 850px)` });
+    const isScreenSmall = useMediaQuery({ query: `(max-width: 1000px)` });
 
     if (props.userLoaded === false) {
         return (
@@ -24,7 +24,7 @@ export const TopNav = (props) => {
     else {
         let todayButton = (<div></div>);
         let currentDateClassName = "currentDate col ";
-        if (moment(props.viewDate).format('MM YYYY') !== moment().format('MM YYYY')) {
+        if ((props.view === "month" && moment(props.viewDate).format('MM YYYY') !== moment().format('MM YYYY')) || (props.view === "year" && moment(props.viewDate).format('YYYY') !== moment().format('YYYY')) || (props.view === "agenda" && moment(props.viewDate).format('DD MM YYYY') !== moment().format('DD MM YYYY'))) {
             todayButton = (
                 <ButtonGroup size="sm" aria-label="View" className="goToToday">
                     <Button variant="outline-primary" onClick={() => props.setViewDate(moment())}> {isMobile ? 'TOD' : 'Today'} </Button>
@@ -37,7 +37,7 @@ export const TopNav = (props) => {
         const viewButtons = (
             <div className="selectView">
                 <ButtonGroup size="sm" aria-label="View" className="viewButtons">
-                    <Button variant={props.view === 'agenda' ? 'primary' : 'outline-primary'} onClick={() => props.setView("agenda")} disabled> {isMobile ? 'A' : 'Agenda'} </Button>
+                    <Button variant={props.view === 'agenda' ? 'primary' : 'outline-primary'} onClick={() => props.setView("agenda")}> {isMobile ? 'A' : 'Agenda'} </Button>
                     <Button variant={props.view === 'month' ? 'primary' : 'outline-primary'} onClick={() => props.setView("month")}> {isMobile ? 'M' : 'Month'} </Button>
                     <Button variant={props.view === 'year' ? 'primary' : 'outline-primary'} onClick={() => props.setView("year")}> {isMobile ? 'Y' : 'Year'} </Button>
                 </ButtonGroup>
@@ -49,13 +49,13 @@ export const TopNav = (props) => {
         const username = (
             <div className="account">
                 <p className="text-end">
-                    <Link to="/logout" className="text-decoration-none"> {isMobile ? props.user.name.match(/[A-Z]/g).join('') : props.user.name} <ChevronCompactRight /></Link>
+                    <Link to="/logout" className="text-decoration-none"> {isMobile ? props.user.name.match(/\b(\w)/g).join('') : props.user.name} <ChevronCompactRight /></Link>
                 </p>
             </div>
         );
 
-        let viewAdjust = false;
-        let displayDate = "MMMM";
+        let viewAdjust = "days";
+        let displayDate = "MMM D";
         let displayDateLight = "YYYY";
 
         if (props.view === "month") {
@@ -90,8 +90,11 @@ export const TopNav = (props) => {
                         <div>
                             <h3 className="text-center">
                                 <span className="chevron" onClick={() => props.setViewDate(moment(props.viewDate).subtract(1, viewAdjust))}><ChevronLeft /></span>
+
                                 <span>{moment(props.viewDate).format(displayDate)} </span>
+
                                 {displayDateLight === false ? "" : <span className="fw-lighter">{moment(props.viewDate).format(displayDateLight)}</span>}
+
                                 <span className="chevron" onClick={() => props.setViewDate(moment(props.viewDate).add(1, viewAdjust))}><ChevronRight /></span>
                             </h3>
                         </div>

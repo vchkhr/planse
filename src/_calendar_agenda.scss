@@ -1,0 +1,64 @@
+.viewAgenda {
+    width: 100%;
+    max-width: 850px;
+    margin: 0px auto;
+    height: calc(100% - 50px);
+    padding: 20px 0px;
+
+    .left {
+        width: 50%;
+        max-width: 350px;
+        padding: 0px 30px 30px 30px;
+        border-right: 1px solid $gray-600;
+
+        .date {
+            .day {
+                font-size: 6em;
+                line-height: calc(1em);
+                margin-bottom: 0px;
+            }
+
+            .date {
+                margin-top: 0px;
+            }
+        }
+
+        .miniCalendar {
+            margin-top: 100px;
+
+            .name {
+                color: $danger;
+                font-weight: 400;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+
+            .week {
+                .day {
+                    width: calc(100% / 7);
+                }
+
+                .realDate {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .right {
+        width: 100%;
+        max-width: 500px;
+        padding: 10px;
+
+        .arrangement,
+        .reminder,
+        .task {
+            margin-bottom: 10px;
+
+            p {
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
