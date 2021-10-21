@@ -3,6 +3,7 @@ import React from 'react';
 import moment from 'moment';
 
 import { Spinner } from 'react-bootstrap';
+import AgendaStack from './AgendaStack';
 
 
 export const AgendaView = (props) => {
@@ -71,6 +72,10 @@ export const AgendaView = (props) => {
                     </div>
 
                     {miniCalendar}
+                </div>
+
+                <div className="right">
+                    <AgendaStack events={props.events} eventsLoaded={props.eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} viewDate={date} />
                 </div>
             </div>
         );

@@ -50,28 +50,6 @@
     .arrangement,
     .reminder,
     .task {
-        border: 0;
-        border-radius: 5px;
-        margin-bottom: 1px;
-        display: flex;
-        padding: 1px 3px;
         font-size: 80%;
-
-        p.name {
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 80%;
-        }
-
-        p.info {
-            white-space: nowrap;
-        }
-    }
-
-    .task-done {
-        text-decoration-skip: spaces;
-        text-decoration: line-through;
     }
 }

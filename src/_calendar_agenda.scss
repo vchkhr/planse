@@ -1,5 +1,7 @@
 .viewAgenda {
     width: 100%;
+    max-width: 850px;
+    margin: 0px auto;
     height: calc(100% - 50px);
     padding: 20px 0px;
 
@@ -40,6 +42,22 @@
                 .realDate {
                     cursor: pointer;
                 }
+            }
+        }
+    }
+
+    .right {
+        width: 100%;
+        max-width: 500px;
+        padding: 10px;
+
+        .arrangement,
+        .reminder,
+        .task {
+            margin-bottom: 10px;
+
+            p {
+                margin-bottom: 0px;
             }
         }
     }
