@@ -18,9 +18,31 @@ export const AgendaStack = (props) => {
     }
     else {
         let dayDate = moment(props.viewDate);
+        let eventsF = [];
         let events = [];
 
         props.events.forEach((event) => {
+            let start = moment(event.start);
+            let end = moment(event.end);
+
+            if (event.type === "task" || event.type === "reminder" || start.diff(end, 'days') === 0) {
+                eventsF.push(event);
+            }
+            else {
+                let dif = -start.diff(end, 'days');
+                console.log(event.name);
+
+                for (let i = 0; i <= dif; i++) {
+                    event.start = moment(event.start).add(i, "days").format("YYYY-MM-DD HH:mm:ss");
+                    event.end = moment(event.start).add(i, "days").format("YYYY-MM-DD 23:59:59");
+                    console.log(event.start, event.end);
+                }
+
+                eventsF.push(event);
+            }
+        })
+
+        eventsF.forEach((event) => {
             let visible = props.calendars.filter((calendar) => calendar.id === event.calendar_id)[0].visible;
             if (visible === 0) {
                 return;
@@ -43,7 +65,7 @@ export const AgendaStack = (props) => {
                     color = "calendar-color-" + color + " calendar-background-color-" + color;
                 }
                 else {
-                    color = "calendar-color-" + color;
+                    color = "calendar-color-" + color + " calendar-outline-color-" + color;
                 }
 
                 if (dayDate.isBetween(start, end, 'days', '[]') === true) {
@@ -136,7 +158,7 @@ export const AgendaStack = (props) => {
                     color = "calendar-color-" + color + " calendar-background-color-" + color;
                 }
                 else {
-                    color = "calendar-color-" + color;
+                    color = "calendar-color-" + color + " calendar-outline-color-" + color;
                 }
 
                 if (dayDate.isBetween(start, start, 'days', '[]') === true) {
@@ -169,7 +191,7 @@ export const AgendaStack = (props) => {
                     <StickyFill />
                 );
                 if (event.is_done === 1) {
-                    color = "calendar-color-" + color;
+                    color = "calendar-color-" + color + " calendar-outline-color-" + color;
                     is_done = "task-done";
                     icon = (
                         <Sticky />
