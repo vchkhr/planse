@@ -128,15 +128,32 @@ export const ArrangementDetails = (props) => {
             }
         }
         else {
-            if (moment(endDate + " " + endTime).isBefore(moment(startDate + " " + startTime))) {
+            start = startDate + " " + startTime;
+            end = endDate + " " + endTime;
+
+            if (moment(end).isBefore(moment(start))) {
                 alert("Start date should be before end date.");
                 return;
             }
         }
 
+        if ((start.match(/:/g)).length === 1) {
+            start += ":00"
+        }
+        if ((end.match(/:/g)).length === 1) {
+            end += ":00"
+        }
+
+        if ((start.match(/:/g)).length === 3) {
+            start = start.substring(0, start.length - 3);
+        }
+        if ((end.match(/:/g)).length === 3) {
+            end = end.substring(0, start.length - 3);
+        }
+
         fetch(process.env.REACT_APP_DOMAIN + '/api/arrangement/edit/' + props.arrangement, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
             credentials: 'include',
             body: JSON.stringify({
                 name,

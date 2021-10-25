@@ -115,6 +115,14 @@ export const ReminderDetails = (props) => {
             start = startDate + " 00:00:00";
         }
 
+        if ((start.match(/:/g)).length === 1) {
+            start += ":00"
+        }
+
+        if ((start.match(/:/g)).length === 3) {
+            start = start.substring(0, start.length - 3);
+        }
+
         fetch(process.env.REACT_APP_DOMAIN + '/api/reminder/edit/' + props.reminder, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

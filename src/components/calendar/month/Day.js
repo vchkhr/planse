@@ -52,7 +52,7 @@ export const Day = (props) => {
                     color = "calendar-color-" + color + " calendar-background-color-" + color;
                 }
                 else {
-                    color = "calendar-color-" + color;
+                    color = "calendar-color-" + color + " calendar-outline-color-" + color;
                 }
 
                 if (dayDate.isBetween(start, end, 'days', '[]') === true) {
@@ -145,7 +145,7 @@ export const Day = (props) => {
                     color = "calendar-color-" + color + " calendar-background-color-" + color;
                 }
                 else {
-                    color = "calendar-color-" + color;
+                    color = "calendar-color-" + color + " calendar-outline-color-" + color;
                 }
 
                 if (dayDate.isBetween(start, start, 'days', '[]') === true) {
@@ -178,7 +178,7 @@ export const Day = (props) => {
                     <StickyFill />
                 );
                 if (event.is_done === 1) {
-                    color = "calendar-color-" + color;
+                    color = "calendar-color-" + color + " calendar-outline-color-" + color;
                     is_done = "task-done";
                     icon = (
                         <Sticky />

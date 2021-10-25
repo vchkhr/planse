@@ -63,6 +63,24 @@ export const AgendaView = (props) => {
             }
         }
 
+        let rulerItems = [];
+        for (let i = 0; i < 24; i++) {
+            let i_s = i.toString()
+            if (i < 10) {
+                i_s = "0" + i.toString()
+            }
+
+            rulerItems.push(
+                <p className="font-monospace">{i_s}</p>
+            );
+        }
+
+        let ruler = (
+            <div className="ruler">
+                {rulerItems}
+            </div>
+        );
+
         return (
             <div className="d-flex viewAgenda">
                 <div className="left">
@@ -74,8 +92,12 @@ export const AgendaView = (props) => {
                     {miniCalendar}
                 </div>
 
-                <div className="right">
-                    <AgendaStack events={props.events} eventsLoaded={props.eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} viewDate={date} />
+                <div className="right d-flex">
+                    {ruler}
+
+                    <div className="flex-fill">
+                        <AgendaStack events={props.events} eventsLoaded={props.eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} viewDate={date} />
+                    </div>
                 </div>
             </div>
         );
