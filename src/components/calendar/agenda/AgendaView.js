@@ -93,7 +93,7 @@ export const AgendaView = (props) => {
                 </div>
 
                 <div className="right d-flex">
-                    {ruler}
+                    {/* {ruler} */}
 
                     <div className="flex-fill">
                         <AgendaStack events={props.events} eventsLoaded={props.eventsLoaded} calendars={props.calendars} calendarsLoaded={props.calendarsLoaded} showEventModal={props.showEventModal} setShowEventModal={props.setShowEventModal} showAllDayEvents={props.showAllDayEvents} showTimeSpecificEvents={props.showTimeSpecificEvents} showArrangements={props.showArrangements} showReminders={props.showReminders} showTasks={props.showTasks} viewDate={date} />

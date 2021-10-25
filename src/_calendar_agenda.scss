@@ -1,6 +1,7 @@
 .viewAgenda {
     width: 100%;
-    margin: 0px;
+    max-width: 1000px;
+    margin: 0px auto;
     height: calc(100% - 50px);
     padding: 0px;
     overflow-y: scroll;
@@ -67,11 +68,13 @@
         .reminder,
         .task {
             margin: 0px;
+            margin-bottom: 10px;
 
             p {
                 height: 40px !important;
                 padding: 0px;
                 margin-bottom: 0px;
+                font-size: 1.2em;
             }
         }
     }

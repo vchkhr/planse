@@ -10,6 +10,7 @@
         background-color: $white;
         width: calc(100% / 4);
         padding: 10px;
+        overflow-y: scroll;
 
         .name {
             color: $danger;
