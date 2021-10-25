@@ -17,10 +17,10 @@ export const YearRow = (props) => {
     else {
         return (
             <>
-                {props.row.map((month) => {
+                {props.row.map((month, index) => {
                     return (
                         <div className="month">
-                            <Month className="month" index={props.index} month={month} view={props.view} setView={props.setView} viewDate={props.viewDate} setViewDate={props.setViewDate} />
+                            <Month className="month" index={props.index} month={month} view={props.view} setView={props.setView} viewDate={props.viewDate} setViewDate={props.setViewDate} key={index} />
                         </div>
                     )
                 })}

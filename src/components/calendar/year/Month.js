@@ -35,7 +35,7 @@ export const Month = (props) => {
                 let dayDate = index * 7 + parseInt(day, 10) + 1 - parseInt(date.format("d"), 10) + 1;
 
                 return (
-                    <p className={"day text-center fw-light " + (parseInt(day, 10) >= 5 ? "text-muted" : "")}>{ (dayDate > 0 && dayDate <= lastDay) ? dayDate : ''}</p>
+                    <p key={index + "-" + i} className={"day text-center fw-light " + (parseInt(day, 10) >= 5 ? "text-muted" : "")}>{ (dayDate > 0 && dayDate <= lastDay) ? dayDate : ''}</p>
                 );
             });
 

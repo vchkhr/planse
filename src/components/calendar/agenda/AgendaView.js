@@ -37,14 +37,14 @@ export const AgendaView = (props) => {
                 {month.map((week, index) => {
                     return (
                         <div className="d-flex week">
-                            {week.map((day) => {
+                            {week.map((day, i) => {
                                 let dayDate = index * 7 + day - firstDay + 1;
                                 if (dayDate >= 0) {
                                     dayDate += 1;
                                 }
 
                                 return (
-                                    <p className={"day text-center fw-light " + (parseInt(day, 10) >= 5 ? "text-muted " : "") + ((dayDate > 0 && dayDate <= lastDay) ? "realDate " : "")} onClick={() => { goToDay(dayDate) }}>{(dayDate > 0 && dayDate <= lastDay) ? dayDate : ''}</p>
+                                    <p key={index + '-' + i} className={"day text-center fw-light " + (parseInt(day, 10) >= 5 ? "text-muted " : "") + ((dayDate > 0 && dayDate <= lastDay) ? "realDate " : "")} onClick={() => { goToDay(dayDate) }}>{(dayDate > 0 && dayDate <= lastDay) ? dayDate : ''}</p>
                                 );
                             })}
                         </div>
@@ -63,23 +63,23 @@ export const AgendaView = (props) => {
             }
         }
 
-        let rulerItems = [];
-        for (let i = 0; i < 24; i++) {
-            let i_s = i.toString()
-            if (i < 10) {
-                i_s = "0" + i.toString()
-            }
+        // let rulerItems = [];
+        // for (let i = 0; i < 24; i++) {
+        //     let i_s = i.toString()
+        //     if (i < 10) {
+        //         i_s = "0" + i.toString()
+        //     }
 
-            rulerItems.push(
-                <p className="font-monospace">{i_s}</p>
-            );
-        }
+        //     rulerItems.push(
+        //         <p className="font-monospace">{i_s}</p>
+        //     );
+        // }
 
-        let ruler = (
-            <div className="ruler">
-                {rulerItems}
-            </div>
-        );
+        // let ruler = (
+        //     <div className="ruler">
+        //         {rulerItems}
+        //     </div>
+        // );
 
         return (
             <div className="d-flex viewAgenda">
