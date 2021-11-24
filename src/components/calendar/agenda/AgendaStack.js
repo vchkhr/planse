@@ -139,6 +139,10 @@ export const AgendaStack = (props) => {
                     color = "calendar-color-" + color + " calendar-outline-color-" + color;
                 }
 
+                if (start.isBefore(moment()) === true) {
+                    color += " reminder-past";
+                }
+
                 if (dayDate.isBetween(start, start, 'days', '[]') === true) {
                     if (event.all_day === 0 && props.showTimeSpecificEvents === true) {
                         // Events with start or end time

@@ -275,7 +275,9 @@ export const TaskDetails = (props) => {
                     </Form.Floating>
 
                     <div className="d-flex justify-content-between mt-3">
-                        <Button variant="outline-danger" onClick={() => deleteTask()}><Trash /> Delete</Button>
+                        <div className="btn-group">
+                            <Button variant="outline-danger" onClick={() => deleteTask()}><Trash /> Delete</Button>
+                        </div>
 
                         <div className="btn-group">
                             <Button variant="outline-secondary" onClick={() => hideModal()}><XCircle /> Close</Button>

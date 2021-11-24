@@ -92,7 +92,8 @@ a.color-inherit {
         }
     }
 
-    .task-done {
+    .task-done,
+    .reminder-past {
         text-decoration-skip: spaces;
         text-decoration: line-through;
     }
